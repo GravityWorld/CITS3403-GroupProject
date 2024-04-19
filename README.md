@@ -2,4 +2,5 @@
 
 ## Next steps:
 
-finalise theme for entire website. (Bootstrap)
+Finalise theme for entire website. (Bootstrap)
+
