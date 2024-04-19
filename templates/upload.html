@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Submission Game</title>
 </head>
+
 <body>
     <h1>Code Submission Game</h1>
     <form id="submission-form">
         <div>
             <label for="html">HTML:</label>
+            <textarea id="html" rows="10" cols="50"></textarea>
         </div>
         <button type="submit">Submit</button>
     </form>
     <div id="submission-status"></div>
     <iframe id="output-frame"></iframe>
+    <script>
+        document.getElementById('submission-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get the HTML content entered by the user
+            var htmlContent = document.getElementById('html').value;
+
+            // Update the srcdoc attribute of the iframe with the user's HTML input
+            document.getElementById('output-frame').srcdoc = htmlContent;
+
+            // Display a success message
+            document.getElementById('submission-status').textContent = 'HTML code submitted successfully.';
+        });
+    </script>
 </body>
+
 </html>
