@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'cascadia';
-    src: url('assets/fonts/CaskaydiaCoveNerdFont-Regular.ttf');
+    src: url('assets/fonts/CaskadiaCodePL.ttf');
 }
 
 /* Resetting default margin and padding */
@@ -8,17 +8,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'cascadia';
 }
 
 /* Basic styling */
 body {
-    font-family: 'cascadia';
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
     background: #e0e0e0;
     height: 100vh;
     color: #333;
+}
+
+button {
+    font-size: 20px;
 }
 
 header {
@@ -77,7 +81,7 @@ nav ul li a:hover {
     background-color: #495057; /* Darker gray background on hover */
 }
 
-/* Login page styling */
+/* LOGIN PAGE STYLING */
 
 form {
     max-width: 300px;
@@ -163,28 +167,28 @@ form input[type="submit"]:hover {
 /* styling for landing page */ 
 
 #sidebar {
-    background: #333;
+    background: #1f1f1f;
     padding: 20px;
     height: 100%;
     width: 200px;
     box-sizing: border-box;
     position: fixed; /* Keeps the sidebar fixed during scrolling */
 }
-#sidebar button{
+#sidebar button {
     display: block;
     background: #555;
     color: #fff;
-    border: none; /* Remove default border */
+    border: none;
     padding: 15px 20px;
-    margin: 15px 0;
+    margin: 15px 10px; /* Adjusted margin */
     text-align: center;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 22px;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
-    width: 100%; /* Ensures the button stretches to full width of the sidebar */
-    cursor: pointer; /* Makes it clear that the element is clickable */
-    outline: none; /* Remove focus outline */
+    cursor: pointer;
+    outline: none;
+    width: calc(100% - 20px); /* Set width to be 100% minus padding on both sides */
 }
 
 #sidebar button:hover {
@@ -192,13 +196,18 @@ form input[type="submit"]:hover {
     box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
 }
 
+.button-upload {
+/*  Could add extra styling for upload.
+    Quality of service feature so low priority.
+*/
+}
+
 .button-login {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 80%; /* Make the button stretch the full width of the sidebar */
     padding: 15px 20px;
-    margin: 15px 0;
+    margin: 15px 10px; /* Adjusted margin */
     color: black;
     border: none;
     border-radius: 8px;

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Name would be here</title>
 
 </head>
@@ -12,13 +11,17 @@
 <body>
     <div id="sidebar">
         <div>
+        <!-- Might be better to implement ID's instead of classes here.  -->
         <button class="button-home"><i class="fa fa-home" style="font-size:20px"></i>Home</button>
         <button class="button-contact-us">Contact Us!</button>
         <button class="button-about">About</button>
+        <button class="button-upload">Upload</button>
         </div>
         <div class="bottom-button-container"> <!-- This div will be pushed to the bottom -->
-            <button class="button-login" onclick="window.location.href='login.html'"><img src="html5.png" alt="Login" width="12" height="12"> Login</button>
-            
+            <button class="button-login" onclick="window.location.href='login.html'">
+                <img href="Assets/icons/blank-user-white.png">
+                Login
+            </button>
         </div>
     </div>
     
