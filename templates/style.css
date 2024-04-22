@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'cascadia';
-    src: url('assets/fonts/CaskadiaCodePL.ttf');
+    src: url('assets/fonts/MesloLGS NF Regular.ttf');
 }
 
 /* Resetting default margin and padding */
@@ -13,10 +13,9 @@
 
 /* Basic styling */
 body {
-    background-color: #f0f0f0;
+    background-color: #dad6d6;
     margin: 0;
     padding: 0;
-    background: #e0e0e0;
     height: 100vh;
     color: #333;
 }
@@ -83,19 +82,27 @@ nav ul li a:hover {
 
 /* LOGIN PAGE STYLING */
 
+.login-body {
+    background-color: rgb(31,31,31);
+}
+
 form {
     max-width: 300px;
     margin: 20px auto;
     margin-top: 180px;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #bababa;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 10px #bababa;
+    text-align: center;
 }
 
 form label {
     display: block;
     margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center; /* Center the text within the label */
 }
 
 form input[type="text"],
@@ -103,42 +110,36 @@ form input[type="password"] {
     width: calc(100% - 12px);
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-form input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #343a40;
-    color: #ffffff;
     border: none;
     border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-form input[type="submit"]:hover {
-    background-color: #495057;
-}
 
 .login-button {
     display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background-color: #343a40;
-    color: #ffffff;
+    margin: 0 auto; /* This will center the button horizontally */
+    background: #555;
+    color: #fff;
     border: none;
-    border-radius: 3px;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 22px;
+    box-shadow: 2px 2px 10px 
+    transition: all 0.1s ease;
     cursor: pointer;
-    transition: background-color 0.3s;
+    outline: none;
 }
+
 
 /* need to create a better effect for on-hover buttons. 
    low priority issue.
 */
 .login-button:hover {
-    background-color: #495057;
+    background-color: #0aefff;
+    color: black;
+    font-weight: bold;
+    box-shadow: 2px 2px 15px #0aefff;
 }
 
 
@@ -166,11 +167,15 @@ form input[type="submit"]:hover {
 
 /* styling for landing page */ 
 
+#sidebar button i {
+    margin-right: 10px; /* Adjust the value to increase or decrease the space */
+}
+
 #sidebar {
     background: #1f1f1f;
     padding: 20px;
     height: 100%;
-    width: 200px;
+    width: 220px;
     box-sizing: border-box;
     position: fixed; /* Keeps the sidebar fixed during scrolling */
 }
@@ -191,9 +196,13 @@ form input[type="submit"]:hover {
     width: calc(100% - 20px); /* Set width to be 100% minus padding on both sides */
 }
 
-#sidebar button:hover {
+#sidebar button.button-home:hover,
+#sidebar button.button-contact-us:hover,
+#sidebar button.button-about:hover,
+#sidebar button.button-upload:hover {
     background-color: #95e214;
-    font color: black;
+    color: black;
+    font-weight: bold;
     box-shadow: 2px 2px 15px #95e214;
 }
 
@@ -218,9 +227,11 @@ form input[type="submit"]:hover {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.button-login:hover {
-    background-color: #0056b3; /* A darker blue on hover for visual feedback */
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover for a "lifting" effect */
+#sidebar button.button-login:hover {
+    background-color: #0aefff; 
+    box-shadow: 4px 4px 15px #0aefff;
+    color: black; 
+    font-weight: bold;
 }
 
 
