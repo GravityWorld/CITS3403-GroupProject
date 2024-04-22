@@ -151,7 +151,7 @@ form input[type="submit"]:hover {
 }
 
 #html {
-    width: 100%; /* Make the textarea occupy 100% of its container */
+    width: 70%; /* Make the textarea occupy 100% of its container */
 }
 
 #output-frame {
