@@ -8,8 +8,7 @@
     <title>Login Page</title>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="login.php" method="POST">
+    <form action="/submit" method="POST">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br><br>
         
@@ -19,8 +18,9 @@
         <input type="submit" value="Login">
     </form>
     <br>
-    <button onclick="window.history.back()">Back</button>
-    <button onclick="window.location.href='create_account.php'">Create Account</button>
+    
+    <button class="login-button" onclick="window.location.href='create_account.html'">Create Account</button>
+    <button class="login-button" onclick="window.history.back()">Back</button>
 </body>
 </html>
 
