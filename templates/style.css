@@ -1,6 +1,8 @@
 @font-face {
-  font-family: "cascadia";
-  src: url("fonts/Arvo-Regular.ttf");
+  font-family: "arvo";
+  src: url("../assets/fonts/Arvo-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Resetting default margin and padding */
@@ -8,7 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "cascadia";
+  font-family: "arvo";
 }
 
 /* Basic styling */
