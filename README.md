@@ -2,5 +2,6 @@
 
 ## Next steps:
 
-Finalise theme for entire website. (Bootstrap)
+Finalise theme for entire website.
+Flask Login. authentication
 
