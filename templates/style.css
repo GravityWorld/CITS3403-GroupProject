@@ -1,8 +1,26 @@
-@font-face {
-  font-family: "arvo";
-  src: url("../assets/fonts/Arvo-Regular.ttf") format("truetype");
-  font-weight: normal;
+/* Global Font Styling */
+.arvo-regular {
+  font-family: "Arvo", serif;
+  font-weight: 400;
   font-style: normal;
+}
+
+.arvo-bold {
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.arvo-regular-italic {
+  font-family: "Arvo", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.arvo-bold-italic {
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: italic;
 }
 
 /* Resetting default margin and padding */
@@ -10,7 +28,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "arvo";
+  font-family: "Arvo", sans-serif;
 }
 
 /* Basic styling */
@@ -95,7 +113,7 @@ form {
   padding: 20px;
   background-color: #bababa;
   border-radius: 5px;
-  box-shadow: 4px 4px 10px #bababa;
+  box-shadow: 0 0 10px 20px #bababa;
   text-align: center;
 }
 

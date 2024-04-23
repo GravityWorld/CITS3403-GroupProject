@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Code Submission Game</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Upload Code</h1>
     <form id="submission-form">
-        <div>
-            <label for="html">HTML:</label>
-            <textarea id="html" rows="10" cols="50"></textarea>
-        </div>
-        <button type="submit">Submit</button>
+      <div>
+        <label for="html">HTML:</label>
+        <textarea id="html" rows="10" cols="50"></textarea>
+      </div>
+      <button type="submit">Submit</button>
     </form>
     <div id="submission-status"></div>
     <iframe id="output-frame"></iframe>
     <script>
-        document.getElementById('submission-form').addEventListener('submit', function (event) {
-            event.preventDefault();
+      document
+        .getElementById("submission-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-            // Get the HTML content entered by the user
-            var htmlContent = document.getElementById('html').value;
+          // Get the HTML content entered by the user
+          var htmlContent = document.getElementById("html").value;
 
-            // Update the srcdoc attribute of the iframe with the user's HTML input
-            document.getElementById('output-frame').srcdoc = htmlContent;
+          // Update the srcdoc attribute of the iframe with the user's HTML input
+          document.getElementById("output-frame").srcdoc = htmlContent;
 
-            // Display a success message
-            document.getElementById('submission-status').textContent = 'HTML code submitted successfully.';
+          // Display a success message
+          document.getElementById("submission-status").textContent =
+            "HTML code submitted successfully.";
         });
     </script>
-</body>
-
+  </body>
 </html>
