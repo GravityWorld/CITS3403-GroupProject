@@ -26,7 +26,6 @@ def index():
 
 
 @app.route('/login', methods=['GET', 'POST'])
-@login_required
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
