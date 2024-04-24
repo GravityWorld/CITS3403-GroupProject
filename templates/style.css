@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'cascadia';
+    src: url('assets/fonts/CaskaydiaCoveNerdFont-Regular.ttf');
+}
+
 
 /* Resetting default margin and padding */
 * {
