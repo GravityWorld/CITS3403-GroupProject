@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Name would be here</title>
+
+</head>
+
+<body>
+    <div id="sidebar">
+        <div>
+            <button class="button-home"><i class="fa fa-home" style="font-size:20px"></i>Home</button>
+            <button class="button-post" onclick="window.location.href='/upload'">Post</button>
+            <button class="button-contact-us">Contact Us!</button>
+            <button class="button-about">About</button>
+        </div>
+        <div class="bottom-button-container"> <!-- This div will be pushed to the bottom -->
+            <button class="button-login" onclick="window.location.href='/login'"><img src="html5.png" alt="Login"
+                    width="12" height="12"> Login</button>
+
+        </div>
+    </div>
+
+    </div>
+
+    <main>
+        <h1>Welcome to Our Site!</h1>
+
+        <!-- Redundant text to visualise how the "about us" section would look with current font -->
+        {% extends "base.html" %}
+
+        {% block content %}
+        <h1>Hi, {{ current_user.username }}!</h1>
+        {% for post in posts %}
+        <div>
+            <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
+        </div>
+        {% endfor %}
+        {% endblock %}
+
+
+    </main>
+</body>
+
+</html>
