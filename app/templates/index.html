@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name would be here</title>
+
+</head>
+
+<body>
+    <div id="sidebar">
+      <div>
+        <!-- Might be better to implement ID's instead of classes here.  -->
+        <button class="button-home">
+          <i class="fa fa-home" style="font-size: 20px"></i>Home
+        </button>
+        <button class="button-about">
+          <i class="fas fa-lightbulb"></i>About
+        </button>
+        <button class="button-contact-us">
+          <i class="fas fa-phone"></i>Contact Us
+        </button>
+        <button
+          class="button-upload"
+          onclick="window.location.href='/upload'"
+        >
+          <i class="fas fa-upload"></i>Upload
+        </button>
+      </div>
+      <div class="bottom-button-container">
+        <!-- This div will be pushed to the bottom -->
+        <button
+          class="button-login"
+          onclick="window.location.href='/login'"
+        >
+          <i class="fas fa-user" style="font-size: 20px"></i>
+          Login/ Sign Up
+        </button>
+      </div>
+    </div>
+
+    </div>
+
+    <main>
+        <h1>Welcome to Our Site!</h1>
+
+        <!-- Redundant text to visualise how the "about us" section would look with current font -->
+        {% extends "base.html" %}
+
+        {% block content %}
+        <h1>Hi, {{ current_user.username }}!</h1>
+        {% for post in posts %}
+        <div>
+            <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
+        </div>
+        {% endfor %}
+        {% endblock %}
+
+
+    </main>
+</body>
+
+</html>

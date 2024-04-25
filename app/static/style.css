@@ -1,4 +1,4 @@
-/* Global Font Styling */
+/* font styling */
 .arvo-regular {
   font-family: "Arvo", serif;
   font-weight: 400;
@@ -28,8 +28,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Arvo", sans-serif;
+  font-family: "Arvo", serif;
 }
+
+/* from:
+    https://fonts.google.com/specimen/Arvo */
 
 /* Basic styling */
 body {
@@ -103,7 +106,7 @@ nav ul li a:hover {
 /* LOGIN PAGE STYLING */
 
 .login-body {
-  background-color: rgb(31, 31, 31);
+  background-color: #1f1f1f;
 }
 
 form {
@@ -113,7 +116,7 @@ form {
   padding: 20px;
   background-color: #bababa;
   border-radius: 5px;
-  box-shadow: 0 0 10px 20px #bababa;
+  box-shadow: 4px 4px 10px #bababa;
   text-align: center;
 }
 
@@ -135,7 +138,7 @@ form input[type="password"] {
 }
 
 .login-button {
-  display: block;
+  display: inline-block;
   margin: 0 auto; /* This will center the button horizontally */
   background: #555;
   color: #fff;
