@@ -1,37 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %} {% block content %}
+<h1 class="upload-header">Upload your HTML</h1>
+<form id="submission-form" action="/upload" method="post">
+  <div>
+    <label for="html">HTML:</label>
+    <textarea id="html" name="html" rows="10" cols="50"></textarea>
+  </div>
+  <button type="button" onclick="displayHTML()">Display</button>
+  <button type="submit">Upload</button>
+</form>
+<div id="submission-status"></div>
+<iframe id="output-frame"></iframe>
+<script>
+  function displayHTML() {
+    // Get the HTML content entered by the user
+    var htmlContent = document.getElementById("html").value;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Code Submission Game</title>
-</head>
+    // Update the srcdoc attribute of the iframe with the user's HTML input
+    document.getElementById("output-frame").srcdoc = htmlContent;
 
-<body>
-    <h1>Code Submission Game</h1>
-    <form id="submission-form" action="/upload" method="post">
-        <div>
-            <label for="html">HTML:</label>
-            <textarea id="html" name="html" rows="10" cols="50"></textarea>
-        </div>
-        <button type="button" onclick="displayHTML()">Display</button>
-        <button type="submit">Upload</button>
-    </form>
-    <div id="submission-status"></div>
-    <iframe id="output-frame"></iframe>
-    <script>
-        function displayHTML() {
-            // Get the HTML content entered by the user
-            var htmlContent = document.getElementById('html').value;
-
-            // Update the srcdoc attribute of the iframe with the user's HTML input
-            document.getElementById('output-frame').srcdoc = htmlContent;
-
-            // Display a success message
-            document.getElementById('submission-status').textContent = 'HTML code displayed successfully.';
-        }
-    </script>
-</body>
-
-</html>
+    // Display a success message
+    document.getElementById("submission-status").textContent =
+      "HTML code displayed successfully.";
+  }
+</script>
+{% endblock %}
