@@ -1,0 +1,19 @@
+<body class="signup-body">
+    {% extends "base.html" %} {% block content %}
+    <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.username.label }}<br />
+        {{ form.username(size=32) }}
+      </p>
+      <p>
+        {{ form.password.label }}<br />
+        {{ form.password(size=32) }}
+      </p>
+      <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+      <!--<button class="login-button">{{ form_signup.submit() }}</button>-->
+      <button type="submit" class="signup-button">Sign Up</button>
+    </form>
+    {% endblock %}
+  </body>
+  

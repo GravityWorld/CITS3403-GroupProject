@@ -153,10 +153,61 @@ form input[type="password"] {
   outline: none;
 }
 
+/* SIGNUP PAGE STYLING */
+
+.signup-body {
+  background-color: #1f1f1f;
+}
+
+form_signup {
+  max-width: 300px;
+  margin: 20px auto;
+  margin-top: 180px;
+  padding: 20px;
+  background-color: #bababa;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px #bababa;
+  text-align: center;
+}
+
+form_signup label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center; /* Center the text within the label */
+}
+
+form_signup input[type="text"],
+form_signup input[type="password"] {
+  width: calc(100% - 12px);
+  padding: 8px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 3px;
+}
+
+.signup-button {
+  display: inline-block;
+  margin: 0 auto; /* This will center the button horizontally */
+  background: #555;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 22px;
+  box-shadow: 2px 2px 10px #555;
+  transition: all 0.1s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+
 /* need to create a better effect for on-hover buttons. 
    low priority issue.
 */
-.login-button:hover {
+.signup-button:hover {
   background-color: #0aefff;
   color: black;
   font-weight: bold;
