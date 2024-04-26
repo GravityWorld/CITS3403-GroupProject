@@ -11,8 +11,9 @@
       {{ form.password(size=32) }}
     </p>
     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <button class="login-button">{{ form.submit() }}</button>
+    <!--<button class="login-button">{{ form.submit() }}</button>-->
+    <button type="submit" class="login-button">Sign in</button>
+    <p>Don't have an account? <a href="/signup">Sign up</a></p>
   </form>
-  <p>Don't have an account?</p>
   {% endblock %}
 </body>
