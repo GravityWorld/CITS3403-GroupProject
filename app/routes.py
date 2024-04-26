@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
 from app import app, db
-from app.forms import LoginForm
+from app.forms import LoginForm, SignUpForm
 from app.models import User
 
 
@@ -42,6 +42,17 @@ def login():
             next_page = url_for('index')
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignUpForm()
+    if form.validate_on_submit:
+        next_page = request.args.get('next')
+        if not next_page or urlsplit(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+    return render_template("signup.html", title='Create an account', form=form)
+
 
 @app.route('/logout')
 def logout():
