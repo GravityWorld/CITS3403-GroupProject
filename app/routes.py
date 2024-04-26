@@ -43,15 +43,7 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
-# @app.route('/signup', methods=['GET', 'POST'])
-# def signup():
-#     form = SignUpForm()
-#     #if form.validate_on_submit:
-#         #next_page = request.args.get('next')
-#         #if not next_page or urlsplit(next_page).netloc != '':
-#         #    next_page = url_for('index')
-#         #return redirect(next_page)
-#     return render_template("signup.html", title='Create an account', form=form)
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if current_user.is_authenticated:
@@ -63,6 +55,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
+        login_user(user)
         return redirect(url_for('index'))
     return render_template('signup.html', title='Register', form=form)
 
