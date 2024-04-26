@@ -175,7 +175,6 @@ form input[type="password"] {
   outline: none;
 }
 
-
 /* need to create a better effect for on-hover buttons. 
    low priority issue.
 */
@@ -250,6 +249,7 @@ form input[type="password"] {
   color: black;
   font-weight: bold;
   box-shadow: 0px 0px 15px #95e214;
+  text-align: center;
 }
 
 #sidebar button i {
@@ -269,6 +269,15 @@ form input[type="password"] {
   color: black;
   box-shadow: 0 0 10px #ffd700; /* Add box shadow for glow effect */
   background-color: #ffd700;
+  text-align: center;
+}
+
+#sidebar button.button-profile:hover {
+  font-weight: bold;
+  color: black;
+  box-shadow: 0 0 10px #cc00ff; /* Add box shadow for glow effect */
+  background-color: #cc00ff;
+  text-align: center;
 }
 
 .button-login {
@@ -314,7 +323,6 @@ form input[type="password"] {
   color: black;
   font-weight: bold;
 }
-
 
 main {
   margin-left: 250px; /* Offset for the sidebar */

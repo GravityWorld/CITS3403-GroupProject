@@ -16,3 +16,4 @@ class SignUpForm(FlaskForm):
     ReEnterPass = StringField('Re-enter Password', validators=[DataRequired()])
     
     submit = SubmitField('Create account')
+   
