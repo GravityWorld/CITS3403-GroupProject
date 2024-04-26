@@ -62,8 +62,9 @@ def signup():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+        login_user(user)
         flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('index'))
+        return redirect(url_for('index', status='authenticated'))
     return render_template('signup.html', title='Register', form=form)
 
 
@@ -77,6 +78,7 @@ def logout():
 @login_required
 def upload():
     return render_template("upload.html")
+
 
 
 
