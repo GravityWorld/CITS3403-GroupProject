@@ -66,3 +66,56 @@ def upload():
     return render_template("upload.html")
 
 
+
+
+
+@app.route('/gallery')
+def hall_of_fame():
+    top_submissions = [
+        {
+            'title': 'Hello World Submission',
+            'author': 'User 1',
+            'likes': 10,
+            'html': """ <div class="card h-100" style="border: 1px solid #ccc; border-radius: 15px; background: linear-gradient(to right, #00c6ff, #0072ff); color: white; text-align: center; padding: 20px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);">
+  <div class="card-body">
+    <h5 class="card-title" style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Stunning Design</h5>
+    <p class="card-text" style="font-size: 16px; margin-bottom: 20px;">This design showcases creativity and skill.</p>
+    <div class="content" style="display: flex; justify-content: center;">
+      <div class="circle" style="width: 50px; height: 50px; background-color: #fff; border-radius: 50%; margin: 0 10px; animation: pulse 1s infinite alternate;"></div>
+      <div class="circle" style="width: 50px; height: 50px; background-color: #fff; border-radius: 50%; margin: 0 10px; animation: pulse 1s infinite alternate;"></div>
+      <div class="circle" style="width: 50px; height: 50px; background-color: #fff; border-radius: 50%; margin: 0 10px; animation: pulse 1s infinite alternate;"></div>
+    </div>
+  </div>
+</div>
+"""
+        },
+        {
+            'title': 'Submission 2',
+            'author': 'User 2',
+            'likes': 8,
+            'html': """<div class="card h-100" style="border: 1px solid #ccc; border-radius: 15px; background: linear-gradient(to right, #f8f9fa, #f8f9fa); color: #333; text-align: center; padding: 20px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);">
+  <div class="card-body">
+    <h5 class="card-title" style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Submission Form</h5>
+    <form style="display: flex; flex-direction: column; gap: 10px;">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+      
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+      
+      <label for="html">HTML Code:</label>
+      <textarea id="html" name="html" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; height: 100px;"></textarea>
+      
+      <button type="submit" style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+    </form>
+  </div>
+</div>
+
+"""
+        },
+        # Add more submissions as needed
+    ]
+    return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
+
+
+

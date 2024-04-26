@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Name would be here</title>
-
-</head>
-
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
     <div id="sidebar">
       <div>
-        <!-- Might be better to implement ID's instead of classes here.  -->
         <button class="button-home">
-          <i class="fa fa-home" style="font-size: 20px"></i>Home
+          <i class="fa fa-home"></i><span>Home</span>
         </button>
         <button class="button-about">
-          <i class="fas fa-lightbulb"></i>About
+          <i class="fas fa-lightbulb"></i><span>About</span>
         </button>
         <button class="button-contact-us">
-          <i class="fas fa-phone"></i>Contact Us
+          <i class="fas fa-phone"></i><span>Contact Us</span>
         </button>
-        <button
-          class="button-upload"
-          onclick="window.location.href='/upload'"
-        >
-          <i class="fas fa-upload"></i>Upload
+        <button class="button-upload" onclick="window.location.href='/upload'">
+          <i class="fas fa-upload"></i><span>Upload</span>
         </button>
+        <div class="fame">
+          <button
+            class="button-hall-of-fame"
+            onclick="window.location.href='/gallery'"
+          >
+            <i class="fas fa-trophy"></i><span>Hall of Fame</span>
+          </button>
+        </div>
       </div>
       <div class="bottom-button-container">
         <!-- This div will be pushed to the bottom -->
@@ -43,26 +48,16 @@
         </button>
       </div>
     </div>
-
-    </div>
-
     <main>
-        <h1>Welcome to Our Site!</h1>
-
-        <!-- Redundant text to visualise how the "about us" section would look with current font -->
-        {% extends "base.html" %}
-
-        {% block content %}
-        <h1>Hi, {{ current_user.username }}!</h1>
-        {% for post in posts %}
-        <div>
-            <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
-        </div>
-        {% endfor %}
-        {% endblock %}
-
-
+      <h1>Welcome to Our Site!</h1>
+      <!-- Redundant text to visualise how the "about us" section would look with current font -->
+      {% extends "base.html" %} {% block content %}
+      <h1>Hi, {{ current_user.username }}!</h1>
+      {% for post in posts %}
+      <div>
+        <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
+      </div>
+      {% endfor %} {% endblock %}
     </main>
-</body>
-
+  </body>
 </html>
