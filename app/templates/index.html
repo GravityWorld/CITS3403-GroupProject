@@ -34,18 +34,26 @@
         </div>
       </div>
       <div class="bottom-button-container">
-        <!-- This div will be pushed to the bottom -->
-        <button class="button-signup"
-          onclick="window.location.href='/signup'">
-          <i class="fas fa-user" style="font-size: 20px"></i>
+        <!-- Show profile button if user is logged in -->
+        {% if current_user.is_authenticated %}
+        <button
+          class="button-profile"
+          onclick="window.location.href='/profile'"
+        >
+          <i class="fas fa-user"></i>
+          Profile
+        </button>
+        {% else %}
+        <!-- Show signup and login buttons if user is not logged in -->
+        <button class="button-signup" onclick="window.location.href='/signup'">
+          <i class="fas fa-user"></i>
           Sign up
         </button>
-
-        <button class="button-login"
-          onclick="window.location.href='/login'">
-          <i class="fas fa-user" style="font-size: 20px"></i>
+        <button class="button-login" onclick="window.location.href='/login'">
+          <i class="fas fa-user"></i>
           Login
         </button>
+        {% endif %}
       </div>
     </div>
     <main>
