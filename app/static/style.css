@@ -110,7 +110,7 @@ nav ul li a:hover {
 }
 
 form {
-  max-width: 300px;
+  max-width: 500px; 
   margin: 20px auto;
   margin-top: 180px;
   padding: 20px;
@@ -268,18 +268,54 @@ form input[type="password"] {
 }
 
 #html {
-  width: 70%; /* Make the textarea occupy 100% of its container */
-}
-
-#output-frame {
-  border: 4px solid black;
-  width: 99vw; /* Make the iframe occupy the entire viewport width */
-  height: 99vh; /* Set a fixed height for the iframe */
+  width: 100%; /* Make the textarea occupy 100% of its container */
 }
 
 #submission-status {
   margin-top: 20px;
 }
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.output-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.output-frame {
+  flex: 1;
+  border: 4px solid black;
+}
+
+.display-button,
+.upload-button {
+  width: 48%;
+}
+
+
+
+
+
+
+
 
 /* styling for landing page */
 
@@ -415,3 +451,6 @@ main {
   margin: auto;
   background-color: #1f1f1f; /* Fallback color */
 }
+
+
+
