@@ -2,23 +2,31 @@
     {% extends "base.html" %} {% block content %}
     <form action="" method="post" novalidate>
       {{ form.hidden_tag() }}
+      <p class = "form-title">
+        Create an Account
+      </p>
+      <br/>
       <p>
-        {{ form.username.label }}<br />
+        {{ form.username.label }}
         {{ form.username(size=32) }}
       </p>
+      <br/>
       <p>
-        {{ form.email.label }}<br />
+        {{ form.email.label }}
         {{ form.email(size=32) }}
       </p>
+      <br/>
       <p>
-        {{ form.password.label }}<br />
+        {{ form.password.label }}
         {{ form.password(size=32) }}
       </p>
+      <br/>
       <p>
-        {{ form.ReEnterPass.label }}<br />
+        {{ form.ReEnterPass.label }}
         {{ form.ReEnterPass(size=32) }}
       </p>
-      <button type="submit" class="signup-button">Sign Up</button>
+      <br/>
+      <a type="submit" class="button_signup">Sign Up</a>
     </form>
     {% endblock %}
   </body>
