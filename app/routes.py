@@ -5,6 +5,8 @@ import sqlalchemy as sa
 from app import app, db
 from app.forms import LoginForm, SignUpForm
 from app.models import User
+from app.models import Post
+from datetime import datetime, timezone
 
 
 @app.route('/')
@@ -71,6 +73,38 @@ def logout():
 def upload():
     return render_template("upload.html")
 
+@app.route('/upload', methods=['POST'])
+@login_required
+def handle_upload():
+    html_content = request.form.get('html')
+    if not html_content.strip():
+        flash('Your post is empty.', 'warning')
+        return redirect(url_for('display_upload'))
+
+    # Create a new Post instance
+    new_post = Post(body=html_content, author=current_user)
+    db.session.add(new_post)
+    db.session.commit()
+
+    flash('Your HTML has been uploaded successfully!', 'success')
+    return redirect(url_for('profile'))
+
+@app.route('/profile')
+@login_required
+def current_user_profile():
+    # Assuming you want to display the profile of the logged-in user
+    posts = Post.query.filter_by(user_id=current_user.id).order_by(Post.timestamp.desc()).all()
+    return render_template('profile.html', user=current_user, posts=posts)
+
+@app.route('/profile/<username>')
+@login_required
+def user_profile(username):
+    # This route is for visiting any user's profile by their username
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
+    return render_template('profile.html', user=current_user, posts=posts)
+
+
 
 
 
@@ -122,6 +156,5 @@ def hall_of_fame():
         # Add more submissions as needed
     ]
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
-
 
 

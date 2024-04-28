@@ -342,3 +342,47 @@ main {
   margin: auto;
   background-color: #1f1f1f; /* Fallback color */
 }
+#main-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px;
+  background-color: #f4f4f4;
+}
+
+.profile-actions button {
+  position: static;
+  left: 0;
+  bottom: 0;
+  padding: 15px 20px;
+  margin: 15px 10px; /* Adjusted margin */
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#sidebar button.button-edit:hover {
+  background-color:whitesmoke;
+  box-shadow: 4px 4px 15px whitesmoke;
+  color: black;
+  font-weight: bold;
+}
+#sidebar button.button-logout:hover{
+  background-color: red;
+  box-shadow:4px 4px 15px red;
+  color:black;
+  font-weight:bold;
+}
+
+.profile-details p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.user-posts {
+  margin-top: 20px;
+}
+
+
