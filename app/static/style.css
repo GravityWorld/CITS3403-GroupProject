@@ -120,14 +120,29 @@ form {
   text-align: center;
 }
 
+.form-title {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center; /* Center the text within the label */
+}
+
+.remember-me {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left; /* Center the text within the label */
+}
+
 form label {
   display: block;
   margin-bottom: 5px;
   font-size: 20px;
   font-weight: bold;
-  text-align: center; /* Center the text within the label */
+  text-align: left; /* Center the text within the label */
 }
-
 form input[type="text"],
 form input[type="password"] {
   width: calc(100% - 12px);
@@ -137,21 +152,6 @@ form input[type="password"] {
   border-radius: 3px;
 }
 
-.login-button {
-  display: inline-block;
-  margin: 0 auto; /* This will center the button horizontally */
-  background: #555;
-  color: #fff;
-  border: none;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 22px;
-  box-shadow: 2px 2px 10px #555;
-  transition: all 0.1s ease;
-  cursor: pointer;
-  outline: none;
-}
 
 /* SIGNUP PAGE STYLING */
 
@@ -159,21 +159,7 @@ form input[type="password"] {
   background-color: #1f1f1f;
 }
 
-.signup-button {
-  display: inline-block;
-  margin: 0 auto; /* This will center the button horizontally */
-  background: #555;
-  color: #fff;
-  border: none;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 22px;
-  box-shadow: 2px 2px 10px #555;
-  transition: all 0.1s ease;
-  cursor: pointer;
-  outline: none;
-}
+
 
 /* need to create a better effect for on-hover buttons. 
    low priority issue.
@@ -292,7 +278,6 @@ form input[type="password"] {
   cursor: pointer;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 #sidebar button.button-login:hover {
