@@ -50,6 +50,12 @@ def signup():
         return redirect(url_for('index'))
     form = SignUpForm()
     if form.validate_on_submit():
+        # this checks if the username already exists
+        existing_user = User.query.filter_by(username=form.username.data).first()
+        if existing_user:
+            flash('Error: Username already exists. Please choose a different username.')
+            return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
+        # If username doesn't exist, proceed with registration
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
@@ -125,3 +131,12 @@ def hall_of_fame():
 
 
 
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = db.first_or_404(sa.select(User).where(User.username == username))
+    posts = [
+        {'author': user, 'body': 'Some HTML code #1'},
+        {'author': user, 'body': 'Some HTML code #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
