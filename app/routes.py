@@ -87,7 +87,7 @@ def handle_upload():
     db.session.commit()
 
     flash('Your HTML has been uploaded successfully!', 'success')
-    return redirect(url_for('profile'))
+    return redirect(url_for('user_profile',username=current_user.username))
 
 @app.route('/profile')
 @login_required
