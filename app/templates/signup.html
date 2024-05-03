@@ -1,33 +1,23 @@
 <body class="signup-body">
-    {% extends "base.html" %} {% block content %}
-    <form action="" method="post" novalidate>
-      {{ form.hidden_tag() }}
-      <p class = "form-title">
-        Create an Account
-      </p>
-      <br/>
-      <p>
-        {{ form.username.label }}
-        {{ form.username(size=32) }}
-      </p>
-      <br/>
-      <p>
-        {{ form.email.label }}
-        {{ form.email(size=32) }}
-      </p>
-      <br/>
-      <p>
-        {{ form.password.label }}
-        {{ form.password(size=32) }}
-      </p>
-      <br/>
-      <p>
-        {{ form.ReEnterPass.label }}
-        {{ form.ReEnterPass(size=32) }}
-      </p>
-      <br/>
-      <button type="submit" class="button_signup">Sign Up</button>
-    </form>
-    {% endblock %}
-  </body>
-  
+  {% extends "base.html" %} {% block content %}
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p class="form-title">Create an Account</p>
+    <br />
+    <p>{{ form.username.label }} {{ form.username(size=32) }}</p>
+    <br />
+    <p>{{ form.email.label }} {{ form.email(size=32) }}</p>
+    <br />
+    <p>
+      {{ form.password.label }} {{ form.password(size=32, type='password') }}
+    </p>
+    <br />
+    <p>
+      {{ form.ReEnterPass.label }} {{ form.ReEnterPass(size=32, type='password')
+      }}
+    </p>
+    <br />
+    <button type="submit" class="button_signup">Sign Up</button>
+  </form>
+  {% endblock %}
+</body>

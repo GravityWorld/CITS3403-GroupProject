@@ -6,7 +6,6 @@ from app import app, db
 from app.forms import LoginForm, SignUpForm
 from app.models import User
 
-
 @app.route('/')
 @app.route('/index')
 
@@ -56,6 +55,9 @@ def signup():
             flash('Error: Username already exists. Please choose a different username.')
             return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         # If username doesn't exist, proceed with registration
+        if form.password != form.ReEnterPass:
+            flash('Error: Passwords do')
+            return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
@@ -76,6 +78,18 @@ def logout():
 @login_required
 def upload():
     return render_template("upload.html")
+
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = db.first_or_404(sa.select(User).where(User.username == username))
+    posts = [
+        {'author': user, 'body': 'Some HTML code #1'},
+        {'author': user, 'body': 'Some HTML code #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
+
 
 
 @app.route('/gallery')
@@ -125,15 +139,3 @@ def hall_of_fame():
         # Add more submissions as needed
     ]
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
-
-
-
-@app.route('/user/<username>')
-@login_required
-def user(username):
-    user = db.first_or_404(sa.select(User).where(User.username == username))
-    posts = [
-        {'author': user, 'body': 'Some HTML code #1'},
-        {'author': user, 'body': 'Some HTML code #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts)
