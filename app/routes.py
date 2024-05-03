@@ -58,6 +58,9 @@ def signup():
             flash('Error: Username already exists. Please choose a different username.')
             return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         # If username doesn't exist, proceed with registration
+        if form.password != form.ReEnterPass:
+            flash('Error: Passwords do')
+            return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
