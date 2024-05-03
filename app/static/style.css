@@ -110,7 +110,7 @@ nav ul li a:hover {
 }
 
 form {
-  max-width: 300px;
+  max-width: 500px; 
   margin: 20px auto;
   margin-top: 180px;
   padding: 20px;
@@ -120,14 +120,29 @@ form {
   text-align: center;
 }
 
+.form-title {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center; /* Center the text within the label */
+}
+
+.remember-me {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left; /* Center the text within the label */
+}
+
 form label {
   display: block;
   margin-bottom: 5px;
   font-size: 20px;
   font-weight: bold;
-  text-align: center; /* Center the text within the label */
+  text-align: left; /* Center the text within the label */
 }
-
 form input[type="text"],
 form input[type="password"] {
   width: calc(100% - 12px);
@@ -137,21 +152,52 @@ form input[type="password"] {
   border-radius: 3px;
 }
 
-.login-button {
+.button_login {
   display: inline-block;
-  margin: 0 auto; /* This will center the button horizontally */
-  background: #555;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
   color: #fff;
-  border: none;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 22px;
-  box-shadow: 2px 2px 10px #555;
-  transition: all 0.1s ease;
-  cursor: pointer;
-  outline: none;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 2px solid #000;
 }
+.button_login:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0cf;
+  border-radius: 10rem;
+  z-index: -2;
+}
+.button_login:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #008fb3;
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+.button_login:hover {
+  color: #fff;
+}
+.button_login:hover:before {
+  width: 100%;
+}
+
+
+
 
 /* SIGNUP PAGE STYLING */
 
@@ -159,20 +205,48 @@ form input[type="password"] {
   background-color: #1f1f1f;
 }
 
-.signup-button {
+.button_signup {
   display: inline-block;
-  margin: 0 auto; /* This will center the button horizontally */
-  background: #555;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
   color: #fff;
-  border: none;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 22px;
-  box-shadow: 2px 2px 10px #555;
-  transition: all 0.1s ease;
-  cursor: pointer;
-  outline: none;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 2px solid #000;
+}
+.button_signup:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0cf;
+  border-radius: 10rem;
+  z-index: -2;
+}
+.button_signup:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #008fb3;
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+.button_signup:hover {
+  color: #fff;
+}
+.button_signup:hover:before {
+  width: 100%;
 }
 
 /* need to create a better effect for on-hover buttons. 
@@ -194,18 +268,63 @@ form input[type="password"] {
 }
 
 #html {
-  width: 70%; /* Make the textarea occupy 100% of its container */
-}
-
-#output-frame {
-  border: 4px solid black;
-  width: 99vw; /* Make the iframe occupy the entire viewport width */
-  height: 99vh; /* Set a fixed height for the iframe */
+  width: 100%; /* Make the textarea occupy 100% of its container */
 }
 
 #submission-status {
   margin-top: 20px;
 }
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+  width: 50%
+}
+
+.output-box{
+  flex: 1;
+  margin-right: 10px;
+  width: 50%
+}
+
+.form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.output-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.output-frame {
+  flex: 1;
+  border: 4px solid black;
+  width: 100%;
+  height: 100%;
+}
+
+.display-button,
+.upload-button {
+  width: 48%;
+}
+
+
+
+
+
+
+
 
 /* styling for landing page */
 
@@ -292,7 +411,6 @@ form input[type="password"] {
   cursor: pointer;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 #sidebar button.button-login:hover {
