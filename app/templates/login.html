@@ -2,17 +2,28 @@
   {% extends "base.html" %} {% block content %}
   <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
+    <p class = "form-title">
+      Log into your account
+    </p>
+    <br/>
     <p>
-      {{ form.username.label }}<br />
+      {{ form.username.label }}
       {{ form.username(size=32) }}
     </p>
+
     <p>
-      {{ form.password.label }}<br />
+      {{ form.password.label }}
       {{ form.password(size=32) }}
     </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <button type="submit" class="login-button">Sign in</button>
+    <br/>
+    <p class = "remember-me">{{ form.remember_me() }} Remember me</p>
+    <br/>
+
+    <button type="submit" class="button_login">Sign in</button>
+    <br/>
+    <br/>
     <p>Don't have an account? <a href="/signup">Sign up</a></p>
   </form>
+
   {% endblock %}
 </body>

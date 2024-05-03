@@ -78,9 +78,6 @@ def upload():
     return render_template("upload.html")
 
 
-
-
-
 @app.route('/gallery')
 def hall_of_fame():
     top_submissions = [
