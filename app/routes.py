@@ -162,15 +162,3 @@ def hall_of_fame():
         # Add more submissions as needed
     ]
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
-
-
-
-@app.route('/user/<username>')
-@login_required
-def user(username):
-    user = db.first_or_404(sa.select(User).where(User.username == username))
-    posts = [
-        {'author': user, 'body': 'Some HTML code #1'},
-        {'author': user, 'body': 'Some HTML code #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts)
