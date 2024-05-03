@@ -61,6 +61,9 @@ def signup():
         if form.password != form.ReEnterPass:
             flash('Error: Passwords do')
             return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
+        if form.password != form.ReEnterPass:
+            flash('Error: Passwords do')
+            return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
