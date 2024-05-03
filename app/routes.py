@@ -5,6 +5,9 @@ import sqlalchemy as sa
 from app import app, db
 from app.forms import LoginForm, SignUpForm
 from app.models import User
+from app.models import Post
+from datetime import datetime, timezone
+
 
 @app.route('/')
 @app.route('/index')
@@ -58,6 +61,9 @@ def signup():
         if form.password != form.ReEnterPass:
             flash('Error: Passwords do')
             return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
+        if form.password != form.ReEnterPass:
+            flash('Error: Passwords do')
+            return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
@@ -79,16 +85,39 @@ def logout():
 def upload():
     return render_template("upload.html")
 
-
-@app.route('/user/<username>')
+@app.route('/upload', methods=['POST'])
 @login_required
-def user(username):
-    user = db.first_or_404(sa.select(User).where(User.username == username))
-    posts = [
-        {'author': user, 'body': 'Some HTML code #1'},
-        {'author': user, 'body': 'Some HTML code #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts)
+def handle_upload():
+    html_content = request.form.get('html')
+    if not html_content.strip():
+        flash('Your post is empty.', 'warning')
+        return redirect(url_for('display_upload'))
+
+    # Create a new Post instance
+    new_post = Post(body=html_content, author=current_user)
+    db.session.add(new_post)
+    db.session.commit()
+
+    flash('Your HTML has been uploaded successfully!', 'success')
+    return redirect(url_for('user_profile',username=current_user.username))
+
+@app.route('/profile')
+@login_required
+def current_user_profile():
+    # Assuming you want to display the profile of the logged-in user
+    posts = Post.query.filter_by(user_id=current_user.id).order_by(Post.timestamp.desc()).all()
+    return render_template('profile.html', user=current_user, posts=posts)
+
+@app.route('/profile/<username>')
+@login_required
+def user_profile(username):
+    # This route is for visiting any user's profile by their username
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
+    return render_template('profile.html', user=current_user, posts=posts)
+
+
+
 
 
 
