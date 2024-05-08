@@ -58,12 +58,9 @@ def signup():
             flash('Error: Username already exists. Please choose a different username.')
             return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         # If username doesn't exist, proceed with registration
-        if form.password != form.ReEnterPass:
-            flash('Error: Passwords do')
-            return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
-        if form.password != form.ReEnterPass:
-            flash('Error: Passwords do')
-            return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
+        if form.password.data != form.ReEnterPass.data:
+            flash('Error: Passwords do not match')
+            return redirect(url_for('signup'))
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
@@ -89,17 +86,28 @@ def upload():
 @login_required
 def handle_upload():
     html_content = request.form.get('html')
+    css_content = request.form.get('css')
+
     if not html_content.strip():
         flash('Your post is empty.', 'warning')
         return redirect(url_for('display_upload'))
 
-    # Create a new Post instance
+    # Insert the CSS into the HTML content
+    if '<head>' in html_content:
+        # If there is a <head> tag, add the CSS inside it
+        html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
+    else:
+        # If no <head> tag, prepend a <head> containing the style
+        html_content = '<head><style>' + css_content + '</style></head>' + html_content
+
+    # Create a new Post instance with the modified HTML content
     new_post = Post(body=html_content, author=current_user)
     db.session.add(new_post)
     db.session.commit()
 
     flash('Your HTML has been uploaded successfully!', 'success')
-    return redirect(url_for('user_profile',username=current_user.username))
+    return redirect(url_for('user_profile', username=current_user.username))
+
 
 @app.route('/profile')
 @login_required
