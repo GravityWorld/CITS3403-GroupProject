@@ -24,15 +24,6 @@
           class="form-textarea"
         ></textarea>
 
-        <label>JAVA SCRIPT <i class="bx bxl-javascript"></i></label>
-        <textarea
-          onkeyup="runCode()"
-          id="js"
-          name="js"
-          rows="10"
-          cols="50"
-          class="form-textarea"
-        ></textarea>
       </div>
 
       <div class="output-box">
@@ -60,13 +51,11 @@
   function runCode() {
     let htmlContent = document.getElementById("html").value;
     let cssContent = document.getElementById("css").value;
-    let jsContent = document.getElementById("js").value;
 
     let output = document.getElementById("output-frame");
-
-    output.contentDocument.body.innerHTML =
-      htmlContent + "<style>" + cssContent + "</style>";
-    output.contentWindow.eval(jsContent);
+    
+    output.contentDocument.body.innerHTML = htmlContent + "<style>" + cssContent + "</style>";
+    console.log(output.contentDocument.body.innerHTML);
   }
 </script>
 {% endblock %}
