@@ -1,5 +1,5 @@
 from urllib.parse import urlsplit
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
 from app import app, db
@@ -40,9 +40,17 @@ def login():
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
+        # Check if there's an upload intent in the session
+        upload_intent = session.pop('upload_intent', False)
+
         if not next_page or urlsplit(next_page).netloc != '':
             next_page = url_for('index')
-        return redirect(next_page)
+
+        # If there was an upload intent, redirect to upload page after login
+        if upload_intent:
+            return redirect(url_for('upload'))
+        else:
+            return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
 
@@ -66,8 +74,14 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
-        login_user(user)
-        return redirect(url_for('index'))
+        # If there was an upload intent, redirect to upload page after registration
+        if session.get('upload_intent'):
+            session.pop('upload_intent')  # Clear the upload intent from session
+            login_user(user)
+            return redirect(url_for('upload'))
+        else:
+            login_user(user)
+            return redirect(url_for('index'))
     return render_template('signup.html', title='Register', form=form)
 
 
@@ -78,9 +92,13 @@ def logout():
 
 
 @app.route('/upload')
-@login_required
 def upload():
-    return render_template("upload.html")
+    if current_user.is_authenticated:
+        return render_template("upload.html")
+    else:
+        # Track the upload intent for anonymous users
+        session['upload_intent'] = True
+        return redirect(url_for('login'))
 
 @app.route('/upload', methods=['POST'])
 @login_required
