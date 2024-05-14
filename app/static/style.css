@@ -504,3 +504,15 @@ main {
 }
 
 
+/* Style for the image in step 1 */
+#step1-image {
+  max-width: 50%; /* Limit the maximum width of the image */
+  display: block; /* Ensure the image is displayed as a block element */
+  margin-right: 20px; /* Add some space between the image and the text */
+  float: left; /* Float the image to the left */
+}
+
+/* Adjustments for the text in step 1 */
+#step1-text {
+  overflow: hidden; /* Prevent text from wrapping around the floated image */
+}
