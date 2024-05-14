@@ -32,9 +32,7 @@
     <div class="bottom-button-container">
       <!-- Show profile button if user is logged in -->
       {% if current_user.is_authenticated %}
-      <button 
-        class="button-profile" 
-        onclick="window.location.href='/profile'">
+      <button class="button-profile" onclick="window.location.href='/profile'">
         <i class="fas fa-user"></i>
         Profile
       </button>
@@ -51,16 +49,52 @@
       {% endif %}
     </div>
   </div>
+
+
   <main>
+    {% extends "base.html" %}
+
+    {% block content %}
     <h1>Welcome to Our Site!</h1>
-    <!-- Redundant text to visualise how the "about us" section would look with current font -->
-    {% extends "base.html" %} {% block content %}
+    {% if current_user.is_authenticated %}
     <h1>Hi, {{ current_user.username }}!</h1>
-    {% for post in posts %}
-    <div>
-      <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
-    </div>
-    {% endfor %} {% endblock %}
+    {% endif %}
+    <p>Join our community and start engaging in discussions, sharing your creations, and exploring the world of gaming!
+    </p>
+    <!-- Mini Tutorial Section -->
+    <section id="mini-tutorial">
+      <h2>How to use the website:</h2>
+
+      <!-- Step-by-Step Instructions -->
+      <ol>
+        <li id="step1">
+          <h3>Step 1: Develop your HTML/CSS code with our online live editor</h3>
+          <div id="step1-text">
+            <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p>
+          </div>
+          <img id="step1-image" src="/static/assets/images/Step1Tut.PNG" alt="Step 1 Image">
+        </li>
+          <h3>Step 2: Upload your code</h3>
+            <p>Upload your HTML and CSS files to our platform to save and share your creations with the community.</p>
+        </li>
+        <li>
+          <h3>Step 3: View your code on your profile/gallery page</h3>
+          <p>Access your uploaded code on your profile or gallery page to showcase it to others.</p>
+        </li>
+        <li>
+          <h3>Step 4: Watch your code gain in popularity</h3>
+          <p>Track the likes and views your code receives as it gains popularity among our users.</p>
+        </li>
+      </ol>
+
+    </section>
+    {% endblock %}
+
+
+
+    <!-- Redundant text to visualize how the "about us" section would look with the current font -->
+
+
   </main>
 </body>
 
