@@ -73,7 +73,14 @@
           <div class="step-text">
             <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p>
           </div>
-          <img class="step-image" src="/static/assets/images/Step1Tut.PNG" alt="Step 1 Image">
+          <!-- Iframe Section -->
+    <section id="iframe-section">
+      <!-- Container for the iframe -->
+      <div class="iframe-container">
+        <!-- Iframe with cropped top part -->
+        <iframe src="{{ url_for('static', filename='assets/html/preview.html') }}" title="Live Editor Preview"></iframe>
+      </div>
+    </section>
         </li>
         <li class="step">
           <h3>Step 2: Upload your code</h3>
