@@ -544,3 +544,19 @@ main {
 }
 
 
+/* Container for the iframe */
+.iframe-container {
+  overflow: hidden; /* Hide overflow content */
+  position: relative; /* Set position to relative */
+  width: 100%; /* Adjust width as needed */
+  height: 480px; /* Adjust height as needed */
+}
+
+/* Style the iframe */
+.iframe-container iframe {
+  position: absolute; /* Set position to absolute */
+  top: -200px; /* Adjust the top position to crop off the top part */
+  left: 0;
+  width: 100%; /* Set iframe width to 100% */
+  height: calc(100% + 230px); /* Adjust height to include the cropped part */
+}
