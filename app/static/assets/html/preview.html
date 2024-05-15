@@ -45,7 +45,9 @@ body {
   padding: 0;
   height: 100vh;
   color: #333;
+  overflow: hidden; /* Hide scrollbars */
 }
+
 
 button {
   font-size: 20px;
@@ -67,16 +69,7 @@ h1 {
 }
 
 
-form {
-  max-width: 500px; 
-  margin: 20px auto;
-  margin-top: 180px;
-  padding: 20px;
-  background-color: #bababa;
-  border-radius: 5px;
-  box-shadow: 4px 4px 10px #bababa;
-  text-align: center;
-}
+
 
 .form-title {
   display: block;
@@ -86,13 +79,6 @@ form {
   text-align: center; /* Center the text within the label */
 }
 
-.remember-me {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 15px;
-  font-weight: bold;
-  text-align: left; /* Center the text within the label */
-}
 
 form label {
   display: block;
@@ -157,6 +143,7 @@ form input[type="password"] {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .output-frame {
@@ -164,11 +151,25 @@ form input[type="password"] {
   border: 4px solid black;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  
 }
 
 .display-button,
 .upload-button {
   width: 48%;
+}
+
+.form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none; /* Prevent resizing */
+  overflow: auto; /* Allow scrolling */
+}
+
+/* Optional: Hide scrollbar */
+.form-textarea::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in WebKit browsers */
 }
 
 
