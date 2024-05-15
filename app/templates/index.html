@@ -50,11 +50,12 @@
     </div>
   </div>
 
+  {% extends "base.html" %}
+
+  {% block content %}
 
   <main>
-    {% extends "base.html" %}
-
-    {% block content %}
+    
     <h1>Welcome to Our Site!</h1>
     {% if current_user.is_authenticated %}
     <h1>Hi, {{ current_user.username }}!</h1>
@@ -66,28 +67,66 @@
       <h2>How to use the website:</h2>
 
       <!-- Step-by-Step Instructions -->
-      <ol>
-        <li id="step1">
+      <ol class="steps">
+        <li class="step">
           <h3>Step 1: Develop your HTML/CSS code with our online live editor</h3>
-          <div id="step1-text">
+          <div class="step-text">
             <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p>
           </div>
-          <img id="step1-image" src="/static/assets/images/Step1Tut.PNG" alt="Step 1 Image">
+          <!-- Iframe Section -->
+    <section id="iframe-section">
+      <!-- Container for the iframe -->
+      <div class="iframe-container">
+        <!-- Iframe with cropped top part -->
+        <iframe src="{{ url_for('static', filename='assets/html/preview.html') }}" title="Live Editor Preview"></iframe>
+      </div>
+    </section>
         </li>
+        <li class="step">
           <h3>Step 2: Upload your code</h3>
+          <div class="step-text">
             <p>Upload your HTML and CSS files to our platform to save and share your creations with the community.</p>
+          </div>
+          <img class="step-image" src="/static/assets/images/Step2Tut.PNG" alt="Step 2 Image">
         </li>
-        <li>
+        <li class="step">
           <h3>Step 3: View your code on your profile/gallery page</h3>
-          <p>Access your uploaded code on your profile or gallery page to showcase it to others.</p>
+          <div class="step-text">
+            <p>Access your uploaded code on your profile or gallery page to showcase it to others.</p>
+          </div>
+          <img class="step-image" src="/static/assets/images/Step3Tut.PNG" alt="Step 3 Image">
         </li>
-        <li>
+        <li class="step">
           <h3>Step 4: Watch your code gain in popularity</h3>
-          <p>Track the likes and views your code receives as it gains popularity among our users.</p>
+          <div class="step-text">
+            <p>Track the likes and views your code receives as it gains popularity among our users.</p>
+          </div>
+          <img class="step-image" src="/static/assets/images/Step4Tut.PNG" alt="Step 4 Image">
         </li>
       </ol>
 
+
     </section>
+    <section id="blog">
+      <div class="container">
+        <h2>Latest From Our Blog</h2>
+        <div class="blog-posts">
+          <article class="post">
+            <h3>Understanding HTML and CSS</h3>
+            <p>Get to know the basics of web development with our list of the best introductory guides to HTML and CSS.
+            </p>
+            <a href="/blog/html-css-basics" class="read-more">Read More</a>
+          </article>
+          <article class="post">
+            <h3>What's New in Web Design</h3>
+            <p>Explore the latest trends in web design and how they can enhance your online presence.</p>
+            <a href="/blog/web-design-trends" class="read-more">Read More</a>
+          </article>
+          <!-- Add more blog posts here -->
+        </div>
+      </div>
+    </section>
+
     {% endblock %}
 
 
@@ -96,6 +135,7 @@
 
 
   </main>
+
 </body>
 
 </html>

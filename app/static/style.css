@@ -504,15 +504,59 @@ main {
 }
 
 
-/* Style for the image in step 1 */
-#step1-image {
-  max-width: 50%; /* Limit the maximum width of the image */
-  display: block; /* Ensure the image is displayed as a block element */
-  margin-right: 20px; /* Add some space between the image and the text */
-  float: left; /* Float the image to the left */
+/* Styling for steps with a more engaging look */
+.step {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  padding: 20px;
+  position: relative;
+  list-style: none;
+
 }
 
-/* Adjustments for the text in step 1 */
-#step1-text {
-  overflow: hidden; /* Prevent text from wrapping around the floated image */
+/* Style for step headings with emphasis */
+.step h3 {
+  font-size: 26px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+/* Style for step text with improved readability */
+.step-text p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Style for step images with responsive design */
+.step-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Clearfix for floated elements */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+/* Container for the iframe */
+.iframe-container {
+  overflow: hidden; /* Hide overflow content */
+  position: relative; /* Set position to relative */
+  width: 100%; /* Adjust width as needed */
+  height: 480px; /* Adjust height as needed */
+}
+
+/* Style the iframe */
+.iframe-container iframe {
+  position: absolute; /* Set position to absolute */
+  top: -200px; /* Adjust the top position to crop off the top part */
+  left: 0;
+  width: 100%; /* Set iframe width to 100% */
+  height: calc(100% + 230px); /* Adjust height to include the cropped part */
 }
