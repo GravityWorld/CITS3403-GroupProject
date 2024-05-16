@@ -16,7 +16,7 @@ body {
 
 #sidebar button {
     width: 100%;
-    padding: 8px; /* Reduced padding */
+    padding: 8px;
     margin-bottom: 5px;
     background: #444;
     color: white;
@@ -31,8 +31,8 @@ body {
 
 #main-content {
     padding: 20px;
-    overflow: auto; /* Add scroll if content overflows */
-    flex-grow: 1; /* Take remaining space */
+    overflow: auto;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
@@ -57,19 +57,19 @@ body {
 
 .user-posts {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping */
-    gap: 10px; /* Add space between items */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .post-preview {
-    width: calc((100% - 30px) / 3); /* Calculate width for 3 posts per row with gaps */
-    padding-top: calc((100% - 30px) / 3); /* Square */
-    position: relative; /* Positioning for child elements */
+    width: calc((100% - 50px) / 6); /* Adjusted width with smaller boxes */
+    padding-top: calc((100% - 50px) / 6); /* Adjusted padding for smaller boxes */
+    position: relative;
     cursor: pointer;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    box-sizing: border-box; /* Include padding and border in width */
-    overflow: hidden; /* Hide overflow content */
+    border: 10px solid #00000000; /* Added 10px border */
+    background-color: #888fcf;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .post-preview-label {
@@ -82,7 +82,7 @@ body {
 }
 
 .post-preview:hover {
-    background-color: #efefef;
+    background-color: #979797;
 }
 
 .modal {

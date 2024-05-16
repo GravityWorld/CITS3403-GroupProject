@@ -1,61 +1,100 @@
-{% extends "base.html" %} {% block content %}
-<div class="upload-container">
-  <h1 class="upload-header">Upload your HTML</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+  <div id="sidebar">
+    <button class="button-home">
+      <i class="fa fa-home"></i><span>Home</span>
+    </button>
+
+    <button class="button-about">
+      <i class="fas fa-lightbulb"></i><span>About</span>
+    </button>
+
+    <button class="button-contact-us">
+      <i class="fas fa-phone"></i><span>Contact Us</span>
+    </button>
+
+    <div class="fame">
+      <button class="button-hall-of-fame" onclick="window.location.href='/gallery'">
+      <i class="fas fa-trophy"></i><span>Hall of Fame</span>
+      </button>
+    </div>
+  </div>
+
+<div id="main-content">
   <form id="submission-form" action="/upload" method="post" class="upload-form">
-    <div class="flex-container">
-      <div class="form-group">
-        <label>HTML <i class="bx bxl-html5"></i></label>
-        <textarea
-          onkeyup="runCode()"
-          id="html"
-          name="html"
-          rows="10"
-          cols="50"
-          class="form-textarea"
-        ></textarea>
+    <label> Upload your HTML and CSS<i class="bx bxl-html5"></i></label>
 
-        <label>CSS <i class="bx bxl-css3"></i></label>
-        <textarea
-          onkeyup="runCode()"
-          id="css"
-          name="css"
-          rows="10"
-          cols="50"
-          class="form-textarea"
-        ></textarea>
+  <div class="flex-container">
 
-      </div>
+    <div class="form-group">
+      <label>HTML <i class="bx bxl-html5"></i></label>
+      <textarea
+        onkeyup="runCode()"
+        id="html"
+        name="html"
+        rows="10"
+        cols="50"
+        class="form-textarea"
+      ></textarea>
 
-      <div class="output-box">
-        <label>Output</label>
-        <iframe id="output-frame" class="output-frame"></iframe>
-      </div>
+      <label>CSS <i class="bx bxl-html5"></i></label>
+      <textarea
+        onkeyup="runCode()"
+        id="css"
+        name="css"
+        rows="10"
+        cols="50"
+        class="form-textarea"
+      ></textarea>
+
     </div>
-    <p id="submission-status" class="submission-status"></p>
 
-    <div class="output-container">
-      <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
-      <button type="submit" class="upload-button">Upload</button>
+    <div class="output-box">
+      <label>Output</label>
+      <iframe id="output-frame" class="output-frame"></iframe>
     </div>
+  </div>
+
+  <p id="submission-status" class="submission-status"></p>
+
+  <div class="output-container">
+    <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
+    <button type="submit" class="upload-button">Upload</button>
+  </div>
   </form>
+
 </div>
 
+
+
 <script>
-  function displayHTML() {
-    var htmlContent = document.getElementById("html").value;
-    document.getElementById("output-frame").srcdoc = htmlContent;
-    document.getElementById("submission-status").textContent =
-      "HTML code displayed successfully.";
-  }
+function displayHTML() {
+var htmlContent = document.getElementById("html").value;
+document.getElementById("output-frame").srcdoc = htmlContent;
+document.getElementById("submission-status").textContent =
+"HTML code displayed successfully.";
+}
 
-  function runCode() {
-    let htmlContent = document.getElementById("html").value;
-    let cssContent = document.getElementById("css").value;
+function runCode() {
+let htmlContent = document.getElementById("html").value;
+let cssContent = document.getElementById("css").value;
 
-    let output = document.getElementById("output-frame");
-    
-    output.contentDocument.body.innerHTML = htmlContent + "<style>" + cssContent + "</style>";
-    console.log(output.contentDocument.body.innerHTML);
-  }
+let output = document.getElementById("output-frame");
+
+output.contentDocument.body.innerHTML = htmlContent + "<style>" + cssContent + "</style>";
+// console.log(output.contentDocument.body.innerHTML);
+}
 </script>
-{% endblock %}
+
+</body>
+</html>

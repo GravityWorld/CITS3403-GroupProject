@@ -4,42 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <link rel="stylesheet" href="../static/profile.css">
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
-  <div id="sidebar">
-    <button onclick="location.href='/edit_profile'">Edit Profile</button>
-    <button onclick="location.href='/logout'">Logout</button>
-  </div>
-  <div id="main-content">
-    <div class="profile-details">
+
+    <div id="sidebar">
+        <button class="button-home">
+            <i class="fa fa-home"></i><span>Home</span>
+        </button>
+    
+        <button class="button-about">
+            <i class="fas fa-lightbulb"></i><span>About</span>
+        </button>
+
+        <button class="button-contact-us">
+            <i class="fas fa-phone"></i><span>Contact Us</span>
+        </button>
+
+        <button class="button-upload" onclick="window.location.href='/upload'">
+            <i class="fas fa-upload"></i><span>Upload</span>
+        </button>
+        <div class="fame">
+            <button class="button-hall-of-fame" onclick="window.location.href='/gallery'">
+                <i class="fas fa-trophy"></i><span>Hall of Fame</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="main-content">
       <h1>Profile</h1>
-      <p><strong>Username:</strong> {{ current_user.username }}</p>
-      <p><strong>Email:</strong> {{ current_user.email }}</p>
-    </div>
-    <div class="user-posts">
-      <h2>Your Posts</h2>
-      {% for post in posts %}
-      <div class="post-preview" onclick="openModal('{{ loop.index0 }}')">
-        <p class="post-preview-label">Preview of Post #{{ post.id }}</p>
+
+      <div class="profile-details">
+        <div class="profile-icon"> <!-- Add div for the profile icon -->
+          <i class="fas fa-user"></i> <!-- Add the user icon -->
+        </div>
+        <div class="profile-text"> <!-- Added a wrapper div -->
+          <p><strong>Username:</strong> {{ current_user.username }}</p>
+          <p><strong>Email:</strong> {{ current_user.email }}</p> 
+        </div>
       </div>
-      <div
-        class="full-post-content"
-        id="full-post-content-{{ loop.index0 }}"
-        style="display: none"
-      >
-        {{ post.body | safe }}
+      <h2>Your Posts</h2> <!-- Moved this line above the loop -->
+
+      <div class="user-posts">
+        {% for post in posts %}
+        <div class="post-preview" onclick="openModal('{{ loop.index0 }}')">
+            <p class="post-preview-label">Preview of Post #{{ post.id }}</p>
+        </div>
+        <div
+            class="full-post-content"
+            id="full-post-content-{{ loop.index0 }}"
+            style="display: none"
+        >
+            {{ post.body | safe }}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
-  </div>
-  <div id="postModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <iframe id="postFrame" style="width: 100%; height: 500px"></iframe>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <iframe id="postFrame" style="width: 100%; height: 500px"></iframe>
+        </div>
     </div>
-  </div>
-  <script>
+
+    <script>
     function openModal(postIndex) {
       var content = document.getElementById(
         "full-post-content-" + postIndex
@@ -56,6 +86,7 @@
         closeModal();
       }
     };
-  </script>
+    </script>
+
 </body>
 </html>
