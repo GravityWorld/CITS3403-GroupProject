@@ -7,6 +7,7 @@ from app.forms import LoginForm, SignUpForm
 from app.models import User
 from app.models import Post
 from datetime import datetime, timezone
+from markupsafe import escape
 
 
 @app.route('/')
@@ -107,9 +108,14 @@ def handle_upload():
     else:
         # If no <head> tag, prepend a <head> containing the style
         html_content = '<head><style>' + css_content + '</style></head>' + html_content
+    
 
     # Create a new Post instance with the modified HTML content
-    new_post = Post(body=html_content, author=current_user)
+    
+    new_post = Post(body=escape(html_content), author=current_user)
+    print("dev wants print:,", escape(html_content))
+    print("dev2222 wants print:,", html_content)
+    
     db.session.add(new_post)
     db.session.commit()
 
