@@ -125,7 +125,7 @@
                 <div class="modal" id="modal-{{ loop.index0 }}">
                     <div class="modal-content">
                         <span class="close" onclick="closeModal('{{ loop.index0 }}')">&times;</span>
-                        <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height:500px;" srcdoc="{{ post.body | safe }}"></iframe>
+                        <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height:500px;" srcdoc="{{post.body | safe }}"></iframe>
                     </div>
                 </div>
             {% endfor %}
