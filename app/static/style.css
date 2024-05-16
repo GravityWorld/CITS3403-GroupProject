@@ -560,3 +560,30 @@ main {
   width: 100%; /* Set iframe width to 100% */
   height: calc(100% + 230px); /* Adjust height to include the cropped part */
 }
+
+
+/* Styles for the navigation bar */
+.navbar {
+  background-color: #343a40; /* Dark gray background */
+  color: #ffffff; /* White text */
+  padding: 10px;
+  text-align: center;
+}
+
+.navbar a {
+  color: #ffffff; /* White text for navbar links */
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+  background-color: #495057; /* Darker gray background on hover */
+}
+
+/* Style for the active link */
+.navbar .active {
+  background-color: #0aefff; /* Light blue background for active link */
+  color: black; /* Black text for active link */
+  font-weight: bold; /* Bold font for active link */
+}

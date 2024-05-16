@@ -7,6 +7,7 @@ from app.forms import LoginForm, SignUpForm
 from app.models import User
 from app.models import Post
 from datetime import datetime, timezone
+from markupsafe import escape
 
 
 @app.route('/')
@@ -107,15 +108,17 @@ def handle_upload():
     else:
         # If no <head> tag, prepend a <head> containing the style
         html_content = '<head><style>' + css_content + '</style></head>' + html_content
+    
 
     # Create a new Post instance with the modified HTML content
-    new_post = Post(body=html_content, author=current_user)
+    #Use of escape to replace symbols for tags with UTF characters in order to isolate css submitted and the page css.
+    new_post = Post(body=escape(html_content), author=current_user)
+    
     db.session.add(new_post)
     db.session.commit()
 
     flash('Your HTML has been uploaded successfully!', 'success')
     return redirect(url_for('user_profile', username=current_user.username))
-
 
 @app.route('/profile')
 @login_required
