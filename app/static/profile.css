@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#sidebar {
+    background-color: #333;
+    color: white;
+    width: 200px;
+    height: 100vh;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#sidebar button {
+    width: 100%;
+    padding: 8px; /* Reduced padding */
+    margin-bottom: 5px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#sidebar button:hover {
+    background: #555;
+}
+
+#main-content {
+    padding: 20px;
+    overflow: auto; /* Add scroll if content overflows */
+    flex-grow: 1; /* Take remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-details {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.profile-details h1 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.user-posts {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 10px; /* Add space between items */
+}
+
+.post-preview {
+    width: calc((100% - 30px) / 3); /* Calculate width for 3 posts per row with gaps */
+    padding-top: calc((100% - 30px) / 3); /* Square */
+    position: relative; /* Positioning for child elements */
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /* Include padding and border in width */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.post-preview-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-align: center;
+}
+
+.post-preview:hover {
+    background-color: #efefef;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
