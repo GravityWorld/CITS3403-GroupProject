@@ -111,10 +111,8 @@ def handle_upload():
     
 
     # Create a new Post instance with the modified HTML content
-    
+    #Use of escape to replace symbols for tags with UTF characters in order to isolate css submitted and the page css.
     new_post = Post(body=escape(html_content), author=current_user)
-    print("dev wants print:,", escape(html_content))
-    print("dev2222 wants print:,", html_content)
     
     db.session.add(new_post)
     db.session.commit()
