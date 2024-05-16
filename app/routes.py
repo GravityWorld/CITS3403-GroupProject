@@ -116,7 +116,6 @@ def handle_upload():
     flash('Your HTML has been uploaded successfully!', 'success')
     return redirect(url_for('user_profile', username=current_user.username))
 
-
 @app.route('/profile')
 @login_required
 def current_user_profile():
