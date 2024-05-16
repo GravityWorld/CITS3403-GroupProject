@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
     <style>
+        /* Basic styling for the entire body */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
         }
+
+        /* Styling for the sidebar */
         #sidebar {
             background-color: #333;
             color: white;
@@ -19,8 +22,9 @@
             padding: 15px;
         }
 
+        /* General button styling for the sidebar buttons */
         .button-Edit, .button-Home, .button-Logout {
-            display: flex
+            display: flex; /* Corrected missing semicolon */
             align-items: center;
             background: #555;
             color: #fff;
@@ -37,31 +41,42 @@
             width: calc(100% - 20px);
         }
 
+        /* Hover effect for the Edit button */
         .button-Edit:hover {
             background-color: #0aefff;
             box-shadow: 0px 0px 15px #0aefff;
             color: black;
             font-weight: bold;
         }
+
+        /* Hover effect for the Logout button */
         .button-Logout:hover {
             background-color: red;
             box-shadow: 0px 0px 15px red;
             color: black;
             font-weight: bold;
         }
+
+        /* Hover effect for the Home button */
         .button-Home:hover {
             background-color: whitesmoke;
             box-shadow: 0px 0px 15px whitesmoke;
             color: black;
             font-weight: bold;
         }
+
+        /* Styling for the main content area */
         #main-content {
             flex-grow: 1;
             padding: 20px;
         }
+
+        /* Centering the profile details and user posts sections */
         .profile-details, .user-posts {
-            margin:auto;
+            margin: auto;
         }
+
+        /* Styling for the post previews */
         .post-preview {
             cursor: pointer;
             padding: 10px;
@@ -69,9 +84,13 @@
             margin-bottom: 10px;
             background-color: #f9f9f9;
         }
+
+        /* Hover effect for post previews */
         .post-preview:hover {
             background-color: #efefef;
         }
+
+        /* Styling for the modal background */
         .modal {
             display: none;
             position: fixed;
@@ -84,6 +103,8 @@
             background-color: rgba(0,0,0,0.4);
             padding-top: 60px;
         }
+
+        /* Styling for the modal content */
         .modal-content {
             background-color: #fefefe;
             margin: 5% auto;
@@ -91,6 +112,8 @@
             border: 1px solid #888;
             width: 80%;
         }
+
+        /* Styling for the close button */
         .close {
             color: #aaa;
             float: right;
@@ -98,6 +121,8 @@
             font-weight: bold;
             cursor: pointer;
         }
+
+        /* Hover effect for the close button */
         .close:hover, .close:focus {
             color: black;
             text-decoration: none;
@@ -105,23 +130,31 @@
     </style>
 </head>
 <body>
+    <!-- Sidebar with navigation buttons -->
     <div id="sidebar">
         <button class="button-Edit" onclick="location.href='/edit_profile'">Edit Profile</button>
         <button class="button-Logout" onclick="location.href='/logout'">Logout</button>
         <button class="button-Home" onclick="window.location.href='{{ url_for('index') }}'">Home</button>
     </div>
+
+    <!-- Main content area -->
     <div id="main-content">
+        <!-- Profile details section -->
         <div class="profile-details">
             <h1>Profile</h1>
             <p><strong>Username:</strong> {{ current_user.username }}</p>
             <p><strong>Email:</strong> {{ current_user.email }}</p>
         </div>
+
+        <!-- User posts section -->
         <div class="user-posts">
             <h2>Your Posts</h2>
             {% for post in posts %}
+                <!-- Post preview which opens a modal on click -->
                 <div class="post-preview" onclick="openModal('{{ loop.index0 }}')">
                     <p>Preview of Post #{{ post.id }}</p>
                 </div>
+                <!-- Modal for displaying the full post -->
                 <div class="modal" id="modal-{{ loop.index0 }}">
                     <div class="modal-content">
                         <span class="close" onclick="closeModal('{{ loop.index0 }}')">&times;</span>
@@ -131,15 +164,21 @@
             {% endfor %}
         </div>
     </div>
+
     <script>
+        // Function to open a modal
         function openModal(index) {
             var modal = document.getElementById('modal-' + index);
             modal.style.display = 'block';
         }
+
+        // Function to close a modal
         function closeModal(index) {
             var modal = document.getElementById('modal-' + index);
             modal.style.display = 'none';
         }
+
+        // Close the modal if the user clicks outside of it
         window.onclick = function(event) {
             var modals = document.getElementsByClassName('modal');
             for (var i = 0; i < modals.length; i++) {
