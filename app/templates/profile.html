@@ -4,189 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <style>
-        /* Basic styling for the entire body */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
+    <link rel="stylesheet" href="../static/profile.css" />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-        /* Styling for the sidebar */
-        #sidebar {
-            background-color: #333;
-            color: white;
-            width: 200px;
-            height: 100vh;
-            padding: 15px;
-        }
 
-        /* General button styling for the sidebar buttons */
-        .button-Edit, .button-Home, .button-Logout {
-            display: flex; /* Corrected missing semicolon */
-            align-items: center;
-            background: #555;
-            color: #fff;
-            border: none;
-            padding: 15px 20px;
-            margin: 15px 10px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 22px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.1s ease;
-            cursor: pointer;
-            outline: none;
-            width: calc(100% - 20px);
-        }
-
-        /* Hover effect for the Edit button */
-        .button-Edit:hover {
-            background-color: #0aefff;
-            box-shadow: 0px 0px 15px #0aefff;
-            color: black;
-            font-weight: bold;
-        }
-
-        /* Hover effect for the Logout button */
-        .button-Logout:hover {
-            background-color: red;
-            box-shadow: 0px 0px 15px red;
-            color: black;
-            font-weight: bold;
-        }
-
-        /* Hover effect for the Home button */
-        .button-Home:hover {
-            background-color: whitesmoke;
-            box-shadow: 0px 0px 15px whitesmoke;
-            color: black;
-            font-weight: bold;
-        }
-
-        /* Styling for the main content area */
-        #main-content {
-            flex-grow: 1;
-            padding: 20px;
-        }
-
-        /* Centering the profile details and user posts sections */
-        .profile-details, .user-posts {
-            margin: auto;
-        }
-
-        /* Styling for the post previews */
-        .post-preview {
-            cursor: pointer;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-        }
-
-        /* Hover effect for post previews */
-        .post-preview:hover {
-            background-color: #efefef;
-        }
-
-        /* Styling for the modal background */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        /* Styling for the modal content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* Styling for the close button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Hover effect for the close button */
-        .close:hover, .close:focus {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
-</head>
+  </head>
 <body>
-    <!-- Sidebar with navigation buttons -->
+
     <div id="sidebar">
-        <button class="button-Edit" onclick="location.href='/edit_profile'">Edit Profile</button>
-        <button class="button-Logout" onclick="location.href='/logout'">Logout</button>
-        <button class="button-Home" onclick="window.location.href='{{ url_for('index') }}'">Home</button>
+        <button class="button-home">
+            <i class="fa fa-home"></i><span>Home</span>
+        </button>
+    
+        <button class="button-about">
+            <i class="fas fa-lightbulb"></i><span>About</span>
+        </button>
+
+        <button class="button-contact-us">
+            <i class="fas fa-phone"></i><span>Contact Us</span>
+        </button>
+
+        <button class="button-upload" onclick="window.location.href='/upload'">
+            <i class="fas fa-upload"></i><span>Upload</span>
+        </button>
+        <div class="fame">
+            <button class="button-hall-of-fame" onclick="window.location.href='/gallery'">
+                <i class="fas fa-trophy"></i><span>Hall of Fame</span>
+            </button>
+        </div>
     </div>
 
-    <!-- Main content area -->
     <div id="main-content">
-        <!-- Profile details section -->
-        <div class="profile-details">
-            <h1>Profile</h1>
-            <p><strong>Username:</strong> {{ current_user.username }}</p>
-            <p><strong>Email:</strong> {{ current_user.email }}</p>
-        </div>
+      <h1>Profile</h1>
 
-        <!-- User posts section -->
-        <div class="user-posts">
-            <h2>Your Posts</h2>
-            {% for post in posts %}
-                <!-- Post preview which opens a modal on click -->
-                <div class="post-preview" onclick="openModal('{{ loop.index0 }}')">
-                    <p>Preview of Post #{{ post.id }}</p>
+      <div class="profile-details">
+        <div class="profile-icon"> <!-- Add div for the profile icon -->
+          <i class="fas fa-user"></i> <!-- Add the user icon -->
+        </div>
+        <div class="profile-text"> <!-- Added a wrapper div -->
+          <p><strong>Username:</strong> {{ current_user.username }}</p>
+          <p><strong>Email:</strong> {{ current_user.email }}</p> 
+        </div>
+      </div>
+      <h2>Your Posts</h2> <!-- Moved this line above the loop -->
+
+      <div class="user-posts">
+        {% for post in posts %}
+        <div class="col">
+            <div class="card h-100 bg-secondary text-white">
+                <div class="card-body" style="width:100%; height: 200px">
+                    <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: 100%;"
+                    srcdoc="{{ post.body|safe }}"></iframe>
                 </div>
-                <!-- Modal for displaying the full post -->
-                <div class="modal" id="modal-{{ loop.index0 }}">
-                    <div class="modal-content">
-                        <span class="close" onclick="closeModal('{{ loop.index0 }}')">&times;</span>
-                        <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height:500px;" srcdoc="{{post.body | safe }}"></iframe>
-                    </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">Post by {{ post.author.username }}</h5>
+                    <p class="card-text">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
                 </div>
-            {% endfor %}
+                <button class="view-code-button" onclick="openModal('{{ loop.index0 }}')">View Code</button>
+            </div>
+        </div>
+        <div class="full-post-content" id="full-post-content-{{ loop.index0 }}" style="display: none">
+            <pre><code>{{ post.body | safe }}</code></pre>
+        </div>
+        {% endfor %}
+     </div>
+    </div>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <iframe id="postFrame" style="width: 100%; height: 500px"></iframe>
         </div>
     </div>
 
     <script>
-        // Function to open a modal
-        function openModal(index) {
-            var modal = document.getElementById('modal-' + index);
-            modal.style.display = 'block';
-        }
 
-        // Function to close a modal
-        function closeModal(index) {
-            var modal = document.getElementById('modal-' + index);
-            modal.style.display = 'none';
-        }
 
-        // Close the modal if the user clicks outside of it
-        window.onclick = function(event) {
-            var modals = document.getElementsByClassName('modal');
-            for (var i = 0; i < modals.length; i++) {
-                if (event.target == modals[i]) {
-                    modals[i].style.display = 'none';
-                }
-            }
-        }
+    function openModal(postIndex) {
+      var content = document.getElementById(
+        "full-post-content-" + postIndex
+      ).innerHTML;
+      document.getElementById("postFrame").srcdoc = content;
+      document.getElementById("postModal").style.display = "block";
+    }
+    
+    function closeModal() {
+      document.getElementById("postModal").style.display = "none";
+    }
+    
+    window.onclick = function (event) {
+      var modal = document.getElementById("postModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
     </script>
+
 </body>
 </html>
