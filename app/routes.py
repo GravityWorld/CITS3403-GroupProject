@@ -96,7 +96,7 @@ def upload():
 def handle_upload():
     html_content = request.form.get('html')
     css_content = request.form.get('css')
-
+    tags = request.form.get('tags')
     if not html_content.strip():
         flash('Your post is empty.', 'warning')
         return redirect(url_for('display_upload'))
@@ -112,7 +112,7 @@ def handle_upload():
 
     # Create a new Post instance with the modified HTML content
     #Use of escape to replace symbols for tags with UTF characters in order to isolate css submitted and the page css.
-    new_post = Post(body=escape(html_content), author=current_user)
+    new_post = Post(body=escape(html_content), author=current_user,tags=tags)
     
     db.session.add(new_post)
     db.session.commit()
@@ -135,12 +135,21 @@ def user_profile(username):
     posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
     return render_template('profile.html', user=current_user, posts=posts)
 
+@app.route('/gallery', methods=['GET', 'POST'])
+def gallery():
+    tag_filter = request.args.get('tag')
+    sort_order = request.args.get('sort', 'recent')
+    
+    posts_query = Post.query
+    
+    if tag_filter:
+        posts_query = posts_query.filter(Post.tags.contains(tag_filter))
 
+    if sort_order == 'oldest':
+        posts_query = posts_query.order_by(Post.timestamp.asc())
+    else:  # Default to 'recent'
+        posts_query = posts_query.order_by(Post.timestamp.desc())
 
-@app.route('/gallery')
-def hall_of_fame():
-    # Fetch all posts ordered by timestamp, newest first
-    # get current time. 
-    top_submissions = Post.query.order_by(Post.timestamp.desc()).all()
+    top_submissions = posts_query.all()
+
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
-
