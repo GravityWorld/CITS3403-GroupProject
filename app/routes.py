@@ -140,6 +140,7 @@ def user_profile(username):
 @app.route('/gallery')
 def hall_of_fame():
     # Fetch all posts ordered by timestamp, newest first
+    # get current time. 
     top_submissions = Post.query.order_by(Post.timestamp.desc()).all()
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
 
