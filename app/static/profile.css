@@ -119,3 +119,26 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+.profile-details {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px; /* Add margin at the bottom */
+  }
+  
+  .profile-icon {
+    border-radius: 50%; /* Make it round */
+    background-color: #ccc; /* Grey background */
+    padding: 15px; /* Add some padding */
+    margin-right: 30px; /* Add margin between icon and text */
+  }
+  
+  .profile-icon i {
+    color: white; /* Icon color */
+    font-size: 24px; /* Adjust icon size */
+  }
+  
+  .profile-text p {
+    margin: px 0; /* Adjust margin for text */
+  }
+  
