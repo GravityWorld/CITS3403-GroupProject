@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
     <link rel="stylesheet" href="../static/profile.css" />
     <link rel="stylesheet" href="../static/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-</head>
+
+
+  </head>
 <body>
 
     <div id="sidebar">
@@ -52,18 +51,26 @@
 
       <div class="user-posts">
         {% for post in posts %}
-        <div class="post-preview" onclick="openModal('{{ loop.index0 }}')">
-            <p class="post-preview-label">Preview of Post #{{ post.id }}</p>
+        <div class="col">
+            <div class="card h-100 bg-secondary text-white">
+                <div class="card-body" style="width:100%; height: 200px">
+                    <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: 100%;"
+                    srcdoc="{{ post.body|safe }}"></iframe>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">Post by {{ post.author.username }}</h5>
+                    <p class="card-text">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                </div>
+                <button class="view-code-button" onclick="openModal('{{ loop.index0 }}')">View Code</button>
+            </div>
         </div>
-        <div
-            class="full-post-content"
-            id="full-post-content-{{ loop.index0 }}"
-            style="display: none"
-        >
-            {{ post.body | safe }}
+        <div class="full-post-content" id="full-post-content-{{ loop.index0 }}" style="display: none">
+            <pre><code>{{ post.body | safe }}</code></pre>
         </div>
         {% endfor %}
-      </div>
+     </div>
     </div>
 
     <div id="postModal" class="modal">
@@ -74,6 +81,8 @@
     </div>
 
     <script>
+
+
     function openModal(postIndex) {
       var content = document.getElementById(
         "full-post-content-" + postIndex
@@ -81,9 +90,11 @@
       document.getElementById("postFrame").srcdoc = content;
       document.getElementById("postModal").style.display = "block";
     }
+    
     function closeModal() {
       document.getElementById("postModal").style.display = "none";
     }
+    
     window.onclick = function (event) {
       var modal = document.getElementById("postModal");
       if (event.target == modal) {
