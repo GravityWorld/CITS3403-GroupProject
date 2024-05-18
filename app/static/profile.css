@@ -106,6 +106,7 @@ body {
     background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
+    width: 80%;
 }
 
 .close {
@@ -498,4 +499,63 @@ body {
 .post-details { /* New CSS for aligning post details */
     display: flex;
     flex-direction: column;
+  }
+
+
+  .profile-textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .postsave-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 20px auto;
+
+    padding: 20px;
+    background-color: #bababa;
+    border-radius: 5px;
+    box-shadow: 4px 4px 10px #bababa;
+    text-align: center;
+  }
+  
+  #save-form {
+    width: 100%; /* makes the form occupy the entire screen width */
+    max-width: 1500px; /* Limit the maximum width of the form */
+    /* can add maximum height for height of window */
+    margin-bottom: 20px;
+  }
+
+  
+  .postsave-title {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center; /* Center the text within the label */
+  }
+  
+  .remember-me {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left; /* Center the text within the label */
+  }
+  
+  postsave label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left; /* Center the text within the label */
+  }
+  postsave input[type="text"],
+  postsave input[type="password"] {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 3px;
   }

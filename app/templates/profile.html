@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../static/profile.css" />
     <link rel="stylesheet" href="../static/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'/>
 
   </head>
 <body>
@@ -78,7 +78,7 @@
                     </button>
                   </li>
                   <li>
-                    <button>
+                    <button onclick="openEditModal('{{ loop.index0 }}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
                       </svg>
@@ -100,7 +100,6 @@
             </label>
           </div>
           
-          
           <div class="card h-100 bg-secondary text-white">
             <div class="card-body" style="width:100%; height: 200px">
               <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: 100%;"
@@ -108,26 +107,80 @@
             </div>
           </div>
         </div>
-
+      
         <div class="full-post-content" id="full-post-content-{{ loop.index0 }}" style="display: none">
             <pre><code>{{ post.body | safe }}</code></pre>
         </div>
         {% endfor %}
-    </div>
-    </div>
-
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <iframe id="postFrame" style="width: 100%; height: 500px"></iframe>
+      </div>
+      
+      <div id="postModal" class="modal">
+      <div class="modal-content">
+        <div class="upload-container">
+            <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
+            <form id="save-form" action="" method="post" class="postsave-form">
+                <div class="flex-container">
+                    <div class="form-group">
+                        <label>HTML <i class="bx bxl-html5"></i></label>
+                        <textarea
+                            onkeyup="runCode()"
+                            id="htmlCode" 
+                            name="html"
+                            rows="10"
+                            cols="50"
+                            class="profile-textarea"
+                        ></textarea>
+    
+                        <label>CSS <i class="bx bxl-css3"></i></label>
+                        <textarea
+                            onkeyup="runCode()"
+                            id="cssCode" 
+                            name="css"
+                            rows="10"
+                            cols="50"
+                            class="profile-textarea"
+                        ></textarea>
+                    </div>
+    
+                    <div class="output-box">
+                        <label>Output</label>
+                        <iframe id="output-frame" class="output-frame"></iframe>
+                    </div>
+                </div>
+                <p id="submission-status" class="submission-status"></p>
+    
+                <div class="output-container">
+                    <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
+                    <button type="submit" class="upload-button">Save post</button>
+                </div>
+            </form>
         </div>
+        <span class="close" onclick="closeModal()">&times;</span>
+      </div>
     </div>
+    
+<!-- 
+        <div class="modal-content">
+          <div class="code-box">
+            <h3>CSS</h3>
+            <textarea id="cssCode" class="code-CSS"></textarea>
+          </div>
+          <div class="code-box">
+            <h3>HTML</h3>
+            <textarea id="htmlCode" class="code-HTML"></textarea>
+          </div>
+        </div>
+      </div> -->
+
+
+
+    
 
     <script>
     function downloadTextFile(postIndex) {
        // Get the user-entered text
         const textContent = document.getElementById("full-post-content-" + postIndex).querySelector("code").innerText;
-
+        
         // Create a Blob object containing the text
         const blob = new Blob([textContent], { type: 'text/plain' });
 
@@ -148,15 +201,53 @@
         window.URL.revokeObjectURL(a.href);
     }
 
+    function runCode() {
+    let htmlContent = document.getElementById("htmlCode").value;
+    let cssContent = document.getElementById("cssCode").value;
+
+    let output = document.getElementById("output-frame").contentDocument;
+
+    output.open();
+    output.write('<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
+    output.close();
+
+    console.log(output.body.innerHTML);
+  }
 
 
-    function openModal(postIndex) {
-      var content = document.getElementById(
-        "full-post-content-" + postIndex
-      ).innerHTML;
-      document.getElementById("postFrame").srcdoc = content;
-      document.getElementById("postModal").style.display = "block";
+    function openEditModal(index) {
+      const textContent = document.getElementById("full-post-content-" + index).querySelector("code").innerText;
+
+      var htmlRegex = /<body.*?>([\s\S]*)<\/body>/; 
+      var cssRegex = /<style.*?>([\s\S]*)<\/style>/; 
+
+      var htmlMatch = textContent.match(htmlRegex);
+      var cssMatch = textContent.match(cssRegex);
+
+      var htmlPart = htmlMatch ? htmlMatch[1] : ''; 
+      var cssPart = cssMatch ? cssMatch[1] : ''; 
+      console.log(htmlPart);
+      // Set the HTML and CSS parts to the text areas in the modal
+      document.getElementById('htmlCode').value = htmlPart;
+      document.getElementById('cssCode').value = cssPart;
+
+      runCode();
+      // Display the modal
+      var modal = document.getElementById('postModal');
+      modal.style.display = "block";
     }
+
+  
+  
+
+
+    // function openModal(postIndex) {
+    //   var content = document.getElementById(
+    //     "full-post-content-" + postIndex
+    //   ).innerHTML;
+    //   document.getElementById("postFrame").srcdoc = content;
+    //   document.getElementById("postModal").style.display = "block";
+    // }
     
     function closeModal() {
       document.getElementById("postModal").style.display = "none";
@@ -168,6 +259,10 @@
         closeModal();
       }
     };
+
+
+
+    
     </script>
 
 </body>
