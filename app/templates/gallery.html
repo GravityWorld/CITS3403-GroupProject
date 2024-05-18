@@ -8,24 +8,32 @@
     color: white;
   }
 
+  .modal-dialog {
+    width: 100%;
+    max-width: 1400px;
+    height: 690px;
+    margin: auto;
+  }
+
   .modal-content {
-    width: 90%;
-    max-width: 1200px;
+    width: 100%;
+    height: 80%;
   }
 
   .modal-body {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    height: calc(100% - 60px);
+    /* Adjust for header and footer height */
   }
 
-  .modal-body iframe {
-    flex: 1;
-    height: auto;
+  .modal-body iframe,
+  .modal-body pre {
+    height: 100%;
   }
 
   .modal-body pre {
-    flex: 1;
     white-space: pre-wrap;
     word-wrap: break-word;
   }
@@ -70,7 +78,7 @@
 
 <h1 class="mb-4 text-center">Hall of Fame</h1>
 
-<div class="container mb-4">
+<div class="container">
   <form method="GET" action="{{ url_for('gallery') }}" class="filter-sort-container">
     <input type="text" name="tag" class="form-control" placeholder="Search by tag" value="{{ request.args.get('tag', '') }}">
     <select name="sort" class="form-control">
@@ -79,9 +87,7 @@
     </select>
     <button type="submit" class="btn btn-primary">Apply</button>
   </form>
-</div>
 
-<div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for submission in top_submissions %}
     <div class="col">
@@ -102,22 +108,18 @@
     </div>
     <!-- Modal -->
     <div class="modal fade" id="codeModal{{ submission.id }}" tabindex="-1" aria-labelledby="codeModalLabel{{ submission.id }}" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-white">
           <div class="modal-header">
             <h5 class="modal-title" id="codeModalLabel{{ submission.id }}">Code for {{ submission.author.username }}</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <h5>Post</h5>
-                <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: auto;" srcdoc="{{ submission.body|safe }}"></iframe>
-              </div>
-              <div class="col-md-6">
-                <h5>Code</h5>
-                <pre><code>{{ submission.body|safe }}</code></pre>
-              </div>
+            <div style="width: 50%;">
+              <iframe sandbox="allow-same-origin allow-scripts" srcdoc="{{ submission.body|safe }}" style="width: 100%; height: 100%;"></iframe>
+            </div>
+            <div style="width: 50%;">
+              <pre><code>{{ submission.body|safe }}</code></pre>
             </div>
           </div>
           <div class="modal-footer">
