@@ -2,6 +2,7 @@ from urllib.parse import urlsplit
 from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
+import humanize
 from app import app, db
 from app.forms import LoginForm, SignUpForm
 from app.models import User
@@ -139,9 +140,9 @@ def user_profile(username):
 def gallery():
     tag_filter = request.args.get('tag')
     sort_order = request.args.get('sort', 'recent')
-    
+
     posts_query = Post.query
-    
+
     if tag_filter:
         posts_query = posts_query.filter(Post.tags.contains(tag_filter))
 
@@ -151,5 +152,11 @@ def gallery():
         posts_query = posts_query.order_by(Post.timestamp.desc())
 
     top_submissions = posts_query.all()
+
+    for submission in top_submissions:
+        # Ensure timestamp is offset-aware
+        if submission.timestamp.tzinfo is None:
+            submission.timestamp = submission.timestamp.replace(tzinfo=timezone.utc)
+        submission.relative_timestamp = humanize.naturaltime(datetime.now(timezone.utc) - submission.timestamp)
 
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
