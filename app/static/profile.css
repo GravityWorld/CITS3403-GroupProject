@@ -393,6 +393,7 @@ body {
   left: var(--nav-position-left);
   right: var(--nav-position-right);
   transition: var(--burger-transition);
+  
 }
 
 .popup-window legend {
@@ -487,3 +488,14 @@ body {
   visibility: visible;
   opacity: 1;
 }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-details { /* New CSS for aligning post details */
+    display: flex;
+    flex-direction: column;
+  }

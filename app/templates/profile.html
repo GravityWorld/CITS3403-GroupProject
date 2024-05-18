@@ -53,45 +53,61 @@
         {% for post in posts %}
         <div class="col">
           <div class="card-footer d-flex justify-content-between align-items-center">
-            <div>
-                <h5 class="card-title">Post by {{ post.author.username }}</h5>
-                <p class="card-text">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-                </div>
-
-
-
-                <div class="download-view">
-                  <button class="download-button">
-                    <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none"
-                        stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line y2="13" x2="8" y1="13" x1="16"></line>
-                        <line y2="17" x2="8" y1="17" x1="16"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                      </svg> Docs</div>
-                    <div class="download" onclick="triggerDownload()">
-                      <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2"
-                        stroke="currentColor" height="24" width="24" viewBox="0 0 24 24">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line y2="3" x2="12" y1="15" x1="12"></line>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                
-              
-              
-              
+            <div class="post-details">
+              <h5 class="card-title">Post by {{ post.author.username }}</h5>
+              <p class="card-text">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            </div>
+          
+            <label class="popup">
+              <input type="checkbox">
+              <div class="burger" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
-                  <div class="card h-100 bg-secondary text-white">
-                    <div class="card-body" style="width:100%; height: 200px">
-                      <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: 100%;"
-                        srcdoc="{{ post.body|safe }}"></iframe>
-                    </div>
-                  </div>
-                </div>
+              <nav class="popup-window">
+                <legend>Actions</legend>
+                <ul class="post-options">
+                  <li>
+                    <button onclick="downloadTextFile('{{ loop.index0 }}')">
+                      <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <rect ry="2" rx="2" height="13" width="13" y="9" x="9"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                      <span>Download</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button>
+                      <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+                      </svg>
+                      <span>Edit</span>
+                    </button>
+                  </li>
+                  <hr>
+                  <li>
+                    <button>
+                      <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <line y2="18" x2="6" y1="6" x1="18"></line>
+                        <line y2="18" x2="18" y1="6" x1="6"></line>
+                      </svg>
+                      <span>Delete</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </label>
+          </div>
+          
+          
+          <div class="card h-100 bg-secondary text-white">
+            <div class="card-body" style="width:100%; height: 200px">
+              <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: 100%;"
+                srcdoc="{{ post.body|safe }}"></iframe>
+            </div>
+          </div>
+        </div>
 
         <div class="full-post-content" id="full-post-content-{{ loop.index0 }}" style="display: none">
             <pre><code>{{ post.body | safe }}</code></pre>
@@ -109,8 +125,7 @@
 
     <script>
     function downloadTextFile(postIndex) {
-        var content = document.getElementById("full-post-content-" + postIndex).innerHTML;
-        // Get the user-entered text
+       // Get the user-entered text
         const textContent = document.getElementById("full-post-content-" + postIndex).querySelector("code").innerText;
 
         // Create a Blob object containing the text
