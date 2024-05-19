@@ -32,16 +32,16 @@ class FlaskAppSeleniumTestCase(unittest.TestCase):
 
     def test_home_page(self):
         self.driver.get('http://127.0.0.1:5000/')
-        self.assertIn('Welcome to Our Site!', self.driver.page_source)
+        self.assertIn('Welcome to Spyderweb!', self.driver.page_source)
 
     def test_login(self):
         self.driver.get('http://127.0.0.1:5000/login')
         username_field = self.driver.find_element(By.NAME, 'username')
-        password_field = self.driver.find_element(By.NAME, 'password')
+        password_field = self.driver.find_element(By.NAME, 'password!')
         submit_button = self.driver.find_element(By.XPATH, '//button[@type="submit"]')
 
         username_field.send_keys('testuser')
-        password_field.send_keys('testpassword')
+        password_field.send_keys('testpassword!')
         submit_button.click()
 
         self.assertIn('testuser!', self.driver.page_source)
