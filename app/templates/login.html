@@ -1,6 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class = "form-title">
+    Log into your account
+  </title>
+</head>
 <body class="login-body">
   {% extends "base.html" %} {% block content %}
-  <form action="" method="post" novalidate>
+  <form action="login" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p class = "form-title">
       Log into your account

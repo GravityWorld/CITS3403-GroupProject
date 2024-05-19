@@ -547,7 +547,7 @@ main {
   padding: 20px;
   position: relative;
   list-style: none;
-
+  margin-bottom: 20px;
 }
 
 /* Style for step headings with emphasis */
