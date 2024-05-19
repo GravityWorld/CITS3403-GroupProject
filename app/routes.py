@@ -4,10 +4,13 @@ from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
 import humanize
 from app import app, db
-from app.forms import LoginForm, SignUpForm
+from app.forms import LoginForm, SignUpForm,UploadForm
 from app.models import User, Post, Like
 from datetime import datetime, timezone
 from markupsafe import escape
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect(app)
 
 @app.route('/')
 @app.route('/index')
@@ -72,32 +75,32 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/upload')
-def upload():
-    if current_user.is_authenticated:
-        return render_template("upload.html")
-    else:
-        session['upload_intent'] = True
-        return redirect(url_for('login'))
-
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 @login_required
-def handle_upload():
-    html_content = request.form.get('html')
-    css_content = request.form.get('css')
-    tags = request.form.get('tags')
-    if not html_content.strip():
-        flash('Your post is empty.', 'warning')
-        return redirect(url_for('display_upload'))
-    if '<head>' in html_content:
-        html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
-    else:
-        html_content = '<head><style>' + css_content + '</style></head>' + html_content
-    new_post = Post(body=escape(html_content), author=current_user, tags=tags)
-    db.session.add(new_post)
-    db.session.commit()
-    flash('Your HTML has been uploaded successfully!', 'success')
-    return redirect(url_for('user_profile', username=current_user.username))
+def upload():
+    form = UploadForm()
+    if form.validate_on_submit():
+        html_content = form.html.data
+        css_content = form.css.data
+        tags = form.tags.data
+        
+        if not html_content.strip():
+            flash('Your post is empty.', 'warning')
+            return redirect(url_for('upload'))
+        
+        if '<head>' in html_content:
+            html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
+        else:
+            html_content = '<head><style>' + css_content + '</style></head>' + html_content
+        
+        new_post = Post(body=escape(html_content), author=current_user, tags=tags)
+        db.session.add(new_post)
+        db.session.commit()
+        
+        flash('Your HTML has been uploaded successfully!', 'success')
+        return redirect(url_for('user_profile', username=current_user.username))
+    
+    return render_template('upload.html', form=form)
 
 @app.route('/profile')
 @login_required
@@ -112,23 +115,32 @@ def user_profile(username):
     posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
     return render_template('profile.html', user=current_user, posts=posts)
 
-@app.route('/gallery', methods=['GET'])
+@app.route('/gallery', methods=['GET', 'POST'])
 def gallery():
     tag_filter = request.args.get('tag')
     sort_order = request.args.get('sort', 'recent')
+
     posts_query = Post.query
+
     if tag_filter:
         posts_query = posts_query.filter(Post.tags.contains(tag_filter))
+
     if sort_order == 'oldest':
         posts_query = posts_query.order_by(Post.timestamp.asc())
-    else:
+    elif sort_order == 'most_liked':
+        posts_query = posts_query.outerjoin(Like).group_by(Post.id).order_by(sa.func.count(Like.id).desc())
+    else:  # Default to 'recent'
         posts_query = posts_query.order_by(Post.timestamp.desc())
+
     top_submissions = posts_query.all()
+
     for submission in top_submissions:
         if submission.timestamp.tzinfo is None:
             submission.timestamp = submission.timestamp.replace(tzinfo=timezone.utc)
         submission.relative_timestamp = humanize.naturaltime(datetime.now(timezone.utc) - submission.timestamp)
+
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
+
     
 @app.route('/like/<int:post_id>', methods=['POST'])
 @login_required
