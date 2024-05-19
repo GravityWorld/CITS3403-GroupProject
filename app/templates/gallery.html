@@ -184,6 +184,17 @@
     }
   }
 
+    /**
+   * Function to like or unlike a post.
+   * 
+   * This function sends a POST request to the server to like or unlike a post.
+   * If the user has already liked the post, it will unlike the post.
+   * If the user has not liked the post, it will like the post.
+   * The button's appearance and like count are updated based on the server's response.
+   * 
+   * @param {number} postId - The ID of the post to like or unlike.
+   * @param {HTMLElement} button - The button element that was clicked to trigger this function.
+   */
   function likePost(postId, button) {
     // Send a POST request to the server to like or unlike the post
     fetch(`/like/${postId}`, {
