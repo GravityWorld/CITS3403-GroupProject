@@ -15,21 +15,6 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from flask import request, redirect, flash, url_for
 
-def extract_html_css(post_body):
-    # Define regular expressions to match HTML and CSS parts
-    html_regex = re.compile(r'<body.*?>([\s\S]*)<\/body>', re.IGNORECASE)
-    css_regex = re.compile(r'<style.*?>([\s\S]*)<\/style>', re.IGNORECASE)
-
-    # Extract HTML and CSS parts using regular expressions
-    html_match = html_regex.search(post_body)
-    css_match = css_regex.search(post_body)
-
-    # Check if matches were found
-    html_part = html_match.group(1) if html_match else ''
-    css_part = css_match.group(1) if css_match else ''
-    return(html_part, css_part)
-
-
 
 
 @app.route('/')
@@ -165,23 +150,6 @@ def handle_modify():
 
 
     return redirect(url_for('user_profile', username=current_user.username))
-
-@app.route('/delete', methods=['POST'])
-@login_required
-def delete_post():
-    post_id = request.form.get('postId')
-    
-    post = Post.query.get_or_404(post_id)
-
-    if post.author != current_user:
-        flash('You do not have permission to delete this post.', 'danger')
-        return redirect(url_for('index'))
-
-    db.session.delete(post)
-    db.session.commit()
-    flash('Post has been deleted.', 'success')
-    return redirect(url_for('user_profile', username=current_user.username))
-
 
 @app.route('/profile')
 @login_required

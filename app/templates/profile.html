@@ -65,9 +65,7 @@
                 <span></span>
                 <span></span>
               </div>
-              <p> {{ post.id }}</p>
-
-
+              <!-- <p> {{ post.id }}</p> -->
               <nav class="popup-window">
                 <legend>Actions</legend>
                 <ul class="post-options">
@@ -88,16 +86,7 @@
                       <span>Edit</span>
                     </button>
                   </li>
-                  <hr>
-                  <li>
-                    <button>
-                      <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
-                        <line y2="18" x2="6" y1="6" x1="18"></line>
-                        <line y2="18" x2="18" y1="6" x1="6"></line>
-                      </svg>
-                      <span>Delete</span>
-                    </button>
-                  </li>
+
                 </ul>
               </nav>
             </label>
@@ -118,9 +107,11 @@
         <div id="postModal" class="modal">
           <div class="modal-content">
             <div class="upload-container">
+            <span class="close" onclick="closeModal()">&times;</span>
+
                 <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
                 <form id="save-form" action="/modify" method="post" class="postsave-form">
-                  <input type="hidden" id="postId" name="postId" value=""">
+                  <input type="hidden" id="postId" name="postId" value="">
                     <div class="flex-container">
                         <div class="form-group">
                             <label>HTML <i class="bx bxl-html5"></i></label>
@@ -158,11 +149,8 @@
 
                 </form>
             </div>
-            <span class="close" onclick="closeModal()">&times;</span>
           </div>
         </div>
-
-
 
         {% endfor %}
       </div>
