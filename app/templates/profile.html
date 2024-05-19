@@ -110,23 +110,8 @@
             <span class="close" onclick="closeModal()">&times;</span>
 
                 <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
-                  <form id="save-form" action="{{ url_for('modify') }}" method="get" class="postsave-form">
-                    {{ form.hidden_tag() }} 
-                    <input type="hidden" id="postId" name="postId" value="">
-                      <div class="flex-container">
-                          <div class="form-group">
-                              <label>HTML <i class="bx bxl-html5"></i></label>
-                              {{ form.html(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
-          
-                              <label></label>CSS <i class="bx bxl-css3"></i></label>
-                              {{ form.css(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
 
-
-
-          
-                  </form>
-   
-                </form>
+                
             </div>
           </div>
         </div>
