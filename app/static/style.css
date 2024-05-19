@@ -543,24 +543,43 @@ main {
   clear: both;
   display: table;
 }
-
-
-/* Container for the iframe */
-.iframe-container {
+/* Style the container for the first iframe */
+#iframe-section1 .iframe-container {
   overflow: hidden; /* Hide overflow content */
   position: relative; /* Set position to relative */
   width: 100%; /* Adjust width as needed */
   height: 480px; /* Adjust height as needed */
 }
 
-/* Style the iframe */
-.iframe-container iframe {
+/* Style the first iframe */
+#iframe-section1 .iframe-container iframe {
   position: absolute; /* Set position to absolute */
   top: -200px; /* Adjust the top position to crop off the top part */
   left: 0;
   width: 100%; /* Set iframe width to 100% */
   height: calc(100% + 230px); /* Adjust height to include the cropped part */
+  border: none; /* Remove default iframe border */
+  pointer-events: none; /* Disable user interaction */
 }
+
+/* Style the container for the second iframe */
+#iframe-section2 .iframe-container {
+  width: 100%;
+  height: 760px; /* Set the desired height for the second iframe container */
+  overflow: hidden; /* Hide overflow content */
+  position: relative; /* Set position to relative */
+}
+
+/* Style the second iframe */
+#iframe-section2 .iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -50px; /* Adjust the top position to crop off the top part if needed */
+  border: none; /* Remove default iframe border */
+  pointer-events: none; /* Disable user interaction */
+}
+
 
 
 /* Styles for the navigation bar */
