@@ -67,9 +67,18 @@ def signup():
         if existing_user:
             flash('Error: Username already exists. Please choose a different username.', 'error')
             return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
-        # If username doesn't exist, proceed with registration
+        # Password validation logic
         if form.password.data != form.ReEnterPass.data:
             flash('Error: Passwords do not match', 'error')
+            return redirect(url_for('signup'))
+
+        if len(form.password.data) < 8:
+            flash('Error: Password must be at least 8 characters long', 'error')
+            return redirect(url_for('signup'))
+
+        special_characters = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+        if not special_characters.search(form.password.data):
+            flash('Error: Password must contain at least one special character', 'error')
             return redirect(url_for('signup'))
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
