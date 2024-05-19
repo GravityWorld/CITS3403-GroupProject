@@ -62,8 +62,7 @@
                 <span></span>
                 <span></span>
               </div>
-              <p> {{ post.id }}</p>
-
+              <br/>
 
               <nav class="popup-window">
                 <legend>Actions</legend>
@@ -82,7 +81,7 @@
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
                       </svg>
-                      <span>Edit</span>
+                      <span>View</span>
                     </button>
                   </li>
                   <hr>
@@ -115,29 +114,30 @@
         <div id="postModal" class="modal">
           <div class="modal-content">
             <div class="upload-container">
-                <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
+                <h1 class="upload-header">View or run your HTML/CSS CODE</h1>
                 <form id="save-form" action="/modify" method="get" class="postsave-form">
                   <input type="hidden" id="postId" name="postId" value="">
                     <div class="flex-container">
                         <div class="form-group">
                             <label>HTML <i class="bx bxl-html5"></i></label>
                             <textarea
-                                onkeyup="runCode()"
                                 id="HtmlCode" 
                                 name="HtmlCode"
                                 rows="10"
                                 cols="50"
                                 class="profile-textarea"
+                                readonly
+
                             >{{ post.html_content }}</textarea>
         
                             <label></label>CSS <i class="bx bxl-css3"></i></label>
                             <textarea
-                                onkeyup="runCode()"
                                 id="CssCode" 
                                 name="CssCode"
                                 rows="10"
                                 cols="50"
                                 class="profile-textarea"
+                                readonly
                             >{{ post.css_content }}</textarea>
                         </div>
         
@@ -147,19 +147,12 @@
                         </div>
                     </div>
                     <p id="submission-status" class="submission-status"></p>
-        
-                    <div class="output-container">
-                        <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
-                        <button type="submit" class="upload-button">Save post</button>
-                    </div>
 
                 </form>
             </div>
             <span class="close" onclick="closeModal()">&times;</span>
           </div>
         </div>
-
-
 
         {% endfor %}
       </div>
