@@ -23,8 +23,6 @@ csrf = CSRFProtect(app)
 @app.route('/index')
 
 def index():
-    flash('This is a test message.', 'info')
-
     return render_template('index.html', title='Home')
 
 

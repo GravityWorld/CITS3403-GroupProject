@@ -1,0 +1,98 @@
+  body {
+    background-color: #1f1f1f;
+    color: white;
+  }
+
+  .modal-dialog {
+    width: 100%;
+    max-width: 1400px;
+    height: 690px;
+    margin: auto;
+  }
+
+  .modal-content {
+    width: 100%;
+    height: 80%;
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height: calc(100% - 60px);
+  }
+
+  .modal-body iframe,
+  .modal-body pre {
+    height: 100%;
+  }
+
+  .modal-body pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .filter-sort-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    gap: 10px;
+    width: 80%;
+  }
+
+  .filter-sort-container input {
+    margin-top: 10px;
+    height: 38px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
+  }
+
+  .filter-sort-container select,
+  .filter-sort-container button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: #333;
+    color: white;
+    outline: none;
+  }
+
+  .filter-sort-container input {
+    flex: 2;
+  }
+
+  .filter-sort-container select {
+    flex: 1;
+  }
+
+  .filter-sort-container button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .filter-sort-container button:hover {
+    background-color: #0056b3;
+  }
+
+  .like-btn {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .like-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .like-btn.liked {
+    background-color: red;
+  }
