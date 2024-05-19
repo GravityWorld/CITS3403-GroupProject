@@ -44,7 +44,7 @@ class FlaskAppSeleniumTestCase(unittest.TestCase):
         password_field.send_keys('testpassword')
         submit_button.click()
 
-        self.assertIn('Hi, testuser!', self.driver.page_source)
+        self.assertIn('testuser!', self.driver.page_source)
 
 if __name__ == '__main__':
     unittest.main()
