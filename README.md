@@ -29,19 +29,37 @@ This was fixed eventually by linking the alternate account with their account an
 
   # Setup
   
+    This web-app was developed on MAC-OS and the following commands should work on Linux, MacOs and WSL.
     create a virtual environment with the command: python3 -m venv "name of virtual environmnet"
     activate virtual enviornment with the command: source "name of virtual environmnet"/bin/activate
+
+    For Windows:
+      python -m venv myenv
+      or
+      py -m venv myenv
+      May need to run the following from Powershell admin to activate the env
+      set-executionpolicy remotesigned
+      Then to activate the virtual environment run the following:
+      myenv\Scripts\activate
+      
+    The following commands are OS independent.
     install necessary libraries with the command: pip install -r requirements
     run the command export FLASK_APP=appLaunch.py
+
+
 
   # To run
 
     run the command: flask run
     open localhost link
+
+    NOTE: if `no module error` after installing the dependencies, please deactivate virtual environment with
+          `deactivate` and reactivate with `source "name of virtual environmnet"/bin/activate`
   
   # To populate
 
-    ////
+    to populate database with test data run:
+      `python populate_db_fake_data.py`
 
 # How to Use
 
