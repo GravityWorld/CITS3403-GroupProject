@@ -53,7 +53,7 @@
         {% for post in posts %}
         <div class="col">
           <div class="card-footer d-flex justify-content-between align-items-center">
-            <div class="post-details">
+            <div class="post-details" >
               <h5 class="card-title">Post by {{ post.author.username }}</h5>
               <p class="card-text">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
             </div>
@@ -65,6 +65,9 @@
                 <span></span>
                 <span></span>
               </div>
+              <p> {{ post.id }}</p>
+
+
               <nav class="popup-window">
                 <legend>Actions</legend>
                 <ul class="post-options">
@@ -78,7 +81,7 @@
                     </button>
                   </li>
                   <li>
-                    <button onclick="openEditModal('{{ loop.index0 }}')">
+                    <button onclick="openEditModal('{{ loop.index0 }}', '{{ post.id}}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
                       </svg>
@@ -111,71 +114,61 @@
         <div class="full-post-content" id="full-post-content-{{ loop.index0 }}" style="display: none">
             <pre><code>{{ post.body | safe }}</code></pre>
         </div>
+
+        <div id="postModal" class="modal">
+          <div class="modal-content">
+            <div class="upload-container">
+                <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
+                <form id="save-form" action="/modify" method="post" class="postsave-form">
+                  <input type="hidden" id="postId" name="postId" value=""">
+                    <div class="flex-container">
+                        <div class="form-group">
+                            <label>HTML <i class="bx bxl-html5"></i></label>
+                            <textarea
+                                onkeyup="runCode()"
+                                id="HtmlCode" 
+                                name="HtmlCode"
+                                rows="10"
+                                cols="50"
+                                class="profile-textarea"
+                            ></textarea>
+        
+                            <label></label>CSS <i class="bx bxl-css3"></i></label>
+                            <textarea
+                                onkeyup="runCode()"
+                                id="CssCode" 
+                                name="CssCode"
+                                rows="10"
+                                cols="50"
+                                class="profile-textarea"
+                            ></textarea>
+                        </div>
+        
+                        <div class="output-box">
+                            <label>Output</label>
+                            <iframe id="output-frame" class="output-frame"></iframe>
+                        </div>
+                    </div>
+                    <p id="submission-status" class="submission-status"></p>
+        
+                    <div class="output-container">
+                        <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
+                        <button type="submit" class="upload-button">Save post</button>
+                    </div>
+
+                </form>
+            </div>
+            <span class="close" onclick="closeModal()">&times;</span>
+          </div>
+        </div>
+
+
+
         {% endfor %}
       </div>
       
-      <div id="postModal" class="modal">
-      <div class="modal-content">
-        <div class="upload-container">
-            <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
-            <form id="save-form" action="" method="post" class="postsave-form">
-                <div class="flex-container">
-                    <div class="form-group">
-                        <label>HTML <i class="bx bxl-html5"></i></label>
-                        <textarea
-                            onkeyup="runCode()"
-                            id="htmlCode" 
-                            name="html"
-                            rows="10"
-                            cols="50"
-                            class="profile-textarea"
-                        ></textarea>
-    
-                        <label>CSS <i class="bx bxl-css3"></i></label>
-                        <textarea
-                            onkeyup="runCode()"
-                            id="cssCode" 
-                            name="css"
-                            rows="10"
-                            cols="50"
-                            class="profile-textarea"
-                        ></textarea>
-                    </div>
-    
-                    <div class="output-box">
-                        <label>Output</label>
-                        <iframe id="output-frame" class="output-frame"></iframe>
-                    </div>
-                </div>
-                <p id="submission-status" class="submission-status"></p>
-    
-                <div class="output-container">
-                    <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
-                    <button type="submit" class="upload-button">Save post</button>
-                </div>
-            </form>
-        </div>
-        <span class="close" onclick="closeModal()">&times;</span>
-      </div>
-    </div>
-    
-<!-- 
-        <div class="modal-content">
-          <div class="code-box">
-            <h3>CSS</h3>
-            <textarea id="cssCode" class="code-CSS"></textarea>
-          </div>
-          <div class="code-box">
-            <h3>HTML</h3>
-            <textarea id="htmlCode" class="code-HTML"></textarea>
-          </div>
-        </div>
-      </div> -->
 
-
-
-    
-
+      
     <script>
     function downloadTextFile(postIndex) {
        // Get the user-entered text
@@ -201,9 +194,20 @@
         window.URL.revokeObjectURL(a.href);
     }
 
+    function saveChanges() {
+    // Get the HTML and CSS content
+    var htmlContent = document.getElementById("HtmlCode").value;
+    var cssContent = document.getElementById("CssCode").value;
+
+    // Populate the hidden input fields with the HTML and CSS content
+    document.getElementById("htmlContent").value = htmlContent;
+    document.getElementById("cssContent").value = cssContent;
+}
+
+
     function runCode() {
-    let htmlContent = document.getElementById("htmlCode").value;
-    let cssContent = document.getElementById("cssCode").value;
+    let htmlContent = document.getElementById("HtmlCode").value;
+    let cssContent = document.getElementById("CssCode").value;
 
     let output = document.getElementById("output-frame").contentDocument;
 
@@ -215,40 +219,38 @@
   }
 
 
-    function openEditModal(index) {
-      const textContent = document.getElementById("full-post-content-" + index).querySelector("code").innerText;
+  function openEditModal(index, id) {
+    const postElement = document.getElementById("full-post-content-" + index);
+    const postId = id
 
-      var htmlRegex = /<body.*?>([\s\S]*)<\/body>/; 
-      var cssRegex = /<style.*?>([\s\S]*)<\/style>/; 
-
-      var htmlMatch = textContent.match(htmlRegex);
-      var cssMatch = textContent.match(cssRegex);
-
-      var htmlPart = htmlMatch ? htmlMatch[1] : ''; 
-      var cssPart = cssMatch ? cssMatch[1] : ''; 
-      console.log(htmlPart);
-      // Set the HTML and CSS parts to the text areas in the modal
-      document.getElementById('htmlCode').value = htmlPart;
-      document.getElementById('cssCode').value = cssPart;
-
-      runCode();
-      // Display the modal
-      var modal = document.getElementById('postModal');
-      modal.style.display = "block";
-    }
-
-  
-  
-
-
-    // function openModal(postIndex) {
-    //   var content = document.getElementById(
-    //     "full-post-content-" + postIndex
-    //   ).innerHTML;
-    //   document.getElementById("postFrame").srcdoc = content;
-    //   document.getElementById("postModal").style.display = "block";
-    // }
+    const textContent = postElement.querySelector("code").innerText;
     
+
+    console.log("Test content\n", textContent);
+
+
+    var htmlRegex = /<body.*?>([\s\S]*)<\/body>/; 
+    var cssRegex = /<style.*?>([\s\S]*)<\/style>/; 
+
+    var htmlMatch = textContent.match(htmlRegex);
+    var cssMatch = textContent.match(cssRegex);
+
+    var htmlPart = htmlMatch ? htmlMatch[1] : ''; 
+    var cssPart = cssMatch ? cssMatch[1] : ''; 
+    
+
+    // Set the HTML and CSS parts to the text areas in the modal
+    document.getElementById('HtmlCode').value = htmlPart;
+    document.getElementById('CssCode').value = cssPart;
+    document.getElementById('postId').value = postId;
+
+    runCode();
+    // Display the modal
+    var modal = document.getElementById('postModal');
+    modal.style.display = "block";
+}
+
+     
     function closeModal() {
       document.getElementById("postModal").style.display = "none";
     }
@@ -259,9 +261,6 @@
         closeModal();
       }
     };
-
-
-
     
     </script>
 

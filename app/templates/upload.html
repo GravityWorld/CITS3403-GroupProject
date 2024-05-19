@@ -46,7 +46,7 @@
     let cssContent = document.getElementById("css").value;
 
     let output = document.getElementById("output-frame").contentDocument;
-
+    console.log("Test content\n", '<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
     output.open();
     output.write('<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
     output.close();

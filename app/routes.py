@@ -8,6 +8,28 @@ from app.models import User
 from app.models import Post
 from datetime import datetime, timezone
 from markupsafe import escape
+import re
+from sqlalchemy.orm.exc import NoResultFound
+
+
+
+from flask import request, redirect, flash, url_for
+
+def extract_html_css(post_body):
+    # Define regular expressions to match HTML and CSS parts
+    html_regex = re.compile(r'<body.*?>([\s\S]*)<\/body>', re.IGNORECASE)
+    css_regex = re.compile(r'<style.*?>([\s\S]*)<\/style>', re.IGNORECASE)
+
+    # Extract HTML and CSS parts using regular expressions
+    html_match = html_regex.search(post_body)
+    css_match = css_regex.search(post_body)
+
+    # Check if matches were found
+    html_part = html_match.group(1) if html_match else ''
+    css_part = css_match.group(1) if css_match else ''
+    return(html_part, css_part)
+
+
 
 
 @app.route('/')
@@ -96,29 +118,70 @@ def upload():
 def handle_upload():
     html_content = request.form.get('html')
     css_content = request.form.get('css')
-
+    full_content = ""
+    
     if not html_content.strip():
         flash('Your post is empty.', 'warning')
         return redirect(url_for('display_upload'))
 
+    
     # Insert the CSS into the HTML content
     if '<head>' in html_content:
         # If there is a <head> tag, add the CSS inside it
-        html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
+        full_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
     else:
         # If no <head> tag, prepend a <head> containing the style
-        html_content = '<head><style>' + css_content + '</style></head>' + html_content
+        full_content = '<head><style>' + css_content + '</style></head>' + html_content
     
-
+    full_content = '<html><head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
     # Create a new Post instance with the modified HTML content
     #Use of escape to replace symbols for tags with UTF characters in order to isolate css submitted and the page css.
-    new_post = Post(body=escape(html_content), author=current_user)
+    new_post = Post(body=escape(full_content), author=current_user)
     
     db.session.add(new_post)
     db.session.commit()
 
     flash('Your HTML has been uploaded successfully!', 'success')
     return redirect(url_for('user_profile', username=current_user.username))
+
+@app.route('/modify', methods=['POST'])
+@login_required
+def handle_modify():
+    post_id = request.form.get('postId')
+    html_content = request.form.get('HtmlCode')
+    css_content = request.form.get('CssCode')
+    fullcontent = ""
+
+    fullcontent = '<html><head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
+    print(fullcontent)
+
+    try:
+        post = Post.query.filter_by(id=post_id, user_id=current_user.id).one()
+        post.body = escape(fullcontent)
+        db.session.commit()
+        
+    except NoResultFound:
+        print('Post not found or you do not have permission to edit this post.', 'error')
+
+
+    return redirect(url_for('user_profile', username=current_user.username))
+
+@app.route('/delete', methods=['POST'])
+@login_required
+def delete_post():
+    post_id = request.form.get('postId')
+    
+    post = Post.query.get_or_404(post_id)
+
+    if post.author != current_user:
+        flash('You do not have permission to delete this post.', 'danger')
+        return redirect(url_for('index'))
+
+    db.session.delete(post)
+    db.session.commit()
+    flash('Post has been deleted.', 'success')
+    return redirect(url_for('user_profile', username=current_user.username))
+
 
 @app.route('/profile')
 @login_required
