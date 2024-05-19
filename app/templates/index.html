@@ -57,22 +57,23 @@
 
   <main>
 
-    <h1>Welcome to Our Site!</h1>
     {% if current_user.is_authenticated %}
-    <h1>Hi, {{ current_user.username }}!</h1>
+    <h1 style="font-size: 2.5rem;">Hi, {{ current_user.username }}!</h1><br>
+    {% else %}
+    <h1 style="font-size: 2.5rem;">Welcome to Our Site!</h1><br>
     {% endif %}
     <p>Join our community and start engaging in discussions, sharing your creations, and exploring the world of gaming!
-    </p>
+    </p><br>
     <!-- Mini Tutorial Section -->
     <section id="mini-tutorial">
-      <h2>How to use the website:</h2>
+      <h2>How to use the website:</h2><br>
 
       <!-- Step-by-Step Instructions -->
       <ol class="steps">
         <li class="step">
           <h3>Step 1: Develop your HTML/CSS code with our online live editor</h3>
           <div class="step-text">
-            <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p>
+            <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p><br>
           </div>
           <!-- Iframe Section -->
           <section id="iframe-section1">
@@ -84,11 +85,10 @@
             </div>
           </section>
         </li>
+        <br>
         <li class="step">
           <h3>Step 2: Upload your code</h3>
           <div class="step-text">
-            <p>Upload your HTML and CSS files to our platform to save and share your creations with the community.</p>
-            <p>To upload your code:</p>
             <ul class="dot-list"> <!-- Change ol to ul -->
               <li>Ensure your HTML and CSS files are ready.</li>
               <li>Click on the "Upload" button in the sidebar.</li>
@@ -100,11 +100,12 @@
           </div>
 
         </li>
+        <br>
         
         <li class="step">
           <h3>Step 3: View your code on your profile/gallery page</h3>
           <div class="step-text">
-            <p>Access your uploaded code on your profile or gallery page to showcase it to others.</p>
+            <p>Access your uploaded code on your profile or gallery page to showcase it to others.</p><br>
           </div>
           <!-- Iframe Section -->
           <section id="iframe-section2">
@@ -116,20 +117,25 @@
             </div>
           </section>
         </li>
+        <br>
         <li class="step">
           <h3>Step 4: Watch your code gain in popularity</h3>
           <div class="step-text">
-            <p>Track the likes and views your code receives as it gains popularity among our users.</p>
+            <ul>
+              <li>Keep track of how popular your code is by monitoring the likes and views it receives from our users.</li>
+              <li>See how your work is appreciated and understand its impact.</li>
+              <li>Stay informed about your coding achievements as they inspire and help others.</li>
+            </ul>
           </div>
-          <img class="step-image" src="assets/images/Step4Tut.PNG" alt="Step 4 Image">
         </li>
+        <br>
       </ol>
     </section>
     <section id="about-us">
       <div class="container">
         <div class="about-content">
           <article class="about-post">
-            <h3>Why We Built This App</h3>
+            <h3 style="font-size: 2.5rem;">Why We Built This App</h3><br>
             <p>Welcome to our creative space where students and creators can effortlessly find native HTML and CSS designs.
               We built this app because we believe that:<br><br>
             <ul>
@@ -155,12 +161,6 @@
     </section>
 
 
-    {% endblock %}
-
-
-
-    <!-- Redundant text to visualize how the "about us" section would look with the current font -->
-
     <!-- JavaScript for smooth scrolling -->
     <script>
       function scrollToTop() {
@@ -177,6 +177,12 @@
         });
       }
     </script>
+    {% endblock %}
+
+
+
+    <!-- Redundant text to visualize how the "about us" section would look with the current font -->
+
 
   </main>
 
