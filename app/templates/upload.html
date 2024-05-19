@@ -7,13 +7,17 @@
 
     <div class="flex-container">
       <div class="form-group">
+        <!-- HTML Input Field -->
         <label>HTML <i class="bx bxl-html5"></i></label>
+        <!-- Render the HTML textarea form field with specified attributes -->
         {{ form.html(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
-
+        <!-- CSS Input Field -->
         <label>CSS <i class="bx bxl-css3"></i></label>
+        <!-- Render the CSS textarea form field with specified attributes -->
         {{ form.css(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
-
+        <!-- Tags Input Field -->
         <label>Tags</label>
+        <!-- Render the Tags input form field with specified attributes -->
         {{ form.tags(class="form-textarea",placeholder="Enter Your tags") }}
       </div>
 

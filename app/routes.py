@@ -117,28 +117,40 @@ def user_profile(username):
 
 @app.route('/gallery', methods=['GET', 'POST'])
 def gallery():
+    # Retrieve filter and sort parameters from the request
     tag_filter = request.args.get('tag')
     sort_order = request.args.get('sort', 'recent')
 
+    # Start with a base query for posts
     posts_query = Post.query
 
+    # Apply tag filter if provided
     if tag_filter:
         posts_query = posts_query.filter(Post.tags.contains(tag_filter))
 
+    # Apply sort order based on the provided parameter
     if sort_order == 'oldest':
+        # Sort by oldest first
         posts_query = posts_query.order_by(Post.timestamp.asc())
     elif sort_order == 'most_liked':
+        # Sort by most liked first
         posts_query = posts_query.outerjoin(Like).group_by(Post.id).order_by(sa.func.count(Like.id).desc())
     else:  # Default to 'recent'
+        # Sort by most recent first
         posts_query = posts_query.order_by(Post.timestamp.desc())
 
+    # Execute the query and get the list of posts
     top_submissions = posts_query.all()
 
+    # Process each post for display
     for submission in top_submissions:
+        # Ensure timestamp is offset-aware
         if submission.timestamp.tzinfo is None:
             submission.timestamp = submission.timestamp.replace(tzinfo=timezone.utc)
+        # Generate a human-readable relative timestamp
         submission.relative_timestamp = humanize.naturaltime(datetime.now(timezone.utc) - submission.timestamp)
 
+    # Render the gallery template with the filtered and sorted posts
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
 
     
