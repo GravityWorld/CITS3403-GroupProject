@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="bottom-button-container">
-      <!-- Show profile button if user is logged in -->
+
       {% if current_user.is_authenticated %}
       <button class="button-profile" onclick="window.location.href='/profile'">
         <i class="fas fa-user"></i>
@@ -38,7 +38,7 @@
         <i class="fas fa-sign-out-alt"></i><span>Logout</span>
       </button>
       {% else %}
-      <!-- Show signup and login buttons if user is not logged in -->
+
       <button class="button-signup" onclick="window.location.href='/signup'">
         <i class="fas fa-user"></i>
         Sign up
@@ -75,11 +75,11 @@
           <div class="step-text">
             <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p><br>
           </div>
-          <!-- Iframe Section -->
+
           <section id="iframe-section1">
-            <!-- Container for the first iframe -->
+
             <div class="iframe-container">
-              <!-- Iframe with cropped top part -->
+
               <iframe src="{{ url_for('static', filename='assets/html/preview.html') }}"
                 title="Live Editor Preview"></iframe>
             </div>
@@ -88,7 +88,7 @@
         <li class="step">
           <h3>Step 2: Upload your code</h3>
           <div class="step-text">
-            <ul class="dot-list"> <!-- Change ol to ul -->
+            <ul class="dot-list"> 
               <li>Ensure your HTML and CSS files are ready.</li>
               <li>Click on the "Upload" button in the sidebar.</li>
               <li>Fill in any relevant details, such as tags or descriptions, in the upload form.</li>
@@ -105,11 +105,11 @@
           <div class="step-text">
             <p>Access your uploaded code on your profile or gallery page to showcase it to others.</p><br>
           </div>
-          <!-- Iframe Section -->
+
           <section id="iframe-section2">
-            <!-- Container for the second iframe -->
+
             <div class="iframe-container">
-              <!-- Iframe with cropped top part -->
+
               <iframe src="{{ url_for('static', filename='assets/html/preview4.html') }}"
                 title="Live Editor Preview" ></iframe>
             </div>
@@ -173,11 +173,6 @@
       }
     </script>
     {% endblock %}
-
-
-
-    <!-- Redundant text to visualize how the "about us" section would look with the current font -->
-
 
   </main>
 

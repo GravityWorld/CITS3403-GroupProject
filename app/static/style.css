@@ -48,8 +48,8 @@ button {
 }
 
 header {
-  background-color: #343a40; /* Dark gray header background */
-  color: #ffffff; /* White text */
+  background-color: #343a40; 
+  color: #ffffff; 
   padding: 20px;
   text-align: center;
   display: flex;
@@ -58,29 +58,28 @@ header {
 }
 
 h1 {
-  font-size: 24px; /* Adjust the font size as needed */
+  font-size: 24px; 
   margin: 0;
 }
 
 .login a {
-  color: #ffffff; /* White text for login link */
+  color: #ffffff; 
   text-decoration: none;
   padding: 8px 16px;
-  border: 2px solid #ffffff; /* White border */
-  border-radius: 20px; /* Rounded corners */
+  border: 2px solid #ffffff; 
+  border-radius: 20px; 
   transition: background-color 0.3s, color 0.3s;
 }
 
 .login a:hover {
-  background-color: #ffffff; /* White background on hover */
-  color: #343a40; /* Dark gray text on hover */
-}
+  background-color: #ffffff; 
+  color: #343a40; 
 
 nav ul {
   list-style-type: none;
   padding: 0;
   text-align: center;
-  /*background-color: #ffffff; /* Dark gray background for navbar */
+
 }
 
 nav ul li {
@@ -94,13 +93,13 @@ nav ul li:last-child {
 
 nav ul li a {
   text-decoration: none;
-  color: #ffffff; /* White text for navbar links */
+  color: #ffffff; 
   padding: 15px 20px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 nav ul li a:hover {
-  background-color: #495057; /* Darker gray background on hover */
+  background-color: #495057;
 }
 
 /* LOGIN PAGE STYLING */
@@ -125,7 +124,7 @@ form {
   margin-bottom: 5px;
   font-size: 25px;
   font-weight: bold;
-  text-align: center; /* Center the text within the label */
+  text-align: center;
 }
 
 .remember-me {
@@ -133,7 +132,7 @@ form {
   margin-bottom: 5px;
   font-size: 15px;
   font-weight: bold;
-  text-align: left; /* Center the text within the label */
+  text-align: left; 
 }
 
 form label {
@@ -141,7 +140,7 @@ form label {
   margin-bottom: 5px;
   font-size: 20px;
   font-weight: bold;
-  text-align: left; /* Center the text within the label */
+  text-align: left; 
 }
 form input[type="text"],
 form input[type="password"] {
@@ -284,9 +283,6 @@ form input[type="password"] {
   width: 100%;
 } 
 
-/* need to create a better effect for on-hover buttons. 
-   low priority issue.
-*/
 .signup-button:hover {
   background-color: #0aefff;
   color: black;
@@ -296,14 +292,13 @@ form input[type="password"] {
 
 /* styling for upload page */
 #submission-form {
-  width: 100%; /* makes the form occupy the entire screen width */
-  max-width: 1500px; /* Limit the maximum width of the form */
-  /* can add maximum height for height of window */
+  width: 100%; 
+  max-width: 1500px; 
   margin-bottom: 20px;
 }
 
 #html {
-  width: 100%; /* Make the textarea occupy 100% of its container */
+  width: 100%;
 }
 
 #submission-status {
@@ -364,7 +359,7 @@ form input[type="password"] {
 /* styling for landing page */
 
 #sidebar button i {
-  margin-right: 10px; /* Adjust the value to increase or decrease the space */
+  margin-right: 10px; 
 }
 
 #sidebar {
@@ -373,7 +368,7 @@ form input[type="password"] {
   height: 100%;
   width: 250px;
   box-sizing: border-box;
-  position: fixed; /* Keeps the sidebar fixed during scrolling */
+  position: fixed;
 }
 #sidebar button {
   display: flex;
@@ -382,7 +377,7 @@ form input[type="password"] {
   color: #fff;
   border: none;
   padding: 15px 20px;
-  margin: 15px 10px; /* Adjusted margin */
+  margin: 15px 10px; 
   text-align: center;
   text-decoration: none;
   border-radius: 22px;
@@ -407,8 +402,8 @@ form input[type="password"] {
 
 #sidebar button i {
   float: left;
-  margin-right: 10px; /* Add some spacing between the icon and the text */
-  width: 20px; /* Fixed width for all icons */
+  margin-right: 10px; 
+  width: 20px; 
 }
 
 #sidebar button span {
@@ -420,7 +415,7 @@ form input[type="password"] {
 #sidebar button.button-hall-of-fame:hover {
   font-weight: bold;
   color: black;
-  box-shadow: 0 0 10px #ffd700; /* Add box shadow for glow effect */
+  box-shadow: 0 0 10px #ffd700; 
   background-color: #ffd700;
   text-align: center;
 }
@@ -428,7 +423,7 @@ form input[type="password"] {
 #sidebar button.button-profile:hover {
   font-weight: bold;
   color: black;
-  box-shadow: 0 0 10px #cc00ff; /* Add box shadow for glow effect */
+  box-shadow: 0 0 10px #cc00ff; 
   background-color: #cc00ff;
   text-align: center;
 }
@@ -438,7 +433,7 @@ form input[type="password"] {
   left: 0;
   bottom: 0;
   padding: 15px 20px;
-  margin: 15px 10px; /* Adjusted margin */
+  margin: 15px 10px; 
   color: black;
   border: none;
   border-radius: 8px;
@@ -459,7 +454,7 @@ form input[type="password"] {
   left: 0;
   bottom: 0;
   padding: 15px 20px;
-  margin: 15px 10px; /* Adjusted margin */
+  margin: 15px 10px; 
   color: black;
   border: none;
   border-radius: 8px;
@@ -506,7 +501,7 @@ main {
   left: 0;
   bottom: 0;
   padding: 15px 20px;
-  margin: 15px 10px; /* Adjusted margin */
+  margin: 15px 10px; 
   color: black;
   border: none;
   border-radius: 8px;
@@ -578,29 +573,29 @@ main {
 }
 /* Style the container for the first iframe */
 #iframe-section1 .iframe-container {
-  overflow: hidden; /* Hide overflow content */
-  position: relative; /* Set position to relative */
-  width: 100%; /* Adjust width as needed */
-  height: 480px; /* Adjust height as needed */
+  overflow: hidden; 
+  position: relative; 
+  width: 100%; 
+  height: 480px;
 }
 
 /* Style the first iframe */
 #iframe-section1 .iframe-container iframe {
-  position: absolute; /* Set position to absolute */
-  top: -200px; /* Adjust the top position to crop off the top part */
+  position: absolute; 
+  top: -200px; 
   left: 0;
-  width: 100%; /* Set iframe width to 100% */
-  height: calc(100% + 230px); /* Adjust height to include the cropped part */
-  border: none; /* Remove default iframe border */
-  pointer-events: none; /* Disable user interaction */
+  width: 100%; 
+  height: calc(100% + 230px); 
+  border: none; 
+  pointer-events: none;
 }
 
 /* Style the container for the second iframe */
 #iframe-section2 .iframe-container {
   width: 100%;
-  height: 760px; /* Set the desired height for the second iframe container */
-  overflow: hidden; /* Hide overflow content */
-  position: relative; /* Set position to relative */
+  height: 760px; 
+  overflow: hidden; 
+  position: relative;
 }
 
 /* Style the second iframe */
@@ -608,64 +603,64 @@ main {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: -50px; /* Adjust the top position to crop off the top part if needed */
-  border: none; /* Remove default iframe border */
-  pointer-events: none; /* Disable user interaction */
+  top: -50px; 
+  border: none; 
+  pointer-events: none; 
 }
 
 
 
 /* Styles for the navigation bar */
 .navbar {
-  background-color: #343a40; /* Dark gray background */
-  color: #ffffff; /* White text */
+  background-color: #343a40; 
+  color: #ffffff; 
   padding: 10px;
   text-align: center;
 }
 
 .navbar a {
-  color: #ffffff; /* White text for navbar links */
+  color: #ffffff; 
   text-decoration: none;
   padding: 10px 20px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .navbar a:hover {
-  background-color: #495057; /* Darker gray background on hover */
+  background-color: #495057; 
 }
 
 /* Style for the active link */
 .navbar .active {
-  background-color: #0aefff; /* Light blue background for active link */
-  color: black; /* Black text for active link */
-  font-weight: bold; /* Bold font for active link */
+  background-color: #0aefff; 
+  color: black; 
+  font-weight: bold; 
 }
 
 
 /* Style for Step 2 */
 .step:nth-child(2) {
-  background-color: #f9f9f9; /* Light gray background */
+  background-color: #f9f9f9; 
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .step:nth-child(2) h3 {
-  font-size: 24px; /* Adjust font size */
-  color: #007bff; /* Blue color for heading */
+  font-size: 24px; 
+  color: #007bff; 
 }
 
 .step:nth-child(2) .step-text {
-  font-size: 16px; /* Adjust font size */
-  color: #555; /* Dark gray color for text */
+  font-size: 16px; 
+  color: #555; 
 }
 
 .step:nth-child(2) .dot-list {
   list-style-type: disc;
-  margin-left: 20px; /* Adjust as needed */
-  margin-top: 10px; /* Add some top margin */
+  margin-left: 20px; 
+  margin-top: 10px; 
 }
 
 .step:nth-child(2) .dot-list li {
-  margin-bottom: 10px; /* Add spacing between each list item */
+  margin-bottom: 10px; 
 }
