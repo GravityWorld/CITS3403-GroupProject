@@ -8,6 +8,14 @@ from app.forms import LoginForm, SignUpForm,UploadForm
 from app.models import User, Post, Like
 from datetime import datetime, timezone
 from markupsafe import escape
+import re
+from sqlalchemy.orm.exc import NoResultFound
+
+
+
+from flask import request, redirect, flash, url_for
+
+
 from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect(app)
 
@@ -92,6 +100,8 @@ def upload():
         html_content = form.html.data
         css_content = form.css.data
         tags = form.tags.data
+
+        
         
         if not html_content.strip():
             flash('Your post is empty.', 'warning')
@@ -100,8 +110,9 @@ def upload():
         if '<head>' in html_content:
             html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
         else:
-            html_content = '<head><style>' + css_content + '</style></head>' + html_content
+            html_content = '<head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
         
+        # html_content = '<html><head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
         new_post = Post(body=escape(html_content), author=current_user, tags=tags)
         db.session.add(new_post)
         db.session.commit()
@@ -110,6 +121,7 @@ def upload():
         return redirect(url_for('user_profile', username=current_user.username))
     
     return render_template('upload.html', form=form)
+
 
 @app.route('/profile')
 @login_required

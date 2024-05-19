@@ -80,7 +80,7 @@ nav ul {
   list-style-type: none;
   padding: 0;
   text-align: center;
-  background-color: #343a40; /* Dark gray background for navbar */
+  /*background-color: #ffffff; /* Dark gray background for navbar */
 }
 
 nav ul li {
@@ -204,8 +204,43 @@ form input[type="password"] {
 .signup-body {
   background-color: #1f1f1f;
 }
-
 .button_signup {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
+
+.signup-body {
+  background-color: #1f1f1f;
+}
+/* .button_signup {
   display: inline-block;
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
@@ -247,17 +282,17 @@ form input[type="password"] {
 }
 .button_signup:hover:before {
   width: 100%;
-}
+} */
 
 /* need to create a better effect for on-hover buttons. 
    low priority issue.
 */
-.signup-button:hover {
+/* .signup-button:hover {
   background-color: #0aefff;
   color: black;
   font-weight: bold;
   box-shadow: 0px 0px 15px #0aefff;
-}
+} */
 
 /* styling for upload page */
 #submission-form {

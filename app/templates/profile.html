@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,7 @@
     <link rel="stylesheet" href="../static/profile.css" />
     <link rel="stylesheet" href="../static/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'/>
 
   </head>
 <body>
@@ -52,45 +54,206 @@
       <div class="user-posts">
         {% for post in posts %}
         <div class="col">
-            <div class="card h-100 bg-secondary text-white">
-                <div class="card-body" style="width:100%; height: 200px">
-                    <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: 100%;"
-                    srcdoc="{{ post.body|safe }}"></iframe>
-                </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <div class="post-details" >
+              <h5 class="card-title">Post by {{ post.author.username }}</h5>
+              <p class="card-text">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
             </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <div>
-                    <h5 class="card-title">Post by {{ post.author.username }}</h5>
-                    <p class="card-text">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-                </div>
-                <button class="view-code-button" onclick="openModal('{{ loop.index0 }}')">View Code</button>
+          
+            <label class="popup">
+              <input type="checkbox">
+              <div class="burger" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <p> {{ post.id }}</p>
+
+
+              <nav class="popup-window">
+                <legend>Actions</legend>
+                <ul class="post-options">
+                  <li>
+                    <button onclick="downloadTextFile('{{ loop.index0 }}')">
+                      <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <rect ry="2" rx="2" height="13" width="13" y="9" x="9"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                      <span>Download</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button onclick="openEditModal('{{ loop.index0 }}', '{{ post.id}}')">
+                      <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+                      </svg>
+                      <span>Edit</span>
+                    </button>
+                  </li>
+                  <hr>
+                  <li>
+                    <button  >
+                      <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <line y2="18" x2="6" y1="6" x1="18"></line>
+                        <line y2="18" x2="18" y1="6" x1="6"></line>
+                      </svg>
+                      <span>Delete</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </label>
+          </div>
+          
+          <div class="card h-100 bg-secondary text-white">
+            <div class="card-body" style="width:100%; height: 200px">
+              <iframe sandbox="allow-same-origin allow-scripts" style="width:100%; height: 100%;"
+                srcdoc="{{ post.body|safe }}"></iframe>
             </div>
+          </div>
         </div>
+      
         <div class="full-post-content" id="full-post-content-{{ loop.index0 }}" style="display: none">
             <pre><code>{{ post.body | safe }}</code></pre>
         </div>
-        {% endfor %}
-     </div>
-    </div>
 
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <iframe id="postFrame" style="width: 100%; height: 500px"></iframe>
+        <div id="postModal" class="modal">
+          <div class="modal-content">
+            <div class="upload-container">
+                <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
+                <form id="save-form" action="/modify" method="get" class="postsave-form">
+                  <input type="hidden" id="postId" name="postId" value="">
+                    <div class="flex-container">
+                        <div class="form-group">
+                            <label>HTML <i class="bx bxl-html5"></i></label>
+                            <textarea
+                                onkeyup="runCode()"
+                                id="HtmlCode" 
+                                name="HtmlCode"
+                                rows="10"
+                                cols="50"
+                                class="profile-textarea"
+                            >{{ post.html_content }}</textarea>
+        
+                            <label></label>CSS <i class="bx bxl-css3"></i></label>
+                            <textarea
+                                onkeyup="runCode()"
+                                id="CssCode" 
+                                name="CssCode"
+                                rows="10"
+                                cols="50"
+                                class="profile-textarea"
+                            >{{ post.css_content }}</textarea>
+                        </div>
+        
+                        <div class="output-box">
+                            <label>Output</label>
+                            <iframe id="output-frame" class="output-frame"></iframe>
+                        </div>
+                    </div>
+                    <p id="submission-status" class="submission-status"></p>
+        
+                    <div class="output-container">
+                        <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
+                        <button type="submit" class="upload-button">Save post</button>
+                    </div>
+
+                </form>
+            </div>
+            <span class="close" onclick="closeModal()">&times;</span>
+          </div>
         </div>
-    </div>
 
+
+
+        {% endfor %}
+      </div>
+      
+
+      
     <script>
+    function downloadTextFile(postIndex) {
+       // Get the user-entered text
+        const textContent = document.getElementById("full-post-content-" + postIndex).querySelector("code").innerText;
+        
+        // Create a Blob object containing the text
+        const blob = new Blob([textContent], { type: 'text/plain' });
 
+        // Create a temporary anchor element
+        const a = document.createElement('a');
+        a.href = window.URL.createObjectURL(blob);
 
-    function openModal(postIndex) {
-      var content = document.getElementById(
-        "full-post-content-" + postIndex
-      ).innerHTML;
-      document.getElementById("postFrame").srcdoc = content;
-      document.getElementById("postModal").style.display = "block";
+        // Set the file name
+        const fileName = 'user_input.txt';
+        a.download = fileName;
+
+        // Programmatically click the anchor to trigger the download
+        document.body.appendChild(a);
+        a.click();
+
+        // Clean up
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(a.href);
     }
+
+    function saveChanges() {
+    // Get the HTML and CSS content
+    var htmlContent = document.getElementById("HtmlCode").value;
+    var cssContent = document.getElementById("CssCode").value;
+
+    // Populate the hidden input fields with the HTML and CSS content
+    document.getElementById("htmlContent").value = htmlContent;
+    document.getElementById("cssContent").value = cssContent;
+}
+
+
+    function runCode() {
+    let htmlContent = document.getElementById("HtmlCode").value;
+    let cssContent = document.getElementById("CssCode").value;
+
+    let output = document.getElementById("output-frame").contentDocument;
+
+    output.open();
+    output.write('<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
+    output.close();
+
+    console.log(output.body.innerHTML);
+  }
+
+
+  function openEditModal(index, id) {
+    const postElement = document.getElementById("full-post-content-" + index);
+    const postId = id
+
+    const textContent = postElement.querySelector("code").innerText;
     
+
+    console.log("Test content\n", textContent);
+
+
+    var htmlRegex = /<body.*?>([\s\S]*)<\/body>/; 
+    var cssRegex = /<style.*?>([\s\S]*)<\/style>/; 
+
+    var htmlMatch = textContent.match(htmlRegex);
+    var cssMatch = textContent.match(cssRegex);
+
+    var htmlPart = htmlMatch ? htmlMatch[1] : ''; 
+    var cssPart = cssMatch ? cssMatch[1] : ''; 
+    
+    console.log(htmlPart);
+    console.log(cssPart);
+    // Set the HTML and CSS parts to the text areas in the modal
+    document.getElementById('HtmlCode').value = htmlPart;
+    document.getElementById('CssCode').value = cssPart;
+    document.getElementById('postId').value = postId;
+
+    runCode();
+    // Display the modal
+    var modal = document.getElementById('postModal');
+    modal.style.display = "block";
+}
+
+     
     function closeModal() {
       document.getElementById("postModal").style.display = "none";
     }
@@ -101,6 +264,7 @@
         closeModal();
       }
     };
+    
     </script>
 
 </body>
