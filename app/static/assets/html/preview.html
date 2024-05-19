@@ -1,221 +1,32 @@
-
 <!DOCTYPE html>
 <html>
-    <style>
-        /* font styling */
-.arvo-regular {
-  font-family: "Arvo", serif;
-  font-weight: 400;
-  font-style: normal;
-}
 
-.arvo-bold {
-  font-family: "Arvo", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.arvo-regular-italic {
-  font-family: "Arvo", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.arvo-bold-italic {
-  font-family: "Arvo", serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* Resetting default margin and padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Arvo", serif;
-}
-
-/* from:
-    https://fonts.google.com/specimen/Arvo */
-
-/* Basic styling */
-body {
-  background-color: #dad6d6;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  color: #333;
-  overflow: hidden; /* Hide scrollbars */
-}
-
-
-button {
-  font-size: 20px;
-}
-
-header {
-  background-color: #343a40; /* Dark gray header background */
-  color: #ffffff; /* White text */
-  padding: 20px;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h1 {
-  font-size: 24px; /* Adjust the font size as needed */
-  margin: 0;
-}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' />
+  <link rel="stylesheet" href="../../style.css">
 
 
 
+  <title>Welcome to SpyderWeb</title>
 
-.form-title {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center; /* Center the text within the label */
-}
+</head>
 
+<body>
 
-form label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: left; /* Center the text within the label */
-}
-form input[type="text"],
-form input[type="password"] {
-  width: calc(100% - 12px);
-  padding: 8px;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 3px;
-}
-
-
-/* styling for upload page */
-#submission-form {
-  width: 100%; /* makes the form occupy the entire screen width */
-  max-width: 1500px; /* Limit the maximum width of the form */
-  /* can add maximum height for height of window */
-  margin-bottom: 20px;
-}
-
-#html {
-  width: 100%; /* Make the textarea occupy 100% of its container */
-}
-
-#submission-status {
-  margin-top: 20px;
-}
-
-.upload-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-container {
-  display: flex;
-}
-
-.form-group {
-  flex: 1;
-  margin-right: 10px;
-  width: 50%
-}
-
-.output-box{
-  flex: 1;
-  margin-right: 10px;
-  width: 50%
-}
-
-.form-textarea {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.output-container {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-}
-
-.output-frame {
-  flex: 1;
-  border: 4px solid black;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  
-}
-
-.display-button,
-.upload-button {
-  width: 48%;
-}
-
-.form-textarea {
-  width: 100%;
-  box-sizing: border-box;
-  resize: none; /* Prevent resizing */
-  overflow: auto; /* Allow scrolling */
-}
-
-/* Optional: Hide scrollbar */
-.form-textarea::-webkit-scrollbar {
-  display: none; /* Hide scrollbar in WebKit browsers */
-}
-
-
-    </style>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/static/style.css"
-    />
-    <link 
-      rel='stylesheet'
-      href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-    />
-
-    
-    <title>Welcome to SpyderWeb</title>
-    
-  </head>
-  <body>
-       
-<div class="upload-container">
-  <h1 class="upload-header">Upload your HTML</h1>
-  <form id="submission-form" action="/upload" method="post" class="upload-form">
-    <div class="flex-container">
-      <div class="form-group">
-        <label>HTML <i class="bx bxl-html5"></i></label>
-        <textarea
-          onkeyup="runCode()"
-          id="html"
-          name="html"
-          rows="10"
-          cols="50"
-          class="form-textarea"
-        ><html>
+  <div class="upload-container">
+    <h1 class="upload-header">Upload your HTML</h1>
+    <form id="submission-form" action="/upload" method="post" class="upload-form">
+      <div class="flex-container">
+        <div class="form-group">
+          <label>HTML <i class="bx bxl-html5"></i></label>
+          <textarea onkeyup="runCode()" id="html" name="html" rows="10" cols="50" class="form-textarea"><html>
             <head>
             </head>
             <body>
@@ -230,15 +41,8 @@ form input[type="password"] {
             </body>
         </html>'></textarea>
 
-        <label>CSS <i class="bx bxl-css3"></i></label>
-        <textarea
-          onkeyup="runCode()"
-          id="css"
-          name="css"
-          rows="10"
-          cols="50"
-          class="form-textarea"
-        >.cubes {
+          <label>CSS <i class="bx bxl-css3"></i></label>
+          <textarea onkeyup="runCode()" id="css" name="css" rows="10" cols="50" class="form-textarea">.cubes {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -370,12 +174,11 @@ form input[type="password"] {
             color: #ffda77;
           }</textarea>
 
-      </div>
+        </div>
 
-      <div class="output-box">
-        <label>Output</label> 
-        <iframe id="output-frame" class="output-frame" 
-        srcdoc='<html>
+        <div class="output-box">
+          <label>Output</label>
+          <iframe id="output-frame" class="output-frame" srcdoc='<html>
             <head>
                 <style>
                     .cubes {
@@ -522,33 +325,34 @@ form input[type="password"] {
                 </div>
             </body>
         </html>'>
-        </iframe>
+          </iframe>
+        </div>
       </div>
-    </div>
-    <p id="submission-status" class="submission-status"></p>
+      <p id="submission-status" class="submission-status"></p>
 
 
-  </form>
-</div>
+    </form>
+  </div>
 
-<script>
-  function displayHTML() {
-    var htmlContent = document.getElementById("html").value;
-    document.getElementById("output-frame").srcdoc = htmlContent;
-    document.getElementById("submission-status").textContent =
-      "HTML code displayed successfully.";
-  }
+  <script>
+    function displayHTML() {
+      var htmlContent = document.getElementById("html").value;
+      document.getElementById("output-frame").srcdoc = htmlContent;
+      document.getElementById("submission-status").textContent =
+        "HTML code displayed successfully.";
+    }
 
-  function runCode() {
-    let htmlContent = document.getElementById("html").value;
-    let cssContent = document.getElementById("css").value;
+    function runCode() {
+      let htmlContent = document.getElementById("html").value;
+      let cssContent = document.getElementById("css").value;
 
-    let output = document.getElementById("output-frame");
-    
-    output.contentDocument.body.innerHTML = htmlContent + "<style>" + cssContent + "</style>";
-    console.log(output.contentDocument.body.innerHTML);
-  }
-</script>
+      let output = document.getElementById("output-frame");
 
-  </body>
+      output.contentDocument.body.innerHTML = htmlContent + "<style>" + cssContent + "</style>";
+      console.log(output.contentDocument.body.innerHTML);
+    }
+  </script>
+
+</body>
+
 </html>
