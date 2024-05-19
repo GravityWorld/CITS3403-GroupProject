@@ -13,7 +13,7 @@
 <body>
 
     <div id="sidebar">
-        <button class="button-home">
+        <button class="button-home" onclick = "window.location.href = '{{ url_for('index')}}'">
             <i class="fa fa-home"></i><span>Home</span>
         </button>
     
@@ -78,14 +78,14 @@
                       <span>Download</span>
                     </button>
                   </li>
-                  <!-- <li>
+                  <li>
                     <button onclick="openEditModal('{{ loop.index0 }}', '{{ post.id}}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
                       </svg>
                       <span>Edit</span>
                     </button>
-                  </li> -->
+                  </li>
 
                 </ul>
               </nav>
@@ -110,34 +110,23 @@
             <span class="close" onclick="closeModal()">&times;</span>
 
                 <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
-                <!-- <form id="save-form" action="{{ url_for('modify') }}" method="get" class="postsave-form">
-                  {{ form.hidden_tag() }} 
-                  <input type="hidden" id="postId" name="postId" value="">
-                    <div class="flex-container">
-                        <div class="form-group">
-                            <label>HTML <i class="bx bxl-html5"></i></label>
-                            {{ form.html(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
-        
-                            <label></label>CSS <i class="bx bxl-css3"></i></label>
-                            {{ form.css(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
+                  <form id="save-form" action="{{ url_for('modify') }}" method="get" class="postsave-form">
+                    {{ form.hidden_tag() }} 
+                    <input type="hidden" id="postId" name="postId" value="">
+                      <div class="flex-container">
+                          <div class="form-group">
+                              <label>HTML <i class="bx bxl-html5"></i></label>
+                              {{ form.html(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
+          
+                              <label></label>CSS <i class="bx bxl-css3"></i></label>
+                              {{ form.css(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
 
-                            </textarea>
-                        </div>
-        
-                        <div class="output-box">
-                            <label>Output</label>
-                            <iframe id="output-frame" class="output-frame"></iframe>
-                        </div>
-                    </div>
-                    <p id="submission-status" class="submission-status"></p>
-        
-                    <div class="output-container">
-                        <button type="button" onclick="displayHTML()" class="display-button">Display</button>
-                        <button type="submit" class="upload-button">Save post</button>
-                    </div>
 
-                    {{ form.submit(class="upload-button") }}    
-                </form> -->
+
+          
+                  </form>
+   
+                </form>
             </div>
           </div>
         </div>
