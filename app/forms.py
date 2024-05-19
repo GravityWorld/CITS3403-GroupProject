@@ -21,8 +21,3 @@ class UploadForm(FlaskForm):
     css = TextAreaField('CSS', validators=[DataRequired()])
     tags = StringField('Tags', validators=[DataRequired()])
     submit = SubmitField('Upload')
-
-class ModifyForm(FlaskForm):
-    html = TextAreaField('HTML', validators=[DataRequired()])
-    css = TextAreaField('CSS', validators=[DataRequired()])
-    submit = SubmitField('Modify')
