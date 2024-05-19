@@ -1,15 +1,15 @@
 from urllib.parse import urlsplit
-from flask import render_template, flash, redirect, url_for, request, session
+from flask import render_template, flash, redirect, url_for, request, session, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
 import humanize
 from app import app, db
-from app.forms import LoginForm, SignUpForm
-from app.models import User
-from app.models import Post
+from app.forms import LoginForm, SignUpForm,UploadForm
+from app.models import User, Post, Like
 from datetime import datetime, timezone
 from markupsafe import escape
-
+from flask_wtf.csrf import CSRFProtect
+csrf = CSRFProtect(app)
 
 @app.route('/')
 @app.route('/index')
@@ -83,45 +83,33 @@ def signup():
 def logout():
     logout_user()
     return redirect(url_for('index'))
-
-
-@app.route('/upload')
-def upload():
-    if current_user.is_authenticated:
-        return render_template("upload.html")
-    else:
-        # Track the upload intent for anonymous users
-        session['upload_intent'] = True
-        return redirect(url_for('login'))
-
-@app.route('/upload', methods=['POST'])
+    
+@app.route('/upload', methods=['GET', 'POST'])
 @login_required
-def handle_upload():
-    html_content = request.form.get('html')
-    css_content = request.form.get('css')
-    tags = request.form.get('tags')
-    if not html_content.strip():
-        flash('Your post is empty.', 'warning')
-        return redirect(url_for('display_upload'))
-
-    # Insert the CSS into the HTML content
-    if '<head>' in html_content:
-        # If there is a <head> tag, add the CSS inside it
-        html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
-    else:
-        # If no <head> tag, prepend a <head> containing the style
-        html_content = '<head><style>' + css_content + '</style></head>' + html_content
+def upload():
+    form = UploadForm()
+    if form.validate_on_submit():
+        html_content = form.html.data
+        css_content = form.css.data
+        tags = form.tags.data
+        
+        if not html_content.strip():
+            flash('Your post is empty.', 'warning')
+            return redirect(url_for('upload'))
+        
+        if '<head>' in html_content:
+            html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
+        else:
+            html_content = '<head><style>' + css_content + '</style></head>' + html_content
+        
+        new_post = Post(body=escape(html_content), author=current_user, tags=tags)
+        db.session.add(new_post)
+        db.session.commit()
+        
+        flash('Your HTML has been uploaded successfully!', 'success')
+        return redirect(url_for('user_profile', username=current_user.username))
     
-
-    # Create a new Post instance with the modified HTML content
-    #Use of escape to replace symbols for tags with UTF characters in order to isolate css submitted and the page css.
-    new_post = Post(body=escape(html_content), author=current_user,tags=tags)
-    
-    db.session.add(new_post)
-    db.session.commit()
-
-    flash('Your HTML has been uploaded successfully!', 'success')
-    return redirect(url_for('user_profile', username=current_user.username))
+    return render_template('upload.html', form=form)
 
 @app.route('/profile')
 @login_required
@@ -137,28 +125,66 @@ def user_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
     return render_template('profile.html', user=current_user, posts=posts)
-
 @app.route('/gallery', methods=['GET', 'POST'])
 def gallery():
+    # Retrieve filter and sort parameters from the request
     tag_filter = request.args.get('tag')
     sort_order = request.args.get('sort', 'recent')
 
+    # Start with a base query for posts
     posts_query = Post.query
 
+    # Apply tag filter if provided
     if tag_filter:
         posts_query = posts_query.filter(Post.tags.contains(tag_filter))
 
+    # Apply sort order based on the provided parameter
     if sort_order == 'oldest':
+        # Sort by oldest first
         posts_query = posts_query.order_by(Post.timestamp.asc())
+    elif sort_order == 'most_liked':
+        # Sort by most liked first
+        posts_query = posts_query.outerjoin(Like).group_by(Post.id).order_by(sa.func.count(Like.id).desc())
     else:  # Default to 'recent'
+        # Sort by most recent first
         posts_query = posts_query.order_by(Post.timestamp.desc())
 
+    # Execute the query and get the list of posts
     top_submissions = posts_query.all()
 
+    # Process each post for display
     for submission in top_submissions:
         # Ensure timestamp is offset-aware
         if submission.timestamp.tzinfo is None:
             submission.timestamp = submission.timestamp.replace(tzinfo=timezone.utc)
+        # Generate a human-readable relative timestamp
         submission.relative_timestamp = humanize.naturaltime(datetime.now(timezone.utc) - submission.timestamp)
 
+    # Render the gallery template with the filtered and sorted posts
     return render_template('gallery.html', title='Hall of Fame', top_submissions=top_submissions)
+    
+@app.route('/like/<int:post_id>', methods=['POST'])
+@login_required
+def like_post(post_id):
+    """
+    Endpoint to like or unlike a post.
+
+    This endpoint allows the current user to like or unlike a post.
+    If the user has already liked the post, it will remove the like (unlike the post).
+    If the user has not liked the post, it will add a like to the post.
+
+    :param post_id: ID of the post to like or unlike
+    :return: JSON response indicating the action performed ('liked' or 'unliked') and the updated number of likes
+    """
+    post = Post.query.get_or_404(post_id)  # Retrieve the post or return a 404 error if not found
+
+    if current_user.has_liked(post):  # Check if the current user has already liked the post
+        like = Like.query.filter_by(user_id=current_user.id, post_id=post_id).first()  # Find the like record
+        db.session.delete(like)  # Delete the like record
+        db.session.commit()  # Commit the transaction
+        return jsonify({'result': 'unliked', 'likes': post.likes_count})  # Return the response indicating 'unliked'
+    else:
+        like = Like(user_id=current_user.id, post_id=post_id)  # Create a new like record
+        db.session.add(like)  # Add the like record to the session
+        db.session.commit()  # Commit the transaction
+        return jsonify({'result': 'liked', 'likes': post.likes_count})  # Return the response indicating 'liked'

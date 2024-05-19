@@ -25,7 +25,6 @@
     flex-direction: row;
     gap: 20px;
     height: calc(100% - 60px);
-    /* Adjust for header and footer height */
   }
 
   .modal-body iframe,
@@ -40,13 +39,22 @@
 
   .filter-sort-container {
     display: flex;
+    position: relative;
+    
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
     gap: 10px;
+    width: 80%;
+    
+  }
+  .filter-sort-container input{
+    margin-top: 10px;
+    height: 38px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
   }
 
-  .filter-sort-container input,
   .filter-sort-container select,
   .filter-sort-container button {
     padding: 10px;
@@ -54,6 +62,9 @@
     border: none;
     font-size: 1em;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: #333;
+    color: white;
+    outline: none;
   }
 
   .filter-sort-container input {
@@ -70,9 +81,27 @@
     cursor: pointer;
     flex: 1;
   }
+  
 
   .filter-sort-container button:hover {
     background-color: #0056b3;
+  }
+
+  .like-btn {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .like-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .like-btn.liked {
+    background-color: red;
   }
 </style>
 
@@ -80,13 +109,13 @@
 
 <div class="container">
   <form method="GET" action="{{ url_for('gallery') }}" class="filter-sort-container">
-    <input type="text" name="tag" class="form-control" placeholder="Search by tag"
-      value="{{ request.args.get('tag', '') }}">
-    <select name="sort" class="form-control">
+    <input type="text" name="tag" class="form-control" placeholder="Search by tag" value="{{ request.args.get('tag', '') }}">
+    <select name="sort">
       <option value="recent" {% if request.args.get('sort')=='recent' %}selected{% endif %}>Most Recent</option>
       <option value="oldest" {% if request.args.get('sort')=='oldest' %}selected{% endif %}>Oldest to Recent</option>
+      <option value="most_liked" {% if request.args.get('sort') == 'most_liked' %}selected{% endif %}>Most Liked</option>
     </select>
-    <button type="submit" class="btn btn-primary">Apply</button>
+    <button type="submit">Apply</button>
   </form>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -102,6 +131,8 @@
             <h5 class="card-title">Post by {{ submission.author.username }}</h5>
             <p class="card-text">Posted {{ submission.relative_timestamp }}</p>
           </div>
+          <button class="like-btn {% if current_user.is_authenticated and current_user.has_liked(submission) %}liked{% endif %}" onclick="likePost({{ submission.id }}, this)">
+            <span>{{ submission.likes_count }}</span> <i class="fas fa-heart"></i>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal"
             data-bs-target="#codeModal{{ submission.id }}">
             &lt;&gt; Get this code
@@ -110,8 +141,7 @@
       </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="codeModal{{ submission.id }}" tabindex="-1"
-      aria-labelledby="codeModalLabel{{ submission.id }}" aria-hidden="true">
+    <div class="modal fade" id="codeModal{{ submission.id }}" tabindex="-1" aria-labelledby="codeModalLabel{{ submission.id }}" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-white">
           <div class="modal-header">
@@ -154,5 +184,40 @@
       });
     }
   }</script>
+  <script>
+  /**
+   * Function to like or unlike a post.
+   * 
+   * This function sends a POST request to the server to like or unlike a post.
+   * If the user has already liked the post, it will unlike the post.
+   * If the user has not liked the post, it will like the post.
+   * The button's appearance and like count are updated based on the server's response.
+   * 
+   * @param {number} postId - The ID of the post to like or unlike.
+   * @param {HTMLElement} button - The button element that was clicked to trigger this function.
+   */
+  function likePost(postId, button) {
+    // Send a POST request to the server to like or unlike the post
+    fetch(`/like/${postId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token() }}' // Include CSRF token for security
+      },
+      credentials: 'same-origin' // Ensure cookies are included with the request
+    })
+    .then(response => response.json()) // Parse the JSON response from the server
+    .then(data => {
+      // Update the button's appearance based on the result
+      if (data.result === 'liked') {
+        button.classList.add('liked'); // Add 'liked' class to the button
+      } else {
+        button.classList.remove('liked'); // Remove 'liked' class from the button
+      }
+      // Update the like count displayed on the button
+      button.querySelector('span').textContent = data.likes;
+    });
+  }
+</script>
 
 {% endblock %}

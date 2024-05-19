@@ -2,37 +2,22 @@
 {% block content %}
 <div class="upload-container">
   <h1 class="upload-header">Upload your HTML</h1>
-  <form id="submission-form" action="/upload" method="post" class="upload-form">
+    <form id="submission-form" action="{{ url_for('upload') }}" method="post" class="upload-form">
+      {{ form.hidden_tag() }} <!-- CSRF token -->
     <div class="flex-container">
       <div class="form-group">
+        <!-- HTML Input Field -->
         <label>HTML <i class="bx bxl-html5"></i></label>
-        <textarea
-          onkeyup="runCode()"
-          id="html"
-          name="html"
-          rows="10"
-          cols="50"
-          class="form-textarea"
-        ></textarea>
+        <!-- Render the HTML textarea form field with specified attributes -->
+        {{ form.html(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
 
         <label>CSS <i class="bx bxl-css3"></i></label>
-        <textarea
-          onkeyup="runCode()"
-          id="css"
-          name="css"
-          rows="10"
-          cols="50"
-          class="form-textarea"
-        ></textarea>
+        <!-- Render the CSS textarea form field with specified attributes -->
+        {{ form.css(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
 
         <label>Tags</label>
-        <input
-          type="text"
-          id="tags"
-          name="tags"
-          placeholder="Enter tags separated by commas"
-          class="form-textarea"
-        />
+        <!-- Render the Tags input form field with specified attributes -->
+        {{ form.tags(class="form-textarea",placeholder="Enter Your tags") }}
       </div>
 
       <div class="output-box">
@@ -43,16 +28,16 @@
     <p id="submission-status" class="submission-status"></p>
 
     <div class="output-container">
-      <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
-      <button type="submit" class="upload-button">Upload</button>
+      
+      {{ form.submit(class="upload-button") }}    
     </div>
   </form>
 </div>
 
 <script>
   function runCode() {
-    let htmlContent = document.getElementById("html").value;
-    let cssContent = document.getElementById("css").value;
+    let htmlContent = document.getElementById("submission-form").elements["html"].value;
+    let cssContent = document.getElementById("submission-form").elements["css"].value;
 
     let output = document.getElementById("output-frame").contentDocument;
 
