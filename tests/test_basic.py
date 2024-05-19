@@ -22,13 +22,13 @@ class BasicTestCase(unittest.TestCase):
     def test_home_page(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Welcome to Our Site!', response.data)
+        self.assertIn(b'Welcome to Spyderweb', response.data)
     
     def test_post_page(self):
         with app.test_request_context('/'):  
             response = self.app.get(url_for('gallery'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Hall of Fame', response.data)
+        self.assertIn(b'Gallery', response.data)
         
     def test_login_page(self):
         with app.test_request_context('/'): 
@@ -52,45 +52,44 @@ class BasicTestCase(unittest.TestCase):
         # Create a test user
         with app.app_context():
             user = User(username='testuser', email='test@example.com')
-            user.set_password('password')
+            user.set_password('password!')
             db.session.add(user)
             db.session.commit()
 
         # Log in as the test user
         response = self.app.post('/login', data=dict(
             username='testuser',
-            password='password'
+            password='password!'
         ), follow_redirects=True)
 
         # Check if the login was successful
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Welcome to Our Site!', response.data)
+        self.assertIn(b'SPYDERWEB', response.data)
     
     def test_authenticated_user_access_upload(self):
         # Create a test user
         with app.app_context():
             user = User(username='testuser', email='test@example.com')
-            user.set_password('password')
+            user.set_password('password!')
             db.session.add(user)
             db.session.commit()
 
         # Log in as the test user
         response = self.app.post('/login', data=dict(
             username='testuser',
-            password='password'
+            password='password!'
         ), follow_redirects=True)
 
         # Check if the login was successful
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Welcome to Our Site', response.data)
-
+        self.assertIn(b'SPYDERWEB', response.data)
 
         # Access the upload page
         response = self.app.get('/upload')
         
         # Check if the user is redirected to the upload page
         self.assertEqual(response.status_code, 200) 
-        self.assertIn(b'Upload your HTML', response.data)
+        self.assertIn(b'Upload your Code', response.data)
 
         
     def test_logout(self):
@@ -98,13 +97,13 @@ class BasicTestCase(unittest.TestCase):
         self.app.post('/signup', data=dict(
             username='testuser',
             email='test@example.com',
-            password='password',
-            confirm='password'
+            password='password!',
+            confirm='password!'
         ), follow_redirects=True)
 
         self.app.post('/login', data=dict(
             username='testuser',
-            password='password'
+            password='password!'
         ), follow_redirects=True)
 
         # Log out the user
