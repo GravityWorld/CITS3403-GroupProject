@@ -1,8 +1,8 @@
 """Added likes and likes functionality
 
-Revision ID: 5153545f603f
+Revision ID: ba90bae66a2c
 Revises: 9fb60dd15f34
-Create Date: 2024-05-19 00:15:36.314587
+Create Date: 2024-05-19 00:40:58.164951
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5153545f603f'
+revision = 'ba90bae66a2c'
 down_revision = '9fb60dd15f34'
 branch_labels = None
 depends_on = None
