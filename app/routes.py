@@ -15,6 +15,8 @@ from markupsafe import escape
 @app.route('/index')
 
 def index():
+    flash('This is a test message.', 'info')
+
     return render_template('index.html', title='Home')
 
 
@@ -28,7 +30,7 @@ def login():
         user = db.session.scalar(
             sa.select(User).where(User.username == form.username.data))
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', 'error')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -55,17 +57,17 @@ def signup():
         # this checks if the username already exists
         existing_user = User.query.filter_by(username=form.username.data).first()
         if existing_user:
-            flash('Error: Username already exists. Please choose a different username.')
+            flash('Error: Username already exists. Please choose a different username.', 'error')
             return redirect(url_for('signup'))  # redirects back to the registration page and not return external server error
         # If username doesn't exist, proceed with registration
         if form.password.data != form.ReEnterPass.data:
-            flash('Error: Passwords do not match')
+            flash('Error: Passwords do not match', 'error')
             return redirect(url_for('signup'))
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('Congratulations, you are now a registered user!', 'success')
         # If there was an upload intent, redirect to upload page after registration
         if session.get('upload_intent'):
             session.pop('upload_intent')  # Clear the upload intent from session

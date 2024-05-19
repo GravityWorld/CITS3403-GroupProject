@@ -363,7 +363,8 @@ form input[type="password"] {
 #sidebar button.button-home:hover,
 #sidebar button.button-contact-us:hover,
 #sidebar button.button-about:hover,
-#sidebar button.button-upload:hover {
+#sidebar button.button-upload:hover, 
+#sidebar button.button-logout:hover {
   background-color: #95e214;
   color: black;
   font-weight: bold;
