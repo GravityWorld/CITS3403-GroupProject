@@ -11,9 +11,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
-
+<body>
+<br><br><br><br>
 <div class="upload-container">
-  <h1 class="upload-header">Upload your HTML</h1>
+
+  <h1 class="upload-header" style="font-size: 4rem; text-align: center;">Upload your Code</h1>
     <form id="submission-form" action="{{ url_for('upload') }}" method="post" class="upload-form">
       {{ form.hidden_tag() }} <!-- CSRF token -->
     <div class="flex-container">
@@ -46,4 +48,5 @@
   </form>
 </div>
 <script src="{{ url_for('static', filename='upload.js') }}"></script>
+</body>
 {% endblock %}
