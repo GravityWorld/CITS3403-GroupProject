@@ -578,24 +578,43 @@ main {
   clear: both;
   display: table;
 }
-
-
-/* Container for the iframe */
-.iframe-container {
+/* Style the container for the first iframe */
+#iframe-section1 .iframe-container {
   overflow: hidden; /* Hide overflow content */
   position: relative; /* Set position to relative */
   width: 100%; /* Adjust width as needed */
   height: 480px; /* Adjust height as needed */
 }
 
-/* Style the iframe */
-.iframe-container iframe {
+/* Style the first iframe */
+#iframe-section1 .iframe-container iframe {
   position: absolute; /* Set position to absolute */
   top: -200px; /* Adjust the top position to crop off the top part */
   left: 0;
   width: 100%; /* Set iframe width to 100% */
   height: calc(100% + 230px); /* Adjust height to include the cropped part */
+  border: none; /* Remove default iframe border */
+  pointer-events: none; /* Disable user interaction */
 }
+
+/* Style the container for the second iframe */
+#iframe-section2 .iframe-container {
+  width: 100%;
+  height: 760px; /* Set the desired height for the second iframe container */
+  overflow: hidden; /* Hide overflow content */
+  position: relative; /* Set position to relative */
+}
+
+/* Style the second iframe */
+#iframe-section2 .iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -50px; /* Adjust the top position to crop off the top part if needed */
+  border: none; /* Remove default iframe border */
+  pointer-events: none; /* Disable user interaction */
+}
+
 
 
 /* Styles for the navigation bar */
@@ -625,4 +644,30 @@ main {
 }
 
 
+/* Style for Step 2 */
+.step:nth-child(2) {
+  background-color: #f9f9f9; /* Light gray background */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
 
+.step:nth-child(2) h3 {
+  font-size: 24px; /* Adjust font size */
+  color: #007bff; /* Blue color for heading */
+}
+
+.step:nth-child(2) .step-text {
+  font-size: 16px; /* Adjust font size */
+  color: #555; /* Dark gray color for text */
+}
+
+.step:nth-child(2) .dot-list {
+  list-style-type: disc;
+  margin-left: 20px; /* Adjust as needed */
+  margin-top: 10px; /* Add some top margin */
+}
+
+.step:nth-child(2) .dot-list li {
+  margin-bottom: 10px; /* Add spacing between each list item */
+}
