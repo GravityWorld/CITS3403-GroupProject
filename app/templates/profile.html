@@ -18,7 +18,7 @@
 <body>
 
     <div id="sidebar">
-        <button class="button-home">
+        <button class="button-home" onclick="window.location.href='/index'">
             <i class="fa fa-home"></i><span>Home</span>
         </button>
 
@@ -67,6 +67,7 @@
               <nav class="popup-window">
                 <legend>Actions</legend>
                 <ul class="post-options">
+
                   <li>
                     <button onclick="downloadTextFile('{{ loop.index0 }}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +87,7 @@
                   </li>
                   <hr>
                   <li>
-                    <button  >
+                    <button id="deleteButton" type="button" onclick="confirmDelete('{{ post.id}}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <line y2="18" x2="6" y1="6" x1="18"></line>
                         <line y2="18" x2="18" y1="6" x1="6"></line>
@@ -114,9 +115,9 @@
         <div id="postModal" class="modal">
           <div class="modal-content">
             <div class="upload-container">
+              <span class="close" onclick="closeModal()">&times;</span>
                 <h1 class="upload-header">View or run your HTML/CSS CODE</h1>
-                <form id="save-form" action="/modify" method="get" class="postsave-form">
-                  <input type="hidden" id="postId" name="postId" value="">
+                    <input type="hidden" id="postId" name="postId" value="">
                     <div class="flex-container">
                         <div class="form-group">
                             <label>HTML <i class="bx bxl-html5"></i></label>
@@ -148,9 +149,8 @@
                     </div>
                     <p id="submission-status" class="submission-status"></p>
 
-                </form>
             </div>
-            <span class="close" onclick="closeModal()">&times;</span>
+
           </div>
         </div>
 
@@ -160,52 +160,60 @@
 
       
     <script>
-    function downloadTextFile(postIndex) {
-       // Get the user-entered text
-        const textContent = document.getElementById("full-post-content-" + postIndex).querySelector("code").innerText;
-        
-        // Create a Blob object containing the text
-        const blob = new Blob([textContent], { type: 'text/plain' });
+      function confirmDelete(postId) {
 
-        // Create a temporary anchor element
-        const a = document.createElement('a');
-        a.href = window.URL.createObjectURL(blob);
+        var confirmation = confirm('Are you sure you want to delete this post?');
+        if (confirmation) {
+            // If user confirms, redirect to delete endpoint
+            window.location.href = '/delete?postId=' + postId;
+        }
+      }
+      function downloadTextFile(postIndex) {
+        // Get the user-entered text
+          const textContent = document.getElementById("full-post-content-" + postIndex).querySelector("code").innerText;
+          
+          // Create a Blob object containing the text
+          const blob = new Blob([textContent], { type: 'text/plain' });
 
-        // Set the file name
-        const fileName = 'user_input.txt';
-        a.download = fileName;
+          // Create a temporary anchor element
+          const a = document.createElement('a');
+          a.href = window.URL.createObjectURL(blob);
 
-        // Programmatically click the anchor to trigger the download
-        document.body.appendChild(a);
-        a.click();
+          // Set the file name
+          const fileName = 'user_input.txt';
+          a.download = fileName;
 
-        // Clean up
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(a.href);
-    }
+          // Programmatically click the anchor to trigger the download
+          document.body.appendChild(a);
+          a.click();
 
-    function saveChanges() {
-    // Get the HTML and CSS content
-    var htmlContent = document.getElementById("HtmlCode").value;
-    var cssContent = document.getElementById("CssCode").value;
+          // Clean up
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(a.href);
+      }
 
-    // Populate the hidden input fields with the HTML and CSS content
-    document.getElementById("htmlContent").value = htmlContent;
-    document.getElementById("cssContent").value = cssContent;
-}
+      function saveChanges() {
+      // Get the HTML and CSS content
+      var htmlContent = document.getElementById("HtmlCode").value;
+      var cssContent = document.getElementById("CssCode").value;
+
+      // Populate the hidden input fields with the HTML and CSS content
+      document.getElementById("htmlContent").value = htmlContent;
+      document.getElementById("cssContent").value = cssContent;
+      }
 
 
-    function runCode() {
-    let htmlContent = document.getElementById("HtmlCode").value;
-    let cssContent = document.getElementById("CssCode").value;
+      function runCode() {
+      let htmlContent = document.getElementById("HtmlCode").value;
+      let cssContent = document.getElementById("CssCode").value;
 
-    let output = document.getElementById("output-frame").contentDocument;
+      let output = document.getElementById("output-frame").contentDocument;
 
-    output.open();
-    output.write('<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
-    output.close();
+      output.open();
+      output.write('<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
+      output.close();
 
-    console.log(output.body.innerHTML);
+      console.log(output.body.innerHTML);
   }
 
 

@@ -123,6 +123,28 @@ def upload():
     return render_template('upload.html', form=form)
 
 
+
+@app.route('/delete', methods=['GET'])
+def delete_post():
+    if request.method == 'GET':
+        post_id_str = request.args.get('postId')
+        if post_id_str:
+            try:
+                post_id = int(post_id_str)
+            except ValueError:
+                return "Invalid post ID", 400  # Bad Request
+            post = Post.query.get(post_id)
+            if post:
+                db.session.delete(post)
+                db.session.commit()
+                return redirect(url_for('index'))
+            else:
+                # If post not found
+                return "Post not found", 404
+        else:
+            # If postId parameter is not provided or empty
+            return "Post ID is required", 400  # Bad Request
+
 @app.route('/profile')
 @login_required
 def current_user_profile():
