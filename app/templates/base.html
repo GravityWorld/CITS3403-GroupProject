@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,6 +22,7 @@
       rel='stylesheet'
       href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     {% if title %}
     <title>{{ title }} - SpyderWeb</title>
@@ -28,7 +30,9 @@
     <title>Welcome to SpyderWeb</title>
     {% endif %}
   </head>
+  
   <body>
+    {% if not (request.endpoint == 'index' or request.endpoint == 'profile') %}
     <div class="navbar">
       <a href="{{ url_for('index') }}">Home</a>
       {% if current_user.is_anonymous %}
@@ -38,14 +42,43 @@
       <a href="{{ url_for('logout') }}">Logout</a>
       {% endif %}
     </div>
-    
+    {% endif %}
+
     <hr />
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %} {% block content %}{% endblock %}
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": true,
+          "progressBar": false,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": true,
+          "onclick": null,
+          "showDuration": "200",
+          "hideDuration": "1000",
+          "timeOut": "2000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        };
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              toastr["{{ category }}"]("{{ message }}");
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      });
+    </script>
   </body>
 </html>

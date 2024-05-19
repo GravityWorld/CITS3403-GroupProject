@@ -9,23 +9,21 @@
 </head>
 
 <body>
+
   <div id="sidebar">
     <div>
-      <button class="button-home">
+      <button class="button-home" onclick="scrollToTop()">
         <i class="fa fa-home"></i><span>Home</span>
       </button>
-      <button class="button-about">
+      <button class="button-about" onclick="scrollToBottom()">
         <i class="fas fa-lightbulb"></i><span>About</span>
-      </button>
-      <button class="button-contact-us">
-        <i class="fas fa-phone"></i><span>Contact Us</span>
       </button>
       <button class="button-upload" onclick="window.location.href='/upload'">
         <i class="fas fa-upload"></i><span>Upload</span>
       </button>
       <div class="fame">
         <button class="button-hall-of-fame" onclick="window.location.href='/gallery'">
-          <i class="fas fa-trophy"></i><span>Hall of Fame</span>
+          <i class="fas fa-images"></i><span>Gallery</span>
         </button>
       </div>
     </div>
@@ -35,6 +33,9 @@
       <button class="button-profile" onclick="window.location.href='/profile'">
         <i class="fas fa-user"></i>
         Profile
+      </button>
+      <button class="button-logout" onclick="window.location.href='{{ url_for('logout') }}'">
+        <i class="fas fa-sign-out-alt"></i><span>Logout</span>
       </button>
       {% else %}
       <!-- Show signup and login buttons if user is not logged in -->
@@ -133,8 +134,26 @@
 
     <!-- Redundant text to visualize how the "about us" section would look with the current font -->
 
+  <!-- JavaScript for smooth scrolling -->
+  <script>
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    function scrollToBottom() {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 
   </main>
+
+
 
 </body>
 
