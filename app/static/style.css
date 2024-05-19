@@ -58,7 +58,7 @@ header {
 }
 
 h1 {
-  font-size: 24px; 
+  font-size: 24px;
   margin: 0;
 }
 
@@ -67,13 +67,14 @@ h1 {
   text-decoration: none;
   padding: 8px 16px;
   border: 2px solid #ffffff; 
-  border-radius: 20px; 
+  border-radius: 20px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .login a:hover {
   background-color: #ffffff; 
   color: #343a40; 
+}
 
 nav ul {
   list-style-type: none;
@@ -99,7 +100,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  background-color: #495057;
+  background-color: #495057; /
 }
 
 /* LOGIN PAGE STYLING */
@@ -124,7 +125,7 @@ form {
   margin-bottom: 5px;
   font-size: 25px;
   font-weight: bold;
-  text-align: center;
+  text-align: center; 
 }
 
 .remember-me {
@@ -140,7 +141,7 @@ form label {
   margin-bottom: 5px;
   font-size: 20px;
   font-weight: bold;
-  text-align: left; 
+  text-align: left;
 }
 form input[type="text"],
 form input[type="password"] {
@@ -283,6 +284,9 @@ form input[type="password"] {
   width: 100%;
 } 
 
+/* need to create a better effect for on-hover buttons. 
+   low priority issue.
+*/
 .signup-button:hover {
   background-color: #0aefff;
   color: black;
@@ -293,12 +297,13 @@ form input[type="password"] {
 /* styling for upload page */
 #submission-form {
   width: 100%; 
-  max-width: 1500px; 
+  max-width: 1500px;
+
   margin-bottom: 20px;
 }
 
 #html {
-  width: 100%;
+  width: 100%; 
 }
 
 #submission-status {
@@ -368,7 +373,7 @@ form input[type="password"] {
   height: 100%;
   width: 250px;
   box-sizing: border-box;
-  position: fixed;
+  position: fixed; 
 }
 #sidebar button {
   display: flex;
@@ -472,7 +477,7 @@ form input[type="password"] {
 }
 
 main {
-  margin-left: 250px; /* Offset for the sidebar */
+  margin-left: 250px;
   padding: 20px;
   font-size: 18px;
 }
@@ -487,7 +492,7 @@ main {
   width: 1000px;
   height: 750px;
   margin: auto;
-  background-color: #1f1f1f; /* Fallback color */
+  background-color: #1f1f1f; 
 }
 #main-content {
   flex-grow: 1;
@@ -542,7 +547,7 @@ main {
   padding: 20px;
   position: relative;
   list-style: none;
-  margin-bottom: 20px;
+
 }
 
 /* Style for step headings with emphasis */
@@ -573,21 +578,20 @@ main {
 }
 /* Style the container for the first iframe */
 #iframe-section1 .iframe-container {
-  overflow: hidden; 
+  overflow: hidden;
   position: relative; 
   width: 100%; 
-  height: 480px;
+  height: 480px; 
 }
 
 /* Style the first iframe */
 #iframe-section1 .iframe-container iframe {
   position: absolute; 
-  top: -200px; 
   left: 0;
   width: 100%; 
   height: calc(100% + 230px); 
   border: none; 
-  pointer-events: none;
+  pointer-events: none; 
 }
 
 /* Style the container for the second iframe */
@@ -595,7 +599,7 @@ main {
   width: 100%;
   height: 760px; 
   overflow: hidden; 
-  position: relative;
+  position: relative; 
 }
 
 /* Style the second iframe */
@@ -646,21 +650,21 @@ main {
 }
 
 .step:nth-child(2) h3 {
-  font-size: 24px; 
-  color: #007bff; 
+  font-size: 24px;
+  color: #007bff;
 }
 
 .step:nth-child(2) .step-text {
   font-size: 16px; 
-  color: #555; 
+  color: #555;
 }
 
 .step:nth-child(2) .dot-list {
   list-style-type: disc;
   margin-left: 20px; 
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .step:nth-child(2) .dot-list li {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
