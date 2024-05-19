@@ -18,7 +18,7 @@
 <body>
 
     <div id="sidebar">
-        <button class="button-home">
+        <button class="button-home" onclick="window.location.href='/index'">
             <i class="fa fa-home"></i><span>Home</span>
         </button>
 
@@ -163,7 +163,6 @@
       function confirmDelete(postId) {
 
         var confirmation = confirm('Are you sure you want to delete this post?');
-        console.log("POSTTTTTTTTTTTTTTTTTTTTID: ", postId);
         if (confirmation) {
             // If user confirms, redirect to delete endpoint
             window.location.href = '/delete?postId=' + postId;
