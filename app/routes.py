@@ -137,7 +137,7 @@ def delete_post():
             if post:
                 db.session.delete(post)
                 db.session.commit()
-                return redirect(url_for('index'))
+                return redirect(url_for('user_profile', username=current_user.username))
             else:
                 # If post not found
                 return "Post not found", 404

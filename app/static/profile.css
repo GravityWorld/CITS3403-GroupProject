@@ -31,29 +31,71 @@
   font-family: "Arvo", serif;
 }
 
-#sidebar {
-  font-family: "Arvo", serif;
-  background-color: #333;
-  color: white;
-  width: 200px;
-  height: 100vh;
-  padding: 15px;
+#sidebar-profile {
+  background: #1f1f1f;
+  padding: 20px;
+  height: 100%;
+  width: 250px;
   box-sizing: border-box;
+  position: fixed; 
 }
 
-#sidebar button {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 5px;
-    background: #444;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+#sidebar-profile button {
+  display: flex;
+  align-items: center;
+  background: #555;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  margin: 15px 10px; /* Adjusted margin */
+  text-align: center;
+  text-decoration: none;
+  border-radius: 22px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+  cursor: pointer;
+  outline: none;
+  width: calc(    100% - 20px ); 
 }
 
-#sidebar button:hover {
-    background: #555;
+#sidebar-profile button.button-home:hover,
+#sidebar-profile button.button-contact-us:hover,
+#sidebar-profile button.button-about:hover,
+#sidebar-profile button.button-upload:hover, 
+#sidebar-profile button.button-logout:hover {
+  background-color: #95e214;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0px 0px 15px #95e214;
+  text-align: center;
+}
+
+#sidebar-profile button i {
+  float: left;
+  margin-right: 10px; /* Add some spacing between the icon and the text */
+  width: 20px; /* Fixed width for all icons */
+}
+
+#sidebar-profile button span {
+  display: inline-block;
+  padding-left: 5px;
+}
+
+/* Move the box-shadow property to a more specific selector */
+#sidebar-profile button.button-hall-of-fame:hover {
+  font-weight: bold;
+  color: black;
+  box-shadow: 0 0 10px #ffd700; /* Add box shadow for glow effect */
+  background-color: #ffd700;
+  text-align: center;
+}
+
+#sidebar-profile button.button-profile:hover {
+  font-weight: bold;
+  color: black;
+  box-shadow: 0 0 10px #cc00ff; /* Add box shadow for glow effect */
+  background-color: #cc00ff;
+  text-align: center;
 }
 
 #main-content {
@@ -302,108 +344,156 @@
 
   /* POPUP SELECTOR PART */
   /* The design is inspired from the mockapi.io */
-
-.popup {
-  --burger-line-width: 1.125em;
-  --burger-line-height: 0.125em;
-  --burger-offset: 0.625em;
-  --burger-bg: rgba(0, 0, 0, .15);
-  --burger-color: #333;
-  --burger-line-border-radius: 0.1875em;
-  --burger-diameter: 2.125em;
-  --burger-btn-border-radius: calc(var(--burger-diameter) / 2);
-  --burger-line-transition: .3s;
-  --burger-transition: all .1s ease-in-out;
-  --burger-hover-scale: 1.1;
-  --burger-active-scale: .95;
-  --burger-enable-outline-color: var(--burger-bg);
-  --burger-enable-outline-width: 0.125em;
-  --burger-enable-outline-offset: var(--burger-enable-outline-width);
-  /* nav */
-  --nav-padding-x: 0.25em;
-  --nav-padding-y: 0.625em;
-  --nav-border-radius: 0.375em;
-  --nav-border-color: #ccc;
-  --nav-border-width: 0.0625em;
-  --nav-shadow-color: rgba(0, 0, 0, .2);
-  --nav-shadow-width: 0 1px 5px;
-  --nav-bg: #eee;
-  --nav-font-family: Menlo, Roboto Mono, monospace;
-  --nav-default-scale: .8;
-  --nav-active-scale: 1;
-  --nav-position-left: 0;
-  --nav-position-right: unset;
-  /* if you want to change sides just switch one property */
-  /* from properties to "unset" and the other to 0 */
-  /* title */
-  --nav-title-size: 0.625em;
-  --nav-title-color: #777;
-  --nav-title-padding-x: 1rem;
-  --nav-title-padding-y: 0.25em;
-  /* nav button */
-  --nav-button-padding-x: 1rem;
-  --nav-button-padding-y: 0.375em;
-  --nav-button-border-radius: 0.375em;
-  --nav-button-font-size: 12px;
-  --nav-button-hover-bg: #6495ed;
-  --nav-button-hover-text-color: #fff;
-  --nav-button-distance: 0.875em;
-  /* underline */
-  --underline-border-width: 0.0625em;
-  --underline-border-color: #ccc;
-  --underline-margin-y: 0.3125em;
-}
-
-/* popup settings 👆 */
-
-.popup {
-  display: inline-block;
-  text-rendering: optimizeLegibility;
-  position: relative;
-}
-
-.popup input {
-  display: none;
-}
-
-.burger {
-  display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background: var(--burger-bg);
-  width: var(--burger-diameter);
-  height: var(--burger-diameter);
-  border-radius: var(--burger-btn-border-radius);
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  transition: var(--burger-transition);
-  outline: var(--burger-enable-outline-width) solid transparent;
-  outline-offset: 0;
-}
-
-.burger span {
-  height: var(--burger-line-height);
-  width: var(--burger-line-width);
-  background: var(--burger-color);
-  border-radius: var(--burger-line-border-radius);
-  position: absolute;
-  transition: var(--burger-line-transition);
-}
-
-.burger span:nth-child(1) {
-  top: var(--burger-offset);
-}
-
-.burger span:nth-child(2) {
-  bottom: var(--burger-offset);
-}
-
-.burger span:nth-child(3) {
-  top: 50%;
-  transform: translateY(-50%);
-}
+  .popup {
+    --burger-line-width: 1.125em;
+    --burger-line-height: 0.125em;
+    --burger-offset: 0.625em;
+    --burger-bg: rgba(0, 0, 0, .15);
+    --burger-color: #333;
+    --burger-line-border-radius: 0.1875em;
+    --burger-diameter: 2.125em;
+    --burger-btn-border-radius: calc(var(--burger-diameter) / 2);
+    --burger-line-transition: .3s;
+    --burger-transition: all .1s ease-in-out;
+    --burger-hover-scale: 1.1;
+    --burger-active-scale: .95;
+    --burger-enable-outline-color: var(--burger-bg);
+    --burger-enable-outline-width: 0.125em;
+    --burger-enable-outline-offset: var(--burger-enable-outline-width);
+    /* nav */
+    --nav-padding-x: 0.25em;
+    --nav-padding-y: 0.625em;
+    --nav-border-radius: 0.375em;
+    --nav-border-color: #ccc;
+    --nav-border-width: 0.0625em;
+    --nav-shadow-color: rgba(0, 0, 0, .2);
+    --nav-shadow-width: 0 1px 5px;
+    --nav-bg: #eee;
+    --nav-font-family: Menlo, Roboto Mono, monospace;
+    --nav-default-scale: .8;
+    --nav-active-scale: 1;
+    --nav-position-left: unset;
+    --nav-position-right: 0;
+    /* if you want to change sides just switch one property */
+    /* from properties to "unset" and the other to 0 */
+    --nav-title-size: 0.625em;
+    --nav-title-color: #777;
+    --nav-title-padding-x: 1rem;
+    --nav-title-padding-y: 0.25em;
+    /* nav button */
+    --nav-button-padding-x: 1rem;
+    --nav-button-padding-y: 0.375em;
+    --nav-button-border-radius: 0.375em;
+    --nav-button-font-size: 12px;
+    --nav-button-hover-bg: #6495ed;
+    --nav-button-hover-text-color: #fff;
+    --nav-button-distance: 0.875em;
+    /* underline */
+    --underline-border-width: 0.0625em;
+    --underline-border-color: #ccc;
+    --underline-margin-y: 0.3125em;
+  }
+  
+  /* popup settings 👆 */
+  
+  .popup {
+    display: inline-block;
+    text-rendering: optimizeLegibility;
+    position: relative;
+  }
+  
+  .popup input {
+    display: none;
+  }
+  
+  .burger {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background: var(--burger-bg);
+    width: var(--burger-diameter);
+    height: var(--burger-diameter);
+    border-radius: var(--burger-btn-border-radius);
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: var(--burger-transition);
+    outline: var(--burger-enable-outline-width) solid transparent;
+    outline-offset: 0;
+  }
+  
+  .burger span {
+    height: var(--burger-line-height);
+    width: var(--burger-line-width);
+    background: var(--burger-color);
+    border-radius: var(--burger-line-border-radius);
+    position: absolute;
+    transition: var(--burger-line-transition);
+  }
+  
+  .burger span:nth-child(1) {
+    top: var(--burger-offset);
+  }
+  
+  .burger span:nth-child(2) {
+    bottom: var(--burger-offset);
+  }
+  
+  .burger span:nth-child(3) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Modify the popup-nav styles */
+  .popup-nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: var(--nav-position-right);
+    left: var(--nav-position-left);
+    top: var(--nav-position-top);
+    width: var(--nav-width);
+    height: var(--nav-height);
+    padding: var(--nav-padding-y) var(--nav-padding-x);
+    transition: var(--nav-transition);
+    border-radius: var(--nav-border-radius);
+    border: var(--nav-border-width) solid var(--nav-border-color);
+    box-shadow: var(--nav-shadow-width) var(--nav-shadow-color);
+    background-color: var(--nav-bg);
+    font-family: var(--nav-font-family);
+    z-index: 1000;
+    transform: scale(var(--nav-default-scale));
+    transform-origin: top left; /* Change the origin to top right */
+    visibility: hidden;
+    overflow: hidden;
+    max-width: var(--nav-max-width);
+  }
+  
+  .popup-nav.popup-nav--open {
+    transform: scale(var(--nav-active-scale));
+    visibility: visible;
+    height: var(--nav-full-height);
+    border-radius: 0;
+  }
+  
+  .popup-nav__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: var(--nav-item-padding);
+    margin-bottom: var(--nav-item-margin-bottom);
+    transition: background-color .2s ease-in-out;
+    font-size: var(--nav-font-size);
+    color: var(--nav-text-color);
+  }
+  
+  .popup-nav__item:hover {
+    background-color: var(--nav-hover-bg);
+  }
+  
 
 .popup-window {
   transform: scale(var(--nav-default-scale));

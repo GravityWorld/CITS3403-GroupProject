@@ -390,9 +390,7 @@ form input[type="password"] {
   transition: all 0.1s ease;
   cursor: pointer;
   outline: none;
-  width: calc(
-    100% - 20px
-  ); /* Set width to be 100% minus padding on both sides */
+  width: calc(    100% - 20px ); 
 }
 
 #sidebar button.button-home:hover,
