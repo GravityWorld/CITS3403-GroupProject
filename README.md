@@ -11,4 +11,4 @@ Group members:
 |Arnav Dangmali|GravityWorld|23408841|
 |Dheya Chiha|normalusername|23720753|
 |Devarsh Jayendrabhai Patel|devarshp1523|23614429|
-|Shusheel Utagi|sush-utagi|22502356|
+|Susheel Utagi|sush-utagi|22502356|
