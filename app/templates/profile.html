@@ -15,8 +15,8 @@
 </head>
 <body>
 
-    <div id="sidebar">
-        <button class="button-home">
+    <div id="sidebar-profile">
+        <button class="button-home" onclick="window.location.href='/index'">
             <i class="fa fa-home"></i><span>Home</span>
         </button>
 
@@ -65,6 +65,7 @@
               <nav class="popup-window">
                 <legend>Actions</legend>
                 <ul class="post-options">
+
                   <li>
                     <button onclick="downloadTextFile('{{ loop.index0 }}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +85,7 @@
                   </li>
                   <hr>
                   <li>
-                    <button  >
+                    <button id="deleteButton" type="button" onclick="confirmDelete('{{ post.id}}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <line y2="18" x2="6" y1="6" x1="18"></line>
                         <line y2="18" x2="18" y1="6" x1="6"></line>
@@ -112,9 +113,9 @@
         <div id="postModal" class="modal">
           <div class="modal-content">
             <div class="upload-container">
+              <span class="close" onclick="closeModal()">&times;</span>
                 <h1 class="upload-header">View or run your HTML/CSS CODE</h1>
-                <form id="save-form" action="/modify" method="get" class="postsave-form">
-                  <input type="hidden" id="postId" name="postId" value="">
+                    <input type="hidden" id="postId" name="postId" value="">
                     <div class="flex-container">
                         <div class="form-group">
                             <label>HTML <i class="bx bxl-html5"></i></label>
@@ -146,9 +147,8 @@
                     </div>
                     <p id="submission-status" class="submission-status"></p>
 
-                </form>
             </div>
-            <span class="close" onclick="closeModal()">&times;</span>
+
           </div>
         </div>
 
