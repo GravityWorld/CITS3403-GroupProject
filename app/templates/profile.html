@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="../static/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'/>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet" />
   </head>
 <body>
 
@@ -18,21 +21,13 @@
         <button class="button-home">
             <i class="fa fa-home"></i><span>Home</span>
         </button>
-    
-        <button class="button-about">
-            <i class="fas fa-lightbulb"></i><span>About</span>
-        </button>
-
-        <button class="button-contact-us">
-            <i class="fas fa-phone"></i><span>Contact Us</span>
-        </button>
 
         <button class="button-upload" onclick="window.location.href='/upload'">
             <i class="fas fa-upload"></i><span>Upload</span>
         </button>
         <div class="fame">
             <button class="button-hall-of-fame" onclick="window.location.href='/gallery'">
-                <i class="fas fa-trophy"></i><span>Hall of Fame</span>
+                <i class="fas fa-images"></i><span>Gallery</span>
             </button>
         </div>
     </div>
@@ -67,8 +62,7 @@
                 <span></span>
                 <span></span>
               </div>
-              <p> {{ post.id }}</p>
-
+              <br/>
 
               <nav class="popup-window">
                 <legend>Actions</legend>
@@ -87,7 +81,7 @@
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
                       </svg>
-                      <span>Edit</span>
+                      <span>View</span>
                     </button>
                   </li>
                   <hr>
@@ -120,29 +114,30 @@
         <div id="postModal" class="modal">
           <div class="modal-content">
             <div class="upload-container">
-                <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
+                <h1 class="upload-header">View or run your HTML/CSS CODE</h1>
                 <form id="save-form" action="/modify" method="get" class="postsave-form">
                   <input type="hidden" id="postId" name="postId" value="">
                     <div class="flex-container">
                         <div class="form-group">
                             <label>HTML <i class="bx bxl-html5"></i></label>
                             <textarea
-                                onkeyup="runCode()"
                                 id="HtmlCode" 
                                 name="HtmlCode"
                                 rows="10"
                                 cols="50"
                                 class="profile-textarea"
+                                readonly
+
                             >{{ post.html_content }}</textarea>
         
                             <label></label>CSS <i class="bx bxl-css3"></i></label>
                             <textarea
-                                onkeyup="runCode()"
                                 id="CssCode" 
                                 name="CssCode"
                                 rows="10"
                                 cols="50"
                                 class="profile-textarea"
+                                readonly
                             >{{ post.css_content }}</textarea>
                         </div>
         
@@ -152,19 +147,12 @@
                         </div>
                     </div>
                     <p id="submission-status" class="submission-status"></p>
-        
-                    <div class="output-container">
-                        <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
-                        <button type="submit" class="upload-button">Save post</button>
-                    </div>
 
                 </form>
             </div>
             <span class="close" onclick="closeModal()">&times;</span>
           </div>
         </div>
-
-
 
         {% endfor %}
       </div>

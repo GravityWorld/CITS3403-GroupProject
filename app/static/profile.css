@@ -1,17 +1,44 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
+/* font styling */
+.arvo-regular {
+  font-family: "Arvo", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.arvo-bold {
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.arvo-regular-italic {
+  font-family: "Arvo", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.arvo-bold-italic {
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Resetting default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arvo", serif;
 }
 
 #sidebar {
-    background-color: #333;
-    color: white;
-    width: 200px;
-    height: 100vh;
-    padding: 15px;
-    box-sizing: border-box;
+  font-family: "Arvo", serif;
+  background-color: #333;
+  color: white;
+  width: 200px;
+  height: 100vh;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 #sidebar button {
