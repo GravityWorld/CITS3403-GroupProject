@@ -47,7 +47,7 @@
   color: #fff;
   border: none;
   padding: 15px 20px;
-  margin: 15px 10px; /* Adjusted margin */
+  margin: 15px 10px;
   text-align: center;
   text-decoration: none;
   border-radius: 22px;
@@ -72,8 +72,8 @@
 
 #sidebar-profile button i {
   float: left;
-  margin-right: 10px; /* Add some spacing between the icon and the text */
-  width: 20px; /* Fixed width for all icons */
+  margin-right: 10px;
+  width: 20px;
 }
 
 #sidebar-profile button span {
@@ -81,11 +81,10 @@
   padding-left: 5px;
 }
 
-/* Move the box-shadow property to a more specific selector */
 #sidebar-profile button.button-hall-of-fame:hover {
   font-weight: bold;
   color: black;
-  box-shadow: 0 0 10px #ffd700; /* Add box shadow for glow effect */
+  box-shadow: 0 0 10px #ffd700; 
   background-color: #ffd700;
   text-align: center;
 }
@@ -93,7 +92,7 @@
 #sidebar-profile button.button-profile:hover {
   font-weight: bold;
   color: black;
-  box-shadow: 0 0 10px #cc00ff; /* Add box shadow for glow effect */
+  box-shadow: 0 0 10px #cc00ff;
   background-color: #cc00ff;
   text-align: center;
 }
@@ -131,7 +130,7 @@
 }
 
 .col {
-    flex: 0 1 calc(33.333% - 10px); /* Adjust based on the desired number of posts per row */
+    flex: 0 1 calc(33.333% - 10px); 
     box-sizing: border-box;
 }
 
@@ -201,20 +200,20 @@
 
 .profile-details {
     display: flex;
-    align-items: center; /* Align items vertically */
-    margin-bottom: 20px; /* Add margin at the bottom */
+    align-items: center; 
+    margin-bottom: 20px; 
   }
   
   .profile-icon {
-    border-radius: 50%; /* Make it round */
-    background-color: #ccc; /* Grey background */
-    padding: 15px; /* Add some padding */
-    margin-right: 30px; /* Add margin between icon and text */
+    border-radius: 50%;
+    background-color: #ccc;
+    padding: 15px; 
+    margin-right: 30px; 
   }
   
   .profile-icon i {
-    color: white; /* Icon color */
-    font-size: 24px; /* Adjust icon size */
+    color: white; 
+    font-size: 24px; 
   }
   
   .download-button {
@@ -339,7 +338,7 @@
 
 
   /* POPUP SELECTOR PART */
-  /* The design is inspired from the mockapi.io */
+
   .popup {
     --burger-line-width: 1.125em;
     --burger-line-height: 0.125em;
@@ -370,8 +369,7 @@
     --nav-active-scale: 1;
     --nav-position-left: unset;
     --nav-position-right: 0;
-    /* if you want to change sides just switch one property */
-    /* from properties to "unset" and the other to 0 */
+
     --nav-title-size: 0.625em;
     --nav-title-color: #777;
     --nav-title-padding-x: 1rem;
@@ -390,7 +388,7 @@
     --underline-margin-y: 0.3125em;
   }
   
-  /* popup settings 👆 */
+  /* popup settings */
   
   .popup {
     display: inline-block;
@@ -634,9 +632,9 @@
   }
   
   #save-form {
-    width: 100%; /* makes the form occupy the entire screen width */
-    max-width: 1500px; /* Limit the maximum width of the form */
-    /* can add maximum height for height of window */
+    width: 100%;
+    max-width: 1500px; 
+
     margin-bottom: 20px;
   }
 
@@ -646,7 +644,7 @@
     margin-bottom: 5px;
     font-size: 25px;
     font-weight: bold;
-    text-align: center; /* Center the text within the label */
+    text-align: center; 
   }
   
   .remember-me {
@@ -654,7 +652,7 @@
     margin-bottom: 5px;
     font-size: 15px;
     font-weight: bold;
-    text-align: left; /* Center the text within the label */
+    text-align: left;
   }
   
   postsave label {
@@ -662,7 +660,7 @@
     margin-bottom: 5px;
     font-size: 20px;
     font-weight: bold;
-    text-align: left; /* Center the text within the label */
+    text-align: left;
   }
   postsave input[type="text"],
   postsave input[type="password"] {

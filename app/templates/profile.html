@@ -34,15 +34,15 @@
       <h1>Profile</h1>
 
       <div class="profile-details">
-        <div class="profile-icon"> <!-- Add div for the profile icon -->
-          <i class="fas fa-user"></i> <!-- Add the user icon -->
+        <div class="profile-icon"> 
+          <i class="fas fa-user"></i> 
         </div>
-        <div class="profile-text"> <!-- Added a wrapper div -->
+        <div class="profile-text">
           <p><strong>Username:</strong> {{ current_user.username }}</p>
           <p><strong>Email:</strong> {{ current_user.email }}</p> 
         </div>
       </div>
-      <h2>Your Posts</h2> <!-- Moved this line above the loop -->
+      <h2>Your Posts</h2> 
 
       <div class="user-posts">
         {% for post in posts %}
@@ -155,6 +155,7 @@
       </div>
       
       <script src="{{ url_for('static', filename='downloadfile.js') }}"></script>
+      <script src="{{ url_for('static', filename='profile.js') }}"></script>
     </div>
     </body>
 </html>

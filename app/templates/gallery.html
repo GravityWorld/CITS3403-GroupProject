@@ -70,12 +70,12 @@
 <script src="{{ url_for('static', filename='downloadfile.js') }}"></script>
 <script>
 function disableIframeLinks(iframe) {
-  // Ensure the iframe content is accessible
+
   if (iframe.contentWindow) {
     const doc = iframe.contentWindow.document;
-    // Select all anchor tags within the iframe
+
     const links = doc.querySelectorAll('a');
-    // Disable the default click action for each link
+
     links.forEach(link => {
       link.addEventListener('click', function (event) {
         event.preventDefault();
@@ -96,24 +96,23 @@ function disableIframeLinks(iframe) {
  * @param {HTMLElement} button - The button element that was clicked to trigger this function.
  */
 function likePost(postId, button) {
-  // Send a POST request to the server to like or unlike the post
   fetch(`/like/${postId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-CSRFToken': '{{ csrf_token() }}' // Include CSRF token for security
+      'X-CSRFToken': '{{ csrf_token() }}'
     },
-    credentials: 'same-origin' // Ensure cookies are included with the request
+    credentials: 'same-origin'
   })
-  .then(response => response.json()) // Parse the JSON response from the server
+  .then(response => response.json()) 
   .then(data => {
-    // Update the button's appearance based on the result
+
     if (data.result === 'liked') {
-      button.classList.add('liked'); // Add 'liked' class to the button
+      button.classList.add('liked'); 
     } else {
-      button.classList.remove('liked'); // Remove 'liked' class from the button
+      button.classList.remove('liked'); 
     }
-    // Update the like count displayed on the button
+
     button.querySelector('span').textContent = data.likes;
   });
 }
