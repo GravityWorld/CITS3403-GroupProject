@@ -75,8 +75,8 @@
             <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p>
           </div>
           <!-- Iframe Section -->
-          <section id="iframe-section">
-            <!-- Container for the iframe -->
+          <section id="iframe-section1">
+            <!-- Container for the first iframe -->
             <div class="iframe-container">
               <!-- Iframe with cropped top part -->
               <iframe src="{{ url_for('static', filename='assets/html/preview.html') }}"
@@ -89,63 +89,71 @@
           <div class="step-text">
             <p>Upload your HTML and CSS files to our platform to save and share your creations with the community.</p>
             <p>To upload your code:</p>
-            <ul class="dot-list">
+            <ul class="dot-list"> <!-- Change ol to ul -->
               <li>Ensure your HTML and CSS files are ready.</li>
               <li>Click on the "Upload" button in the sidebar.</li>
               <li>Fill in any relevant details, such as tags or descriptions, in the upload form.</li>
               <li>Choose your HTML and CSS files using the file input fields provided in the form.</li>
               <li>Submit the form to upload your code to our platform.</li>
             </ul>
+
           </div>
+
         </li>
+        
         <li class="step">
           <h3>Step 3: View your code on your profile/gallery page</h3>
           <div class="step-text">
             <p>Access your uploaded code on your profile or gallery page to showcase it to others.</p>
           </div>
-          <img class="step-image" src="/static/assets/images/Step3Tut.PNG" alt="Step 3 Image">
+          <!-- Iframe Section -->
+          <section id="iframe-section2">
+            <!-- Container for the second iframe -->
+            <div class="iframe-container">
+              <!-- Iframe with cropped top part -->
+              <iframe src="{{ url_for('static', filename='assets/html/preview4.html') }}"
+                title="Live Editor Preview" ></iframe>
+            </div>
+          </section>
         </li>
         <li class="step">
-          <h3>Step 4: Bask in the Glory of Your Code's Popularity</h3>
+          <h3>Step 4: Watch your code gain in popularity</h3>
           <div class="step-text">
-            <ul>
-              <li>Delight in watching your code capture the hearts of our community! Track the likes and views it
-                garners as it climbs the ranks and earns the admiration of fellow users.</li>
-            </ul>
+            <p>Track the likes and views your code receives as it gains popularity among our users.</p>
           </div>
-          <img class="step-image" src="/static/assets/images/Step4Tut.PNG" alt="Step 4 Image">
+          <img class="step-image" src="assets/images/Step4Tut.PNG" alt="Step 4 Image">
         </li>
       </ol>
+
+
     </section>
-    <section id="about-us">
+    <section id="blog">
       <div class="container">
-        <div class="about-content">
-          <article class="about-post">
-            <h3>Why We Built This App</h3>
-            <p>Welcome to our creative space where students and creators can effortlessly find native HTML and CSS
-              designs. We built this app because we believe that:<br><br>
-            <ul>
-              <li>Sometimes, you just need a cool-looking button, an elegant element, or even a complete template for a
-                landing page without diving deep into Bootstrap or other frameworks.</li><br>
-              <li>Our goal is to provide quick access to beautiful, native designs that you can easily integrate into
-                your projects.</li>
-            </ul>
+        <h2>Latest From Our Blog</h2>
+        <div class="blog-posts">
+          <article class="post">
+            <h3>Understanding HTML and CSS</h3>
+            <p>Get to know the basics of web development with our list of the best introductory guides to HTML and CSS.
             </p>
-            <p>Whether you're a student learning the ropes of web development or a seasoned creator looking for
-              inspiration, our app is here to make your design process smoother and more enjoyable:<br><br>
-            <ul>
-              <li>No more searching endlessly for the perfect snippet or compromising on design quality.</li><br>
-              <li>With our curated collection of HTML and CSS elements, you can bring your ideas to life quickly and
-                with style.</li>
-            </ul>
-            </p>
-            <p>Join our community and discover how simple and fun web design can be when you have the right tools at
-              your fingertips!</p>
+            <a href="/blog/html-css-basics" class="read-more">Read More</a>
           </article>
+          <article class="post">
+            <h3>What's New in Web Design</h3>
+            <p>Explore the latest trends in web design and how they can enhance your online presence.</p>
+            <a href="/blog/web-design-trends" class="read-more">Read More</a>
+          </article>
+          <!-- Add more blog posts here -->
         </div>
       </div>
     </section>
 
+    {% endblock %}
+
+
+
+    <!-- Redundant text to visualize how the "about us" section would look with the current font -->
+
+    <!-- JavaScript for smooth scrolling -->
     <script>
       function scrollToTop() {
         window.scrollTo({
@@ -161,10 +169,10 @@
         });
       }
     </script>
-    {% endblock %}
-
 
   </main>
+
+
 
 </body>
 
