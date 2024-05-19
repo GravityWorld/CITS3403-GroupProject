@@ -20,7 +20,7 @@ class FlaskAppSeleniumTestCase(unittest.TestCase):
 
         # Create a test user
         user = User(username='testuser', email='test@example.com')
-        user.set_password('testpassword')
+        user.set_password('testpassword!')
         db.session.add(user)
         db.session.commit()
 

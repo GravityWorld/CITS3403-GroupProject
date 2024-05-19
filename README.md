@@ -79,6 +79,12 @@ This was fixed eventually by linking the alternate account with their account an
     will return number of failed tests
     So far, testing is for accessing pages (with/without athenticaiton), getting the right message when opening a page, basic database commands such as adding, editing Users/Posts
 
+    After running basic j-unit tests please run the following commands to relaunch the app:
+        rm -f app.db
+        flask db init
+        flask db migrate -m "Initial migration."
+        flask db upgrade
+
   # For Selenium testing:
 
     run the command: python -m unittest tests/test_selenium.py
