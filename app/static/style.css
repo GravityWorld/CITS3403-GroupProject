@@ -240,7 +240,7 @@ form input[type="password"] {
 .signup-body {
   background-color: #1f1f1f;
 }
-/* .button_signup {
+.button_signup {
   display: inline-block;
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
@@ -287,12 +287,12 @@ form input[type="password"] {
 /* need to create a better effect for on-hover buttons. 
    low priority issue.
 */
-/* .signup-button:hover {
+.signup-button:hover {
   background-color: #0aefff;
   color: black;
   font-weight: bold;
   box-shadow: 0px 0px 15px #0aefff;
-} */
+}
 
 /* styling for upload page */
 #submission-form {
