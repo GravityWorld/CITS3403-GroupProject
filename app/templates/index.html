@@ -56,7 +56,7 @@
   {% block content %}
 
   <main>
-    
+
     <h1>Welcome to Our Site!</h1>
     {% if current_user.is_authenticated %}
     <h1>Hi, {{ current_user.username }}!</h1>
@@ -75,20 +75,30 @@
             <p>Add your HTML and CSS code in the live editor provided on our website to create your desired designs.</p>
           </div>
           <!-- Iframe Section -->
-    <section id="iframe-section">
-      <!-- Container for the iframe -->
-      <div class="iframe-container">
-        <!-- Iframe with cropped top part -->
-        <iframe src="{{ url_for('static', filename='assets/html/preview.html') }}" title="Live Editor Preview"></iframe>
-      </div>
-    </section>
+          <section id="iframe-section">
+            <!-- Container for the iframe -->
+            <div class="iframe-container">
+              <!-- Iframe with cropped top part -->
+              <iframe src="{{ url_for('static', filename='assets/html/preview.html') }}"
+                title="Live Editor Preview"></iframe>
+            </div>
+          </section>
         </li>
         <li class="step">
           <h3>Step 2: Upload your code</h3>
           <div class="step-text">
             <p>Upload your HTML and CSS files to our platform to save and share your creations with the community.</p>
+            <p>To upload your code:</p>
+            <ul class="dot-list"> <!-- Change ol to ul -->
+              <li>Ensure your HTML and CSS files are ready.</li>
+              <li>Click on the "Upload" button in the sidebar.</li>
+              <li>Fill in any relevant details, such as tags or descriptions, in the upload form.</li>
+              <li>Choose your HTML and CSS files using the file input fields provided in the form.</li>
+              <li>Submit the form to upload your code to our platform.</li>
+            </ul>
+
           </div>
-          <img class="step-image" src="/static/assets/images/Step2Tut.PNG" alt="Step 2 Image">
+
         </li>
         <li class="step">
           <h3>Step 3: View your code on your profile/gallery page</h3>
@@ -134,22 +144,22 @@
 
     <!-- Redundant text to visualize how the "about us" section would look with the current font -->
 
-  <!-- JavaScript for smooth scrolling -->
-  <script>
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
+    <!-- JavaScript for smooth scrolling -->
+    <script>
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
 
-    function scrollToBottom() {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      });
-    }
-  </script>
+      function scrollToBottom() {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
+    </script>
 
   </main>
 
