@@ -78,14 +78,14 @@
                       <span>Download</span>
                     </button>
                   </li>
-                  <li>
+                  <!-- <li>
                     <button onclick="openEditModal('{{ loop.index0 }}', '{{ post.id}}')">
                       <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                         <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
                       </svg>
                       <span>Edit</span>
                     </button>
-                  </li>
+                  </li> -->
 
                 </ul>
               </nav>
@@ -110,29 +110,18 @@
             <span class="close" onclick="closeModal()">&times;</span>
 
                 <h1 class="upload-header">Edit your HTML/CSS CODE</h1>
-                <form id="save-form" action="/modify" method="post" class="postsave-form">
+                <!-- <form id="save-form" action="{{ url_for('modify') }}" method="get" class="postsave-form">
+                  {{ form.hidden_tag() }} 
                   <input type="hidden" id="postId" name="postId" value="">
                     <div class="flex-container">
                         <div class="form-group">
                             <label>HTML <i class="bx bxl-html5"></i></label>
-                            <textarea
-                                onkeyup="runCode()"
-                                id="HtmlCode" 
-                                name="HtmlCode"
-                                rows="10"
-                                cols="50"
-                                class="profile-textarea"
-                            ></textarea>
+                            {{ form.html(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
         
                             <label></label>CSS <i class="bx bxl-css3"></i></label>
-                            <textarea
-                                onkeyup="runCode()"
-                                id="CssCode" 
-                                name="CssCode"
-                                rows="10"
-                                cols="50"
-                                class="profile-textarea"
-                            ></textarea>
+                            {{ form.css(rows="10", cols="50", class="form-textarea", onkeyup="runCode()") }}
+
+                            </textarea>
                         </div>
         
                         <div class="output-box">
@@ -143,11 +132,12 @@
                     <p id="submission-status" class="submission-status"></p>
         
                     <div class="output-container">
-                        <!--<button type="button" onclick="displayHTML()" class="display-button">Display</button>-->
+                        <button type="button" onclick="displayHTML()" class="display-button">Display</button>
                         <button type="submit" class="upload-button">Save post</button>
                     </div>
 
-                </form>
+                    {{ form.submit(class="upload-button") }}    
+                </form> -->
             </div>
           </div>
         </div>
@@ -193,19 +183,18 @@
 }
 
 
-    function runCode() {
-    let htmlContent = document.getElementById("HtmlCode").value;
-    let cssContent = document.getElementById("CssCode").value;
+  function runCode() {
+      let htmlContent = document.getElementById("submission-form").elements["html"].value;
+      let cssContent = document.getElementById("submission-form").elements["css"].value;
 
-    let output = document.getElementById("output-frame").contentDocument;
+      let output = document.getElementById("output-frame").contentDocument;
+      console.log("Test content\n", '<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
+      output.open();
+      output.write('<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
+      output.close();
 
-    output.open();
-    output.write('<html><head><style>' + cssContent + '</style></head><body>' + htmlContent + '</body></html>');
-    output.close();
-
-    console.log(output.body.innerHTML);
-  }
-
+      console.log(output.body.innerHTML);
+    }
 
   function openEditModal(index, id) {
     const postElement = document.getElementById("full-post-content-" + index);

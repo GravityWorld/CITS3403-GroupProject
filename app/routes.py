@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
 import humanize
 from app import app, db
-from app.forms import LoginForm, SignUpForm,UploadForm
+from app.forms import LoginForm, SignUpForm,UploadForm, ModifyForm
 from app.models import User, Post, Like
 from datetime import datetime, timezone
 from markupsafe import escape
@@ -14,6 +14,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 
 from flask import request, redirect, flash, url_for
+
 
 from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect(app)
@@ -99,6 +100,8 @@ def upload():
         html_content = form.html.data
         css_content = form.css.data
         tags = form.tags.data
+        full_content = ""
+        
         
         if not html_content.strip():
             flash('Your post is empty.', 'warning')
@@ -109,7 +112,8 @@ def upload():
         else:
             html_content = '<head><style>' + css_content + '</style></head>' + html_content
         
-        new_post = Post(body=escape(html_content), author=current_user, tags=tags)
+        full_content = '<html><head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
+        new_post = Post(body=escape(full_content), author=current_user, tags=tags)
         db.session.add(new_post)
         db.session.commit()
         
@@ -118,25 +122,58 @@ def upload():
     
     return render_template('upload.html', form=form)
 
-@app.route('/modify', methods=['POST'])
+# def handle_upload():
+#     html_content = request.form.get('html')
+#     css_content = request.form.get('css')
+#     full_content = ""
+    
+#     if not html_content.strip():
+#         flash('Your post is empty.', 'warning')
+#         return redirect(url_for('display_upload'))
+
+    
+#     # Insert the CSS into the HTML content
+#     if '<head>' in html_content:
+#         # If there is a <head> tag, add the CSS inside it
+#         full_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
+#     else:
+#         # If no <head> tag, prepend a <head> containing the style
+#         full_content = '<head><style>' + css_content + '</style></head>' + html_content
+    
+#     full_content = '<html><head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
+#     # Create a new Post instance with the modified HTML content
+#     #Use of escape to replace symbols for tags with UTF characters in order to isolate css submitted and the page css.
+#     new_post = Post(body=escape(full_content), author=current_user)
+    
+#     db.session.add(new_post)
+#     db.session.commit()
+
+#     flash('Your HTML has been uploaded successfully!', 'success')
+#     return redirect(url_for('user_profile', username=current_user.username))
+
+
+@app.route('/modify', methods=['GET', 'POST'])
 @login_required
-def handle_modify():
-    post_id = request.form.get('postId')
-    html_content = request.form.get('HtmlCode')
-    css_content = request.form.get('CssCode')
-    fullcontent = ""
+def modify():
+    form = ModifyForm()
+    if form.validate_on_submit():
+        html_content = form.html.data
+        css_content = form.css.data
+        full_content = ""
 
-    fullcontent = '<html><head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
-    print(fullcontent)
-
-    try:
-        post = Post.query.filter_by(id=post_id, user_id=current_user.id).one()
-        post.body = escape(fullcontent)
-        db.session.commit()
+        if not html_content.strip():
+            flash('Your post is empty.', 'warning')
+            return redirect(url_for('upload'))
         
-    except NoResultFound:
-        print('Post not found or you do not have permission to edit this post.', 'error')
-
+        if '<head>' in html_content:
+            html_content = html_content.replace('<head>', '<head><style>' + css_content + '</style>')
+        else:
+            html_content = '<head><style>' + css_content + '</style></head>' + html_content
+        
+        full_content = '<html><head><style>' + css_content + '</style></head><body>' + html_content + '</body></html>'
+        new_post = Post(body=escape(full_content), author=current_user)
+        db.session.escape(new_post)
+        db.session.commit()
 
     return redirect(url_for('user_profile', username=current_user.username))
 
