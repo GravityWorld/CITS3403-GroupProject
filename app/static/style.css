@@ -590,4 +590,30 @@ main {
 }
 
 
+/* Style for Step 2 */
+.step:nth-child(2) {
+  background-color: #f9f9f9; /* Light gray background */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
 
+.step:nth-child(2) h3 {
+  font-size: 24px; /* Adjust font size */
+  color: #007bff; /* Blue color for heading */
+}
+
+.step:nth-child(2) .step-text {
+  font-size: 16px; /* Adjust font size */
+  color: #555; /* Dark gray color for text */
+}
+
+.step:nth-child(2) .dot-list {
+  list-style-type: disc;
+  margin-left: 20px; /* Adjust as needed */
+  margin-top: 10px; /* Add some top margin */
+}
+
+.step:nth-child(2) .dot-list li {
+  margin-bottom: 10px; /* Add spacing between each list item */
+}
